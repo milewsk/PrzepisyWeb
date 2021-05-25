@@ -10,12 +10,14 @@ namespace PrzepisyWeb.Models
     {
         //params
 
-        protected int id;
+        protected int RecpieID;
         private string Name;
         private string Ingredients;
         private string Description;
         private DateTime Date;
 
+
+        protected ICollection<RecipeCategory> RecipeCategories;
         //Owner
         private IdentityUser user;
 
@@ -71,7 +73,7 @@ namespace PrzepisyWeb.Models
         }
         public int getID()
         {
-            return this.id;
+            return this.RecpieID;
         }
 
         public IdentityUser getUser()

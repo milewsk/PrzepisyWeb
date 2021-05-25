@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PrzepisyWeb.Data
 {
-    public class RecipeContext : IdentityUserContext<ApplicationUser>
+    public class RecipeContext :IdentityDbContext
     {
         public RecipeContext(DbContextOptions options) : base(options)
         {
@@ -16,5 +16,7 @@ namespace PrzepisyWeb.Data
         }
 
         public DbSet<Recipe> Recipes { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<RecipeCategory> RecipeCategories { get; set; }
     }
 }
