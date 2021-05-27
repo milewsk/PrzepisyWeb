@@ -10,75 +10,27 @@ namespace PrzepisyWeb.Models
     {
         //params
 
-        protected int RecpieID;
-        private string Name;
-        private string Ingredients;
-        private string Description;
-        private DateTime Date;
+        public int RecpieID { get; set; }
+        public string Name { get; set; }
+        public string Ingredients { get; set; }
+        public string Description { get; set; }
+        public DateTime Date { get; set; }
 
 
-        protected ICollection<RecipeCategory> RecipeCategories;
+        public ICollection<RecipeCategory> RecipeCategories { get; set; }
         //Owner
-        private IdentityUser user;
+        public IdentityUser user { get; set; }
 
         //Constructors
 
-        public Recipe(string Name, DateTime Date, string Description, string Ingredients)
+        public Recipe(string name, DateTime date, string description, string ingredients)
         {
-            setName(Name);
-            setDate(Date);
-            setDescription(Description);
-            setIngredients(Ingredients);
-
+            Name = name;
+            Date = date;
+            Description = description;
+            Ingredients = ingredients;
         }
 
 
-        //setters
-
-        public void setName(string Name)
-        {
-            this.Name = Name;
-        }
-        public void setDate(DateTime Time)
-        {
-            this.Date = Time;
-        }
-        public void setDescription(string Description)
-        {
-            this.Description = Description;
-        }
-        public void setIngredients(string Ingredients)
-        {
-            this.Ingredients = Ingredients;
-        }
-
-        //getters
-
-        public string getName()
-        {
-            return this.Name;
-        }
-
-        public DateTime getDate()
-        {
-            return this.Date;
-        }
-        public string getDescription()
-        {
-            return this.Description;
-        }
-        public string getIngredients()
-        {
-            return this.Ingredients;
-        }
-        public int getID()
-        {
-            return this.RecpieID;
-        }
-
-        public IdentityUser getUser()
-        {
-            return this.user;
-        }
     }
 }
