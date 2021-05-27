@@ -1,0 +1,84 @@
+﻿@page
+@model PrzepisyWeb.Pages.AddRecipeModel
+@{
+
+    <div>
+        <div class="d-flex p-2 justify-content-center">
+        <h3>Dodaj swój nowy przepis!</h3>
+        </div>
+        
+        <form method="post">
+            <div class="row m-1">
+                <div class="col">
+                    <label for="recipeTitle">Tytuł</label>
+                    <input type="text" class="form-control" id="recipeTitle" />
+                    <small id="titleHelpMeBlock" class="form-text text-muted">Tytuł może pomieścić maksymalnie 80 znaków!</small>
+                </div>
+            </div>
+            <div class="row m-1">
+                <div class="col">
+                    <label for="textForIngredients">Składniki</label>
+                    <textarea class="form-control" id="textForIngredients" rows="3" placeholder="Przykład - 200g mąki, 100ml mleka, ..."></textarea>
+                </div>
+            </div>
+            <div class="row m-1">
+                <div class="col">
+                    <label for="textForIngredients">Przepis</label>
+                    <textarea class="form-control" id="textForIngredients" rows="6" placeholder="Tutaj podaj swój przepis"></textarea>
+                </div>
+            </div>
+            <div class="row m-1">
+                <div class="col">
+                    <h5>Kategorie</h5>
+                </div>
+               
+             </div>
+            <div class="row m-2 pl-3">
+                <div class="col">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Dessert">
+                    <label class="form-check-label" for="Dessert">Deser</label>
+                </div>
+                <div class="col">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Dinner">
+                    <label class="form-check-label" for="Dinner">Obiad</label>
+                </div>
+                <div class="col">
+
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Healthy">
+                    <label class="form-check-label" for="Healthy">Zdrowe</label>
+                </div>
+                <div class="col">
+
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Healthy">
+                    <label class="form-check-label" for="Healthy">Zdrowe</label>
+                </div>
+            </div>
+            <div class="row m-2 pl-3">
+                <div class="col">
+
+                    <input class="form-check-input" type="checkbox" id="4" value="option1">
+                    <label class="form-check-label" for="4">fgfg</label>
+                </div>
+                <div class="col">
+
+                    <input class="form-check-input" type="checkbox" id="3" value="option1">
+                    <label class="form-check-label" for="3">gfg</label>
+                </div>
+                <div class="col">
+
+                    <input class="form-check-input" type="checkbox" id="2" value="option1">
+                    <label class="form-check-label" for="2">dfdfdf</label>
+                </div>
+                <div class="col">
+
+                    <input class="form-check-input" type="checkbox" id="2" value="option1">
+                    <label class="form-check-label" for="2">dfdfdf</label>
+                </div>
+            </div>
+            
+            
+        </form>
+      
+
+    </div>
+}
