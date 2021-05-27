@@ -11,55 +11,52 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 ml-1 mr-1">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Przepisy.net</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">Przepisodajnia</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Strona Główna</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Recipies">Przepisy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Recipies">Przepisy</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Konto
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-dark" asp-area="" asp-page="#">Mój profil</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-page="#">Ulubione</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-page="#">Moje Przepisy</a>
-                                <div class="dropdown-divider">  </div>
-                                <a class="dropdown-item" asp-area="" asp-page="/AddRecipe">Dodaj przepis</a>
-                            </div>
-                        </li>
-                    </ul>
+                        <!---<li class="nav-item">>>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Index">Strona Główna</a>
+                            </li-->
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Recipies">Przepisy</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Konto
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item text-dark" asp-area="" asp-page="#">Mój profil</a>
+                                    <a class="dropdown-item text-dark" asp-area="" asp-page="#">Ulubione</a>
+                                    <a class="dropdown-item text-dark" asp-area="" asp-page="#">Moje Przepisy</a>
+                                    <div class="dropdown-divider">  </div>
+                                    <a class="dropdown-item" asp-area="" asp-page="/AddRecipe">Dodaj przepis</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
+            </nav>
+        </header>
         <div class="container">
-            &copy; 2021 - PrzepisyWeb - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
         </div>
-    </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2021 - PrzepisyWeb - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            </div>
+        </footer>
 
-    @RenderSection("Scripts", required: false)
-</body>
-</html>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+
+        @RenderSection("Scripts", required: false)
+    </body>
+    </html>
