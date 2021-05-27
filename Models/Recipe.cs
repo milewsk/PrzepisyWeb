@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,8 +10,8 @@ namespace PrzepisyWeb.Models
     public class Recipe
     {
         //params
-
-        public int RecpieID { get; set; }
+        [Key]
+        public int RecipeID { get; set; }
         public string Name { get; set; }
         public string Ingredients { get; set; }
         public string Description { get; set; }
