@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PrzepisyWeb.Models;
 using System;
@@ -21,10 +22,14 @@ namespace PrzepisyWeb.Data
 
         protected override void OnModelCreating(ModelBuilder modelBulider)
         {
+            //many to many
             modelBulider.Entity<RecipeCategory>().HasKey(rc => new { rc.recipeID, rc.CategoryID });
 
             modelBulider.Entity<RecipeCategory>().HasOne(rc => rc.recipe).WithMany(rc => rc.RecipeCategories).HasForeignKey(rc => rc.recipeID);
             modelBulider.Entity<RecipeCategory>().HasOne(rc => rc.category).WithMany(c => c.RecipeCategories).HasForeignKey(rc => rc.CategoryID);
+
+            //one to many
+            modelBulider.Entity<Recipe>().HasRequired<ApplicationUser>(r => r.User).WithMany(a => a.FavRecipes).HasForeignKey(r => r.ApplicationUser.Id);
         }
 
         //zrobić coś takiego tylko połączyć userów z polubieniami
