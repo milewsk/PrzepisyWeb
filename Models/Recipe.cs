@@ -24,7 +24,7 @@ namespace PrzepisyWeb.Models
         public IdentityUser Owner { get; set; }
 
         //Ulubione
-        //public ICollection<FavouriteRecipe> favouriteRecipe { get; set; }
+        public ICollection<FavouriteRecipe> favouriteRecipe { get; set; }
         //for identityUser
 
         //Constructors
