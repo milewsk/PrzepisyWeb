@@ -18,26 +18,32 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
-                        <!---<li class="nav-item">>>
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Index">Strona Główna</a>
-                            </li-->
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Recipies">Przepisy</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Konto
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item text-dark" asp-area="" asp-page="#">Mój profil</a>
-                                    <a class="dropdown-item text-dark" asp-area="" asp-page="#">Ulubione</a>
-                                    <a class="dropdown-item text-dark" asp-area="" asp-page="#">Moje Przepisy</a>
-                                    <div class="dropdown-divider">  </div>
-                                    <a class="dropdown-item" asp-area="" asp-page="/AddRecipe">Dodaj przepis</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Strona Główna</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Recipies">Przepisy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Recipies">Przepisy</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Konto
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item text-dark" asp-area="" asp-page="#">Mój profil</a>
+                                <a class="dropdown-item text-dark" asp-area="" asp-page="#">Ulubione</a>
+                                <a class="dropdown-item text-dark" asp-area="" asp-page="#">Moje Przepisy</a>
+                                <div class="dropdown-divider">  </div>
+                                <a class="dropdown-item" asp-area="" asp-page="/AddRecipe">Dodaj przepis</a>
+                            </div>
+                        </li>
+                        <partial name="_LoginPartial.cshtml" />
+                    </ul>
+
+                </div>
                 </div>
             </nav>
         </header>
