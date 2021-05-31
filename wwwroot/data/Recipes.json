@@ -1,42 +1,42 @@
 [
   {
+    "Author": "Piotr Kuligowski",
     "Description": "This shrimp stir fry recipe is made with loads of shrimp and vegetables pan seared with a spicy sauce made with gochujang, hot paprika, sesame oil, soy sauce and more. A spicy food lover’s dream!",
     "img": "https://www.chilipeppermadness.com/wp-content/uploads/2021/02/Spicy-Shrimp-Stir-Fry-Recipe1.jpg",
     "Ingredients": "Sesame Oil. Shrimp. Salt and Pepper. Vegetables. ...",
     "Name": "SPICY SHRIMP STIR FRY",
-    "Owner": "Piotr Kuligowski",
-    "RecipeID": "105603"
+    "RecipeID": 105603
   },
   {
+    "Author": "Josh Joshua",
     "Description": "Ratunkowe Spaghetti, gdy doskwiera ci głód",
     "img": "https://ocdn.eu/pulscms-transforms/1/bGIk9kpTURBXy8xYmVjMmNkNTRmMDI0Y2YzYzAyM2MxMGUzN2FhNjVmOC5qcGeTlQMAH80D6M0CMpMFzQMUzQG8kwmmY2YwNTgyBoGhMAE/spaghetti-bolognese.jpg",
     "Ingredients": "Makaron, mięso mielone, czosnek, cebula ...",
     "Name": "Ratunkowe Spaghetti Bolognese",
-    "Owner": "Josh Joshua",
-    "RecipeID": "1301356"
+    "RecipeID": 1301356
   },
   {
+    "Author": "John Travolta",
     "Description": "OPIS PRZEPISU 3",
     "img": "https://ocdn.eu/pulscms-transforms/1/4Khk9kpTURBXy9iYTBkN2U3MzIyYTFkNjk5NzZiZDk2YzczMDU1OTQ0Zi5qcGeTlQMAeM0PGc0IfpMFzQMUzQG8kwmmYjAwMzg1BoGhMAE/kurczak-po-tajsku.jpg",
     "Ingredients": "SKŁADNIKI PRZEPISU 3 ...",
     "Name": "PRZEPIS 3",
-    "Owner": "John Travolta",
-    "RecipeID": "6102135"
+    "RecipeID": 6102135
   },
   {
+    "Author": "Spongebob Kanciastoporty",
     "Description": "OPIS PRZEPISU 4",
     "img": "https://www.opowiastka.com/wp-content/uploads/2019/02/Kurczak-po-tajsku3.jpg",
     "Ingredients": "SKŁADNIKI PRZEPISU 4 ...",
     "Name": "PRZEPIS 4",
-    "Owner": "Spongebob Kanciastoporty",
-    "RecipeID": "513286"
+    "RecipeID": 51328
   },
   {
+    "Author": "Skalmar Obłynos",
     "Description": "OPIS PRZEPISU 5",
     "img": "https://www.mojegotowanie.pl/media/cache/default_view/uploads/media/default/0001/07/8a35d0b43a312bc62ba459100b44a6323bb3d16c.jpeg",
     "Ingredients": "SKŁADNIKI PRZEPISU 5 ...",
     "Name": "PRZEPIS 5",
-    "Owner": "Skalmar Obłynos",
-    "RecipeID": "9321"
+    "RecipeID": 9321
   }
 ]

@@ -35,7 +35,7 @@ namespace PrzepisyWeb.Services
             }
         }
 
-        public void AddRating(string recipeId, int rating)
+       /* public void AddRating(string recipeId, int rating)
         {
             var recipes = GetRecipes();
 
@@ -62,5 +62,6 @@ namespace PrzepisyWeb.Services
                 );
             }
         }
+    */
     }
 }

@@ -7,3 +7,15 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
 </div>
+
+<div class="card-columns">
+    @foreach (var recipe in Model.Recipes)
+    {
+        <div class="card">
+            <div class="card-img" style="background-image: url('@recipe.Image');"></div>
+            <div class="card-body">
+                <h5 class="card-title">@recipe.Name</h5>
+            </div>
+        </div>
+    }
+</div>

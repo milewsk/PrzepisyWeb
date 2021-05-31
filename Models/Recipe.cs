@@ -13,14 +13,16 @@ namespace PrzepisyWeb.Models
     {
         //params
         [Key]
-        public string RecipeID { get; set; }
+        public int RecipeID { get; set; }
         public string Name { get; set; }
         [JsonPropertyName("img")]
         public string Image { get; set; }
         public string Ingredients { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }
-        public int[] Ratings { get; set; }
+
+        public string Author { get; set; }
+        //public int[] Ratings { get; set; }
 
 
         public ICollection<RecipeCategory> RecipeCategories { get; set; }
@@ -42,6 +44,7 @@ namespace PrzepisyWeb.Models
             Ingredients = ingredients;
         }
 
+        private Recipe() { }
         public override string ToString() => JsonSerializer.Serialize<Recipe>(this);
 
     }
