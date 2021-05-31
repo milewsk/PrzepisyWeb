@@ -1,0 +1,115 @@
+container {
+    margin: 0; 
+    padding: 0;
+    font-family: 'Roboto Slab', serif;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #282424;
+}
+
+#wrapper {
+    max-width: 1000px;
+    margin: 0 auto 0 auto;
+    background-color: #FFFFFF;
+}
+
+header img {
+    width: 100%;
+    display: block;
+    background-color: #282424;
+}
+nav{
+    background-color: #6666FF;
+}
+
+a.menu{
+    display: inline-block;
+    font-size: 20px;
+    width: 24.67%;
+    padding: 15px 30px 15px 30px;
+    color: white;
+    text-decoration: none;
+    font-family: serif;
+    text-align: center;
+}
+
+a.menu:hover{
+    
+    background-color: crimson;
+    font-size: 25px;
+}
+
+.active {
+    background-color: crimson;
+}
+
+article {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 0 20px;
+}
+
+article img {
+    width: 100%;
+    display: block;
+}
+
+h1 {
+    text-align: center;
+    margin: 0 10% 0 10%;
+    font-size: 70px;
+    padding-bottom: 40px;
+}
+
+h2 {
+    text-align: center;
+    margin: 0 10% 50px 10%;
+    font-size: 50px;
+    padding-bottom: 40px;
+    border-bottom: 5px solid crimson;
+}
+
+h3 {
+    text-align: center;
+    margin: 0 10% 0 10%;
+    font-size: 40px;
+    padding-bottom: 40px;
+}
+h4 {
+    background-color: #FFFFFF;
+    text-align: center;
+    line-height: inherit;
+    font-size: 25px;
+    padding: 30px 10px 0 10px;
+}
+
+.inherit{
+    float: inherit;
+    margin: 0 0 40px 0;
+}
+
+.left{
+    float:left;
+    padding: 0 10px 10px 10px;
+    width: 25%;
+    border-radius: 50%;
+}
+
+article p {
+    text-align: center;
+    font-size: 18px;
+    padding: 15px 15px 0 15px;
+}
+
+footer {
+    
+    background-color: #FFFFFF; 
+    text-align: center;
+    line-height: inherit;
+    font-size: 15px;
+    padding: 30px 10px 20px 10px;
+}
+
+/**/
