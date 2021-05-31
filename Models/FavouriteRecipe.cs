@@ -12,11 +12,12 @@ namespace PrzepisyWeb.Models
         //recipe
         public int RecipeID { get; set; }
 
-        public Recipe Recipe { get; set; }
+        public Recipe recipe { get; set; }
 
         //user
-        public ApplicationUser User { get; set; }
+        public ApplicationUser person { get; set; }
 
-       public string Id { get; set; }
+       
+        public string Id { get; set; }
     }
 }
