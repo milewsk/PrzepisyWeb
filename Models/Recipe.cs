@@ -21,12 +21,11 @@ namespace PrzepisyWeb.Models
         public ICollection<RecipeCategory> RecipeCategories { get; set; }
 
         //Owner
-        public IdentityUser User { get; set; }
+        public IdentityUser Owner { get; set; }
 
         //Ulubione
-        public IdentityUser Id { get; set; }
+        //public ICollection<FavouriteRecipe> favouriteRecipe { get; set; }
         //for identityUser
-        public ICollection<Recipe> FavRecipes { get; set; }
 
         //Constructors
 
