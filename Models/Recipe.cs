@@ -13,7 +13,7 @@ namespace PrzepisyWeb.Models
     {
         //params
         [Key]
-        public int RecipeID { get; set; }
+        public string RecipeID { get; set; }
         public string Name { get; set; }
         [JsonPropertyName("img")]
         public string Image { get; set; }
