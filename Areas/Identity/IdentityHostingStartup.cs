@@ -15,14 +15,14 @@ namespace PrzepisyWeb.Areas.Identity
     {
         public void Configure(IWebHostBuilder builder)
         {
-            builder.ConfigureServices((context, services) => {
-                services.AddDbContext<RecipeContext>(options =>
+    /*        builder.ConfigureServices((context, services) => {
+            services.AddDbContext<RecipeContext>(options =>
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("RecipeDB")));
 
                 services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                     .AddEntityFrameworkStores<RecipeContext>();
             });
-        }
+        */}
     }
 }

@@ -12,7 +12,7 @@ namespace PrzepisyWeb.Data
 {
     public class RecipeContext : IdentityDbContext<ApplicationUser>
     {
-        public RecipeContext(DbContextOptions options) : base(options)
+        public RecipeContext(DbContextOptions<RecipeContext> options) : base(options)
         {
 
         }
