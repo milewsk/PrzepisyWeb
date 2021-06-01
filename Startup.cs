@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PrzepisyWeb.Areas.Identity.Data;
 using PrzepisyWeb.Data;
 using PrzepisyWeb.Services;
 using System;
@@ -29,6 +30,9 @@ namespace PrzepisyWeb
             services.AddDbContext<RecipeContext>(options => {
                 options.UseSqlServer(Configuration.GetConnectionString("RecipeDB"));
             });
+
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            .AddEntityFrameworkStores<RecipeContext>();
 
             services.AddRazorPages();
             services.AddTransient<JsonFileRecipeService>();
