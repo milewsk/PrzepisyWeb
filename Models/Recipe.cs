@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using PrzepisyWeb.Areas.Identity.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,23 +14,27 @@ namespace PrzepisyWeb.Models
     {
         //params
         [Key]
-        public string RecipeID { get; set; }
+        public int RecipeID { get; set; }
         public string Name { get; set; }
         [JsonPropertyName("img")]
         public string Image { get; set; }
         public string Ingredients { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }
-        public int[] Ratings { get; set; }
+
+        //public ICollection<int> Ratings { get; set; }
 
 
         public ICollection<RecipeCategory> RecipeCategories { get; set; }
 
         //Owner
-        public IdentityUser Owner { get; set; }
+        public ApplicationUser Owner { get; set; }
+
+        //Użytkownik ulubione
+        public ApplicationUser FavUser { get; set; }
 
         //Ulubione
-        public ICollection<FavouriteRecipe> favouriteRecipe { get; set; }
+        //public ICollection<FavouriteRecipe> favouriteRecipe { get; set; }
         //for identityUser
 
         //Constructors

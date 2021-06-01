@@ -13,13 +13,7 @@ namespace PrzepisyWeb.Areas.Identity.Data
     public class ApplicationUser : IdentityUser
     {
         //składowa public już jest dziedziczona
-        [Key]
-        public override string Id { get => base.Id; set => base.Id = value; }
-        
-        [Required]
-        [StringLength(100, ErrorMessage =" Błąd w nazwie użytkownika",MinimumLength =10)]
-        public override string UserName { get => base.UserName; set => base.UserName = value; }
 
-        public ICollection<FavouriteRecipe> favouriteRecipes { get; set; }
+        public ICollection<Recipe> favouriteRecipeUser { get; set; }
     }
 }

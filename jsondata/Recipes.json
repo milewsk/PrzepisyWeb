@@ -1,4 +1,6 @@
 [
+  //stworzyć owner dopiero wtedy tworzyć obiekty (klucze obce)
+  // owner == username
   {
     "Description": "This shrimp stir fry recipe is made with loads of shrimp and vegetables pan seared with a spicy sauce made with gochujang, hot paprika, sesame oil, soy sauce and more. A spicy food lover’s dream!",
     "img": "https://www.chilipeppermadness.com/wp-content/uploads/2021/02/Spicy-Shrimp-Stir-Fry-Recipe1.jpg",
