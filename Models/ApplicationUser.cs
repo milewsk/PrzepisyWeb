@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.Identity;
 using PrzepisyWeb.Models;
 
-namespace PrzepisyWeb.Areas.Identity.Data
+namespace PrzepisyWeb.Models
 {
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
         //składowa public już jest dziedziczona
 
-        public ICollection<Recipe> favouriteRecipeUser { get; set; }
+        public ICollection<FavouriteRecipe> favouriteRecipes { get; set; }
     }
 }
