@@ -234,6 +234,21 @@ namespace PrzepisyWeb.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("PrzepisyWeb.Models.FavouriteRecipe", b =>
+                {
+                    b.Property<int>("RecipeID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("RecipeID", "UserID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("FavouriteRecipes");
+                });
+
             modelBuilder.Entity("PrzepisyWeb.Models.Recipe", b =>
                 {
                     b.Property<int>("RecipeID")
@@ -246,9 +261,6 @@ namespace PrzepisyWeb.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FavUserId")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
@@ -263,8 +275,6 @@ namespace PrzepisyWeb.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("RecipeID");
-
-                    b.HasIndex("FavUserId");
 
                     b.HasIndex("OwnerId");
 
@@ -337,12 +347,23 @@ namespace PrzepisyWeb.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("PrzepisyWeb.Models.FavouriteRecipe", b =>
+                {
+                    b.HasOne("PrzepisyWeb.Models.Recipe", "Recipe")
+                        .WithMany("favouriteRecipes")
+                        .HasForeignKey("RecipeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PrzepisyWeb.Areas.Identity.Data.ApplicationUser", "User")
+                        .WithMany("favouriteRecipes")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("PrzepisyWeb.Models.Recipe", b =>
                 {
-                    b.HasOne("PrzepisyWeb.Areas.Identity.Data.ApplicationUser", "FavUser")
-                        .WithMany("favouriteRecipeUser")
-                        .HasForeignKey("FavUserId");
-
                     b.HasOne("PrzepisyWeb.Areas.Identity.Data.ApplicationUser", "Owner")
                         .WithMany()
                         .HasForeignKey("OwnerId");

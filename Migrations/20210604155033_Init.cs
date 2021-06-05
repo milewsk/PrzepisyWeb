@@ -176,24 +176,41 @@ namespace PrzepisyWeb.Migrations
                     Ingredients = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false),
-                    OwnerId = table.Column<string>(nullable: true),
-                    FavUserId = table.Column<string>(nullable: true)
+                    OwnerId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Recipes", x => x.RecipeID);
-                    table.ForeignKey(
-                        name: "FK_Recipes_AspNetUsers_FavUserId",
-                        column: x => x.FavUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Recipes_AspNetUsers_OwnerId",
                         column: x => x.OwnerId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FavouriteRecipes",
+                columns: table => new
+                {
+                    RecipeID = table.Column<int>(nullable: false),
+                    UserID = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FavouriteRecipes", x => new { x.RecipeID, x.UserID });
+                    table.ForeignKey(
+                        name: "FK_FavouriteRecipes_Recipes_RecipeID",
+                        column: x => x.RecipeID,
+                        principalTable: "Recipes",
+                        principalColumn: "RecipeID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_FavouriteRecipes_AspNetUsers_UserID",
+                        column: x => x.UserID,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -260,14 +277,14 @@ namespace PrzepisyWeb.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_FavouriteRecipes_UserID",
+                table: "FavouriteRecipes",
+                column: "UserID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_RecipeCategories_CategoryID",
                 table: "RecipeCategories",
                 column: "CategoryID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Recipes_FavUserId",
-                table: "Recipes",
-                column: "FavUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Recipes_OwnerId",
@@ -291,6 +308,9 @@ namespace PrzepisyWeb.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "FavouriteRecipes");
 
             migrationBuilder.DropTable(
                 name: "RecipeCategories");

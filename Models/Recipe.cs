@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using PrzepisyWeb.Areas.Identity.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -31,11 +30,12 @@ namespace PrzepisyWeb.Models
         public ApplicationUser Owner { get; set; }
 
         //Użytkownik ulubione
-        public ApplicationUser FavUser { get; set; }
+       // public ApplicationUser FavUser { get; set; }
 
         //Ulubione
-        //public ICollection<FavouriteRecipe> favouriteRecipe { get; set; }
-        //for identityUser
+        //dobre podejście
+        public ICollection<FavouriteRecipe> favouriteRecipes { get; set; }
+        
 
         //Constructors
 
