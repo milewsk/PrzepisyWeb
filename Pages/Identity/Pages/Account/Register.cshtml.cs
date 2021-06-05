@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using PrzepisyWeb.Models;
 
-namespace PrzepisyWeb.Areas.Identity.Pages.Account
+namespace PrzepisyWeb.Pages.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class RegisterModel : PageModel

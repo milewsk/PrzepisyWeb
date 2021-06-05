@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using PrzepisyWeb.Models;
 
-namespace PrzepisyWeb.Areas.Identity.Pages.Account
+namespace PrzepisyWeb.Pages.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class LogoutModel : PageModel

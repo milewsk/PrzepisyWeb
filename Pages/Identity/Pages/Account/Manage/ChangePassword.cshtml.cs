@@ -7,8 +7,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using PrzepisyWeb.Areas.Identity.Data;
-namespace PrzepisyWeb.Areas.Identity.Pages.Account.Manage
+using PrzepisyWeb.Models;
+
+namespace PrzepisyWeb.Pages.Identity.Pages.Account.Manage
 {
     public class ChangePasswordModel : PageModel
     {
