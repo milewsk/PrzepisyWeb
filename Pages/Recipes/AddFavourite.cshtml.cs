@@ -30,12 +30,13 @@ namespace PrzepisyWeb.Pages.Recipes
 
         public IActionResult OnGet(Recipe recipe)
         {
-            //Przechwycenie podanego przepisu
+            //Przechwycenie podanego przepisu zależy czy będziecie przerzucać obiekt czy 
+            // będziecie przerzucać asp-for itp tak to bindproperty
             Recipe = recipe;
             return Page();
         }
 
-        [BindProperty]
+        [BindProperty(SupportsGet =true)]
         public Recipe Recipe { get; set; }
 
         [BindProperty]

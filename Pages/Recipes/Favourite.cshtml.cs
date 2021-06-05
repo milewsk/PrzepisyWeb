@@ -42,18 +42,12 @@ namespace PrzepisyWeb.Pages.Recipes
         {
             if (_signInManager.IsSignedIn(User))
             {
-               // var Query = from r in _context.Recipes where r.favouriteRecipes.    select r;
+                var userid = _userManager.GetUserId(User);
 
-                foreach(FavouriteRecipe r in _context.FavouriteRecipes)
-                {
-
-                    if(_userManager.GetUserId(User) == r.UserID)
-                    {
-                        
-                        
-                    }
-                }
-
+                var Query = from x in _context.Recipes
+                            from f in _context.FavouriteRecipes
+                            where (f.UserID == userid && f.RecipeID == x.RecipeID)
+                            select x;
 
                 Recipe = await _context.Recipes.ToListAsync();
             }
