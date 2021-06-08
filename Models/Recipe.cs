@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -21,19 +22,29 @@ namespace PrzepisyWeb.Models
         public string Description { get; set; }
         public DateTime Date { get; set; }
 
-        public string Author { get; set; }
-        //public int[] Ratings { get; set; }
+        //public ICollection<int> Ratings { get; set; }
 
 
         public ICollection<RecipeCategory> RecipeCategories { get; set; }
 
         //Owner
-        public IdentityUser Owner { get; set; }
+        public ApplicationUser Owner { get; set; }
+
+        //Użytkownik ulubione
+       // public ApplicationUser FavUser { get; set; }
 
         //Ulubione
-        public ICollection<FavouriteRecipe> favouriteRecipe { get; set; }
-        //for identityUser
+        //dobre podejście
+        public ICollection<FavouriteRecipe> favouriteRecipes { get; set; }
+        
 
+        // polubienia i listy użytkowników którzy polublili
+        public int LikeCounter { get; set; }
+ /*       [NotMapped]
+        public ICollection<String> LikeUsers { get; set; }
+        [NotMapped]
+        public ICollection<String> DislikeUsers { get; set; }
+ */
         //Constructors
 
         public Recipe(string name, DateTime date, string description, string ingredients)
@@ -44,7 +55,6 @@ namespace PrzepisyWeb.Models
             Ingredients = ingredients;
         }
 
-        private Recipe() { }
         public override string ToString() => JsonSerializer.Serialize<Recipe>(this);
 
     }

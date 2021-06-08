@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PrzepisyWeb.Data;
 
 namespace PrzepisyWeb.Migrations
 {
     [DbContext(typeof(RecipeContext))]
-    partial class RecipeContextModelSnapshot : ModelSnapshot
+    [Migration("20210604155033_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -154,7 +156,7 @@ namespace PrzepisyWeb.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("PrzepisyWeb.Models.ApplicationUser", b =>
+            modelBuilder.Entity("PrzepisyWeb.Areas.Identity.Data.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -268,9 +270,6 @@ namespace PrzepisyWeb.Migrations
                     b.Property<string>("Ingredients")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("LikeCounter")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -310,7 +309,7 @@ namespace PrzepisyWeb.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("PrzepisyWeb.Models.ApplicationUser", null)
+                    b.HasOne("PrzepisyWeb.Areas.Identity.Data.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -319,7 +318,7 @@ namespace PrzepisyWeb.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("PrzepisyWeb.Models.ApplicationUser", null)
+                    b.HasOne("PrzepisyWeb.Areas.Identity.Data.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -334,7 +333,7 @@ namespace PrzepisyWeb.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PrzepisyWeb.Models.ApplicationUser", null)
+                    b.HasOne("PrzepisyWeb.Areas.Identity.Data.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -343,7 +342,7 @@ namespace PrzepisyWeb.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("PrzepisyWeb.Models.ApplicationUser", null)
+                    b.HasOne("PrzepisyWeb.Areas.Identity.Data.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -358,7 +357,7 @@ namespace PrzepisyWeb.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PrzepisyWeb.Models.ApplicationUser", "User")
+                    b.HasOne("PrzepisyWeb.Areas.Identity.Data.ApplicationUser", "User")
                         .WithMany("favouriteRecipes")
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -367,7 +366,7 @@ namespace PrzepisyWeb.Migrations
 
             modelBuilder.Entity("PrzepisyWeb.Models.Recipe", b =>
                 {
-                    b.HasOne("PrzepisyWeb.Models.ApplicationUser", "Owner")
+                    b.HasOne("PrzepisyWeb.Areas.Identity.Data.ApplicationUser", "Owner")
                         .WithMany()
                         .HasForeignKey("OwnerId");
                 });

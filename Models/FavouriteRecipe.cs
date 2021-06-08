@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using PrzepisyWeb.Areas.Identity.Data;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +8,11 @@ namespace PrzepisyWeb.Models
 {
     public class FavouriteRecipe
     {
-        //recipe
         public int RecipeID { get; set; }
-
         public Recipe Recipe { get; set; }
 
-        //user
-        public ApplicationUser User { get; set; }
+        public string UserID { get; set; }
 
-       public string Id { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }

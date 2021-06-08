@@ -1,4 +1,6 @@
 [
+  //stworzyć owner dopiero wtedy tworzyć obiekty (klucze obce)
+  // owner == username
   {
     "Author": "Piotr Kuligowski",
     "Description": "This shrimp stir fry recipe is made with loads of shrimp and vegetables pan seared with a spicy sauce made with gochujang, hot paprika, sesame oil, soy sauce and more. A spicy food lover’s dream!",
