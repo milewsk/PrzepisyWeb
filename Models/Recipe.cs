@@ -55,6 +55,7 @@ namespace PrzepisyWeb.Models
             Ingredients = ingredients;
         }
 
+        private Recipe() { }
         public override string ToString() => JsonSerializer.Serialize<Recipe>(this);
 
     }

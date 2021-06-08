@@ -31,7 +31,7 @@ namespace PrzepisyWeb
                 options.UseSqlServer(Configuration.GetConnectionString("RecipeDB"));
             });
 
-            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
             .AddEntityFrameworkStores<RecipeContext>();
 
             services.AddRazorPages();
