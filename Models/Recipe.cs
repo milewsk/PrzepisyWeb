@@ -36,6 +36,10 @@ namespace PrzepisyWeb.Models
         //dobre podejście
         public ICollection<FavouriteRecipe> favouriteRecipes { get; set; }
         
+        // polubiena
+        public int LikeCounter { get; set; }
+
+
 
         //Constructors
 
