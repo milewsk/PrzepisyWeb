@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -37,6 +38,13 @@ namespace PrzepisyWeb.Models
         public ICollection<FavouriteRecipe> favouriteRecipes { get; set; }
         
 
+        // polubienia i listy użytkowników którzy polublili
+        public int LikeCounter { get; set; }
+ /*       [NotMapped]
+        public ICollection<String> LikeUsers { get; set; }
+        [NotMapped]
+        public ICollection<String> DislikeUsers { get; set; }
+ */
         //Constructors
 
         public Recipe(string name, DateTime date, string description, string ingredients)

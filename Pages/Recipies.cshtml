@@ -3,6 +3,19 @@
 @{
 }
 
+
+    <form method="post">    
+        <div class="form-group justify-content-center">
+            <label id="search_1" asp-for="SearchString">Wyszukiwarka</label>
+            <input type="text" class="form-control" id="search_1" asp-for="SearchString" placeholder="Nazwa przepisu, autor, kategoria..." />
+            <small id="search_1" class="form-text text-muted">Maksymalnie 50 znaków</small>
+            <span asp-validation-for="SearchString" class="text-danger"></span>
+        </div>
+        <div class="justify-content-center align-content-center" >
+            <input type="submit" value="Szukaj" class="btn btn-primary" />
+        </div>
+    </form>
+
 <div class="card" style="width: 18rem;">
     <img class="card-img-top" src="https://www.telepolis.pl/images/2021/02/pale-moon-browser-29.jpg" alt="Card image cap">
     <div class="card-body">
