@@ -20,10 +20,14 @@ namespace PrzepisyWeb.Pages
         }
 
         
+        //foricz ()
+
+
+
         [BindProperty]
         public string SearchString { get; set; }
 
-        public IList<Recipe> SeachList { get; set; }
+        public IList<Recipe> SearchList { get; set; }
 
         public IActionResult OnPost()
         {
@@ -34,9 +38,9 @@ namespace PrzepisyWeb.Pages
                                   where (X.Name.Contains(SearchString) ||
                                   X.Owner.UserName.Contains(SearchString) ||
                                   X.Ingredients.Contains(SearchString) ||
-                                  X.Description.Contains(SearchString)) orderby X.LikeCounter select X;
+                                  X.Description.Contains(SearchString)) select X;
 
-                SeachList = SearchQuery.ToList();
+                SearchList = SearchQuery.ToList();
             }
 
 
@@ -45,9 +49,9 @@ namespace PrzepisyWeb.Pages
 
         public void OnGet()
         {
-            var GetFullList = (from X in _context.Recipes orderby X.LikeCounter select X).Take(20);
+            var GetFullList = (from X in _context.Recipes  select X).Take(20);
 
-            SeachList = GetFullList.ToList();
+            SearchList = GetFullList.ToList();
         }
     }
 }
