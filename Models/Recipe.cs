@@ -39,7 +39,7 @@ namespace PrzepisyWeb.Models
         
 
         // polubienia i listy użytkowników którzy polublili
-        public int LikeCounter { get; set; }
+        //public int LikeCounter { get; set; }
  /*       [NotMapped]
         public ICollection<String> LikeUsers { get; set; }
         [NotMapped]

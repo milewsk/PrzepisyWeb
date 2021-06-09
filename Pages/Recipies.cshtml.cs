@@ -10,11 +10,11 @@ using PrzepisyWeb.Models;
 
 namespace PrzepisyWeb.Pages
 {
-    public class Wyszukiwarka : PageModel
+    public class Recipies : PageModel
     {
         private readonly PrzepisyWeb.Data.RecipeContext _context;
 
-        public Wyszukiwarka(PrzepisyWeb.Data.RecipeContext context)
+        public Recipies(PrzepisyWeb.Data.RecipeContext context)
         {
             _context = context;
         }
@@ -34,7 +34,7 @@ namespace PrzepisyWeb.Pages
                                   where (X.Name.Contains(SearchString) ||
                                   X.Owner.UserName.Contains(SearchString) ||
                                   X.Ingredients.Contains(SearchString) ||
-                                  X.Description.Contains(SearchString)) orderby X.LikeCounter select X;
+                                  X.Description.Contains(SearchString)) select X;
 
                 SearchList = SearchQuery.ToList();
             }
@@ -45,7 +45,7 @@ namespace PrzepisyWeb.Pages
 
         public void OnGet()
         {
-            var GetFullList = (from X in _context.Recipes orderby X.LikeCounter select X).Take(20);
+            var GetFullList = (from X in _context.Recipes select X).Take(20);
 
             SearchList = GetFullList.ToList();
         }
