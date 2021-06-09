@@ -26,11 +26,11 @@
                                 Konto
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-dark" asp-area="" asp-page="#">Mój profil</a>
+                                <a class="dropdown-item text-dark" asp-area="" asp-page="/Identity/Pages/Account/Manage/PersonalData">Mój profil</a>
                                 <a class="dropdown-item text-dark" asp-area="" asp-page="#">Ulubione</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-page="#">Moje Przepisy</a>
+                                <a class="dropdown-item text-dark" asp-area="" asp-page="/Recipes/Index">Moje Przepisy</a>
                                 <div class="dropdown-divider">  </div>
-                                <a class="dropdown-item" asp-area="" asp-page="/AddRecipe">Dodaj przepis</a>
+                                <a class="dropdown-item" asp-area="" asp-page="/Recipes/Create">Dodaj przepis</a>
                             </div>
                         </li>
                         <partial name="_LoginPartial.cshtml" />
