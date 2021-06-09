@@ -17,6 +17,59 @@
     </form>
 
 
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.SearchList[0].Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SearchList[0].Image)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SearchList[0].Ingredients)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SearchList[0].Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SearchList[0].Date)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.SearchList)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Image)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ingredients)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        <a type="text/asp" asp-action="Like" asp-route-id="@item.RecipeID">Like</a>
+                        <button type="submit" asp-action="Dislike" asp-route-id="@item.RecipeID">Dislike</button>
+                        <a asp-page="./Edit" asp-route-id="@item.RecipeID">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.RecipeID">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.RecipeID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
 
 
 

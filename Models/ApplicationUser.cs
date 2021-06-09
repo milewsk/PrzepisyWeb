@@ -18,7 +18,6 @@ namespace PrzepisyWeb.Models
 
         public ICollection<FavouriteRecipe> favouriteRecipes { get; set; }
 
-
         public ICollection<LikeDislikeModel> LikeDislikeList { get; set; }
     }
 }

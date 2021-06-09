@@ -15,9 +15,11 @@ namespace PrzepisyWeb.Models
 
         private bool BoolBoxLike = false;
         
-        private int Counter = 0;
+      //  private int Counter = 0;
 
-        public int CounterLike { get { return Counter; } set { Counter = value; } }
+      // mamy bazkę rokordy z recipeid i userID
+
+      // public int CounterLike { get { return Counter; } set { Counter = value; } }
 
         [Required]
         public int RecipeID { get; set; }
@@ -32,7 +34,14 @@ namespace PrzepisyWeb.Models
         public bool Like { get { return BoolBoxLike; } set { BoolBoxLike = value; } }
 
         [DefaultValue(false)]
-        public bool Dislike { get { return BoolBoxDislike; } set { BoolBoxDislike = value; } } 
+        public bool Dislike { get { return BoolBoxDislike; } set { BoolBoxDislike = value; } }
+
+
+        public LikeDislikeModel(int recipeID, string userID) 
+        {
+            UserID = userID;
+            RecipeID = recipeID;
+        }
 
     }
 }
