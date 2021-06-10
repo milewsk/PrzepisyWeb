@@ -22,22 +22,41 @@ namespace PrzepisyWeb.Data
 
         public DbSet<FavouriteRecipe> FavouriteRecipes { get; set; }
 
+        public DbSet<LikeDislikeModel> LikeDislikeList { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Recipe>()
+                .HasOne(o => o.Owner)
+                .WithMany(r => r.Recipes);
 
             //many to many Kategorie
             modelBuilder.Entity<RecipeCategory>().HasKey(rc => new { rc.recipeID, rc.CategoryID });
 
             modelBuilder.Entity<RecipeCategory>()
                         .HasOne(rc => rc.recipe)
-                        .WithMany(rc => rc.RecipeCategories)
+                        .WithMany(r => r.RecipeCategories)
                         .HasForeignKey(rc => rc.recipeID);
 
             modelBuilder.Entity<RecipeCategory>()
                         .HasOne(rc => rc.category)
                         .WithMany(c => c.RecipeCategories)
-                        .HasForeignKey(rc => rc.CategoryID); 
+                        .HasForeignKey(rc => rc.CategoryID);
+
+
+            modelBuilder.Entity<LikeDislikeModel>().HasKey(dl => new { dl.RecipeID, dl.UserID });
+
+            modelBuilder.Entity<LikeDislikeModel>()
+                        .HasOne(r => r.Recipe)
+                        .WithMany(x => x.LikeDislikeList)
+                        .HasForeignKey(r => r.RecipeID);
+
+            modelBuilder.Entity<LikeDislikeModel>()
+                        .HasOne(r => r.User)
+                        .WithMany(u => u.LikeDislikeList)
+                        .HasForeignKey(r => r.UserID);
          //   modelBuilder.Entity<FavouriteRecipe>().HasKey(fr => new { fr.RecipeID, fr.Id });
 
           //  modelBuilder.Entity<FavouriteRecipe>().HasOne(fr => fr.person).WithMany(u => u.favouriteRecipesUser).HasForeignKey(fr => fr.Id);
