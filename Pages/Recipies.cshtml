@@ -58,7 +58,7 @@
                         @Html.DisplayFor(modelItem => item.Date)
                     </td>
                     <td>
-                        <a type="text/asp" asp-action="Like" asp-route-id="@item.RecipeID">Like</a>
+                        <a  asp-action="Like" asp-route-id="@item.RecipeID">Like</a>
                         <button type="submit" asp-action="Dislike" asp-route-id="@item.RecipeID">Dislike</button>
                         <a asp-page="./Edit" asp-route-id="@item.RecipeID">Edit</a> |
                         <a asp-page="./Details" asp-route-id="@item.RecipeID">Details</a> |
