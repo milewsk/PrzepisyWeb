@@ -9,6 +9,7 @@ namespace PrzepisyWeb.Models
 {
     public class LikeDislikeModel
     {
+        
         public string LikeID { get; set; }
 
         private bool BoolBoxDislike = false;
@@ -21,8 +22,10 @@ namespace PrzepisyWeb.Models
 
       // public int CounterLike { get { return Counter; } set { Counter = value; } }
 
+        
         [Required]
         public int RecipeID { get; set; }
+        
         [Required]
         public string UserID { get; set; }
 
@@ -41,6 +44,8 @@ namespace PrzepisyWeb.Models
         {
             UserID = userID;
             RecipeID = recipeID;
+           
+
         }
 
     }
