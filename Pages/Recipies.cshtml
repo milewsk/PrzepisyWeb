@@ -14,7 +14,7 @@
             <span asp-validation-for="SearchString" class="text-danger"></span>
         </div>
         <div class="justify-content-center align-content-center" >
-            <input type="submit" value="Szukaj" class="btn btn-primary" />
+            <input type="submit" name="Search" value="Szukaj" class="btn btn-primary" />
         </div>
     </form>
 
@@ -60,8 +60,11 @@
                         @Html.DisplayFor(modelItem => item.Date)
                     </td>
                     <td>
-                        <a type="text/asp" asp-action="Like" asp-route-id="@item.RecipeID">Like</a>
-                        <button type="submit" asp-action="Dislike" asp-route-id="@item.RecipeID">Dislike</button>
+                        <form method="post">
+                        <input type="submit" name="Like" value="Like" asp-route-id="@item.RecipeID"/>
+                       </form>
+                            <a type="text/asp" asp-action="Like" asp-route-id="@item.RecipeID">Like</a>
+                        <button  asp-action="Like" asp-route-id="@item.RecipeID">Dislike</button>
                         <a asp-page="./Edit" asp-route-id="@item.RecipeID">Edit</a> |
                         <a asp-page="./Details" asp-route-id="@item.RecipeID">Details</a> |
                         <a asp-page="./Delete" asp-route-id="@item.RecipeID">Delete</a>
