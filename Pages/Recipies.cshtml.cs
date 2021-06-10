@@ -28,7 +28,11 @@ namespace PrzepisyWeb.Pages
 
         //foricz ()
         
+        [BindProperty]
+        public Recipe Recipe { get; set; }
 
+        [BindProperty]
+        public int LikedRecipe { get; set; }
 
         [BindProperty]
         public string SearchString { get; set; }
@@ -39,16 +43,70 @@ namespace PrzepisyWeb.Pages
 
         public IActionResult OnPost()
         {
-            if(ModelState.IsValid)
+
+            if (ModelState.IsValid)
             {
 
-                var SearchQuery = from X in _context.Recipes
-                                  where (X.Name.Contains(SearchString) ||
-                                  X.Owner.UserName.Contains(SearchString) ||
-                                  X.Ingredients.Contains(SearchString) ||
-                                  X.Description.Contains(SearchString)) select X;
 
-                SearchList = SearchQuery.ToList();
+                if (Request.Form.Keys.Contains("Search")) {
+
+                    var SearchQuery = from X in _context.Recipes
+                                      where (X.Name.Contains(SearchString) ||
+                                      X.Owner.UserName.Contains(SearchString) ||
+                                      X.Ingredients.Contains(SearchString) ||
+                                      X.Description.Contains(SearchString)) select X;
+
+                    SearchList = SearchQuery.ToList();
+                }
+
+                if (Request.Form.Keys.Contains("Like"))
+                {
+                    var IsCreated = from IS in _context.LikeDislikeList where (IS.RecipeID == LikedRecipe) && (IS.UserID == _userManager.GetUserId(User)) select IS;
+
+
+                    if (IsCreated.Count() == 0)
+                    {
+                        LikeDislikeModel newOne = new LikeDislikeModel(LikedRecipe, _userManager.GetUserId(User));
+                        newOne.Like = true;
+                        _context.LikeDislikeList.Add(newOne);
+
+                    }
+
+
+                    var tempLike = (from IS in _context.LikeDislikeList where ((IS.RecipeID == Recipe.RecipeID) && (IS.UserID == _userManager.GetUserId(User))) select IS.Like);
+
+                    var tempDislike = (from IS in _context.LikeDislikeList where ((IS.RecipeID == Recipe.RecipeID) && (IS.UserID == _userManager.GetUserId(User))) select IS.Dislike);
+                   
+                    if (tempLike.Count() > 0)
+                    {
+
+                    }
+                    else
+                    {
+                        // albo var coœ tam taki sam jak obecny i usun¹æ
+                        LikeDislikeModel ToDelete = new LikeDislikeModel(Recipe.RecipeID, _userManager.GetUserId(User));
+                        _context.LikeDislikeList.Remove(ToDelete);
+
+
+
+                        ToDelete.Dislike = false;
+                        ToDelete.Like = true;
+                        _context.LikeDislikeList.Add(ToDelete);
+
+                    }
+
+                    //iloœæ wszystkich rekordów
+                    //iloœæ rekrdów dla danego id gdzie dislike jest true
+                    //odj¹æ od siebie bêdzie liczba lików
+                    var AllLikedRecords = (from X in _context.LikeDislikeList where (X.RecipeID == Recipe.RecipeID) && (X.Like == true) select X).Count();
+
+                    var AllDislikedRecords = (from X in _context.LikeDislikeList where (X.RecipeID == Recipe.RecipeID) && (X.Dislike == true) select X).Count();
+
+
+
+                    //zmieniæ counter
+
+                }
             }
 
 
@@ -59,7 +117,7 @@ namespace PrzepisyWeb.Pages
         {
             var GetLikeDislike = from L in _context.LikeDislikeList select L;
 
-            var GetFullList = (from X in _context.Recipes  select X).Take(20);
+            var GetFullList = (from X in _context.Recipes  select X);
 
             SearchList = GetFullList.ToList();
 
@@ -77,7 +135,7 @@ namespace PrzepisyWeb.Pages
 
             if (IsCreated == null)
             {
-                LikeDislikeModel newOne = new LikeDislikeModel(R, _userManager.GetUserId(User));
+                LikeDislikeModel newOne = new LikeDislikeModel(Recipe.RecipeID, _userManager.GetUserId(User));
                 newOne.Like = true;
                 _context.LikeDislikeList.Add(newOne);
           
@@ -89,7 +147,7 @@ namespace PrzepisyWeb.Pages
             else 
             {
                 // albo var coœ tam taki sam jak obecny i usun¹æ
-                LikeDislikeModel ToDelete = new LikeDislikeModel(R, _userManager.GetUserId(User));
+                LikeDislikeModel ToDelete = new LikeDislikeModel(Recipe.RecipeID, _userManager.GetUserId(User));
                 _context.LikeDislikeList.Remove(ToDelete);
 
                 
@@ -125,7 +183,7 @@ namespace PrzepisyWeb.Pages
 
             if (IsCreated == null)
             {
-                LikeDislikeModel newOne = new LikeDislikeModel(R, _userManager.GetUserId(User));
+                LikeDislikeModel newOne = new LikeDislikeModel(Recipe.RecipeID, _userManager.GetUserId(User));
                 newOne.Like = true;
                 _context.LikeDislikeList.Add(newOne);
 
@@ -137,7 +195,7 @@ namespace PrzepisyWeb.Pages
             else
             {
                 // albo var coœ tam taki sam jak obecny i usun¹æ
-                LikeDislikeModel ToDelete = new LikeDislikeModel(R, _userManager.GetUserId(User));
+                LikeDislikeModel ToDelete = new LikeDislikeModel(Recipe.RecipeID, _userManager.GetUserId(User));
                 _context.LikeDislikeList.Remove(ToDelete);
 
 
