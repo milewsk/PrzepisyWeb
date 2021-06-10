@@ -37,13 +37,18 @@ namespace PrzepisyWeb.Models
         //dobre podejście
         public ICollection<FavouriteRecipe> favouriteRecipes { get; set; }
         
+        //polubienia
+
+        public ICollection<LikeDislikeModel> LikeDislikeList { get; set; }
 
         // polubienia i listy użytkowników którzy polublili
-        public int LikeCounter { get; set; }
- /*       [NotMapped]
-        public ICollection<String> LikeUsers { get; set; }
+       /* public int LikeCounter { get; set; }
+        
         [NotMapped]
-        public ICollection<String> DislikeUsers { get; set; }
+        public ICollection<ApplicationUser> LikeUsers { get; set; }
+
+        [NotMapped]
+        public ICollection<ApplicationUser> DislikeUsers { get; set; }
  */
         //Constructors
 
@@ -54,6 +59,8 @@ namespace PrzepisyWeb.Models
             Description = description;
             Ingredients = ingredients;
         }
+        public Recipe()
+        { }
 
         public override string ToString() => JsonSerializer.Serialize<Recipe>(this);
 
