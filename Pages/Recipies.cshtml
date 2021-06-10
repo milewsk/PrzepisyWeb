@@ -3,54 +3,53 @@
 @{
     ViewData["Title"] = "Przepisy - ";
 }
-}
 
 
     <form method="post">    
         <div class="form-group justify-content-center">
-            <label id="search_1" asp-for="SearchString">Wyszukiwarka</label>
+            <label id="search_1" style="margin: 10px 0 5px 0; font-size: 18px" asp-for="SearchString"><b>Wyszukiwarka</b></label>
             <input type="text" class="form-control" id="search_1" asp-for="SearchString" placeholder="Nazwa przepisu, autor, kategoria..." />
             <small id="search_1" class="form-text text-muted">Maksymalnie 50 znaków</small>
             <span asp-validation-for="SearchString" class="text-danger"></span>
         </div>
-        <div class="justify-content-center align-content-center" >
+        <div class="justify-content-center align-content-center" style="margin: 0 0 20px 0">
             <input type="submit" value="Szukaj" class="btn btn-primary" />
         </div>
     </form>
 
-<div class="card" style="width: 18rem;">
+<div class="card" style="card_p; margin: 0 0 15px 0">
     <img class="card-img-top" src="https://www.telepolis.pl/images/2021/02/pale-moon-browser-29.jpg" alt="Card image cap">
     <div class="card-body">
         <!---<h5 class="card-title">Card title</h5>-->
         <!---<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <a href="#" class="btn btn-primary btn-lg btn-block" style="">Zobacz ↑</a>
     </div>
 </div>
 
-<div class="card" style="width: 18rem;">
+<div class="card" style="card_p; margin: 0 0 15px 0">
     <img class="card-img-top" src="https://assets.tmecosys.com/image/upload/t_web767x639/img/recipe/vimdb/202564_0-1059-5478-5478.jpg" alt="Card image cap">
     <div class="card-body">
         <!---<h5 class="card-title">Card title</h5>-->
         <!---<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <a href="#" class="btn btn-primary btn-lg btn-block">Zobacz ↑</a>
     </div>
 </div>
 
-<div class="card" style="width: 18rem;">
+<div class="card" style="card_p; margin: 0 0 15px 0">
     <img class="card-img-top" src="https://natashaskitchen.com/wp-content/uploads/2018/08/Chicken-Stir-Fry-1-1.jpg" alt="Card image cap">
     <div class="card-body">
         <!---<h5 class="card-title">Card title</h5>-->
         <!---<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <a href="#" class="btn btn-primary btn-lg btn-block">Zobacz ↑</a>
     </div>
 </div>
 
-<div class="card" style="width: 18rem;">
+<div class="card" style="card_p; margin: 0 0 15px 0">
     <img class="card-img-top" src="https://ocdn.eu/pulscms-transforms/1/NB6k9kpTURBXy82YmJjYTRkZGQwN2I4MGQ4NTlkZmEzODg3MmRjMGZmOS5qcGeTlQMBzMjNBEXNAmeTBc0DFM0BvJMJpjA3NjE4NQaBoTAB/meksykanskie-buritto.jpg" alt="Card image cap">
     <div class="card-body">
         <!---<h5 class="card-title">Card title</h5>-->
         <!---<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <a href="#" class="btn btn-primary btn-lg btn-block">Zobacz ↑</a>
     </div>
 </div>
 
