@@ -31,8 +31,6 @@ namespace PrzepisyWeb.Pages
         [BindProperty]
         public Recipe Recipe { get; set; }
 
-       
-
         [BindProperty]
         public string SearchString { get; set; }
 
@@ -60,7 +58,7 @@ namespace PrzepisyWeb.Pages
 
                 if (Request.Form.Keys.Contains("Like"))
                 {
-                    var IsCreated = from IS in _context.LikeDislikeList where IS.RecipeID == Recipe.RecipeID select IS;
+                    var IsCreated = from IS in _context.LikeDislikeList where (IS.RecipeID == Recipe.RecipeID) && (IS.UserID == _userManager.GetUserId(User)) select IS;
 
 
                     if (IsCreated.Count() == 0)
@@ -70,6 +68,7 @@ namespace PrzepisyWeb.Pages
                         _context.LikeDislikeList.Add(newOne);
 
                     }
+
 
                     var tempLike = (from IS in _context.LikeDislikeList where ((IS.RecipeID == Recipe.RecipeID) && (IS.UserID == _userManager.GetUserId(User))) select IS.Like);
 
@@ -115,7 +114,7 @@ namespace PrzepisyWeb.Pages
         {
             var GetLikeDislike = from L in _context.LikeDislikeList select L;
 
-            var GetFullList = (from X in _context.Recipes  select X).Take(20);
+            var GetFullList = (from X in _context.Recipes  select X);
 
             SearchList = GetFullList.ToList();
 

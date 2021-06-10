@@ -61,7 +61,7 @@
                     </td>
                     <td>
                         <form method="post">
-                        <input type="submit" name="Like" value="Like" asp-route-id="@item.RecipeID"/>
+                        <input type="submit" name="Like" value="Like" asp-for="@item" />
                        </form>
                             <a type="text/asp" asp-action="Like" asp-route-id="@item.RecipeID">Like</a>
                         <button  asp-action="Like" asp-route-id="@item.RecipeID">Dislike</button>
