@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PrzepisyWeb.Data;
 using PrzepisyWeb.Models;
 
-namespace PrzepisyWeb.Pages.Recipes
+namespace PrzepisyWeb.Pages.Categories
 {
-    [Authorize]
     public class CreateModel : PageModel
     {
         private readonly PrzepisyWeb.Data.RecipeContext _context;
@@ -27,7 +25,7 @@ namespace PrzepisyWeb.Pages.Recipes
         }
 
         [BindProperty]
-        public Recipe Recipe { get; set; }
+        public Category Category { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
@@ -38,7 +36,7 @@ namespace PrzepisyWeb.Pages.Recipes
                 return Page();
             }
 
-            _context.Recipes.Add(Recipe);
+            _context.Categories.Add(Category);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

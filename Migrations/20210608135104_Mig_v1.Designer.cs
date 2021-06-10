@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PrzepisyWeb.Data;
 
 namespace PrzepisyWeb.Migrations
 {
     [DbContext(typeof(RecipeContext))]
-    partial class RecipeContextModelSnapshot : ModelSnapshot
+    [Migration("20210608135104_Mig_v1")]
+    partial class Mig_v1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -249,33 +251,6 @@ namespace PrzepisyWeb.Migrations
                     b.ToTable("FavouriteRecipes");
                 });
 
-            modelBuilder.Entity("PrzepisyWeb.Models.LikeDislikeModel", b =>
-                {
-                    b.Property<int>("RecipeID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("CounterLike")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Dislike")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Like")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("LikeID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("RecipeID", "UserID");
-
-                    b.HasIndex("UserID");
-
-                    b.ToTable("LikeDislikeList");
-                });
-
             modelBuilder.Entity("PrzepisyWeb.Models.Recipe", b =>
                 {
                     b.Property<int>("RecipeID")
@@ -294,6 +269,9 @@ namespace PrzepisyWeb.Migrations
 
                     b.Property<string>("Ingredients")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LikeCounter")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -389,25 +367,10 @@ namespace PrzepisyWeb.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PrzepisyWeb.Models.LikeDislikeModel", b =>
-                {
-                    b.HasOne("PrzepisyWeb.Models.Recipe", "Recipe")
-                        .WithMany("LikeDislikeList")
-                        .HasForeignKey("RecipeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PrzepisyWeb.Models.ApplicationUser", "User")
-                        .WithMany("LikeDislikeList")
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("PrzepisyWeb.Models.Recipe", b =>
                 {
                     b.HasOne("PrzepisyWeb.Models.ApplicationUser", "Owner")
-                        .WithMany("Recipes")
+                        .WithMany()
                         .HasForeignKey("OwnerId");
                 });
 
