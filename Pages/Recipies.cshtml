@@ -60,9 +60,15 @@
                 </td>
                 <td>
                     <form method="post">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <input type="hidden" asp-route-id="@item.RecipeID" />
+
+                        <input type="hidden" name="Like" asp-for="@item.RecipeID" />
                         <input type="submit" name="Like" value="Like" />
+                    </form>
+
+                    <form method="post">
+
+                        <input type="hidden" name="Like" asp-for="@item.RecipeID" />
+                        <input type="submit" name="Dislike" value="Dislike" />
                     </form>
 
                     <a asp-page="/Recipes/AddFavourite" asp-route-id="@item.RecipeID">Do ulubionych</a> |
