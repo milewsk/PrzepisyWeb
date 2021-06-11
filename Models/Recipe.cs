@@ -12,6 +12,9 @@ namespace PrzepisyWeb.Models
 {
     public class Recipe
     {
+
+        //dodać inta do zliczania 
+
         //params
         [Key]
         public int RecipeID { get; set; }
