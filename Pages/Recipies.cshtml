@@ -5,73 +5,76 @@
 }
 
 
-    <form method="post">    
-        <div class="form-group justify-content-center">
-            <label id="search_1" style="margin: 10px 0 5px 0; font-size: 18px" asp-for="SearchString"><b>Wyszukiwarka</b></label>
-            <input type="text" class="form-control" id="search_1" asp-for="SearchString" placeholder="Nazwa przepisu, autor, kategoria..." />
-            <small id="search_1" class="form-text text-muted">Maksymalnie 50 znaków</small>
-            <span asp-validation-for="SearchString" class="text-danger"></span>
-        </div>
-        <div class="justify-content-center align-content-center" >
-            <input type="submit" name="Search" value="Szukaj" class="btn btn-primary" />
-        </div>
-    </form>
+<form method="post">
+    <div class="form-group justify-content-center">
+        <label id="search_1" style="margin: 10px 0 5px 0; font-size: 18px" asp-for="SearchString"><b>Wyszukiwarka</b></label>
+        <input type="text" class="form-control" id="search_1" asp-for="SearchString" placeholder="Nazwa przepisu, autor, kategoria..." />
+        <small id="search_1" class="form-text text-muted">Maksymalnie 50 znaków</small>
+        <span asp-validation-for="SearchString" class="text-danger"></span>
+    </div>
+    <div class="justify-content-center align-content-center">
+        <input type="submit" name="Search" value="Szukaj" class="btn btn-primary" />
+    </div>
+</form>
 
 
-    <table class="table">
-        <thead>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SearchList[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SearchList[0].Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SearchList[0].Ingredients)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SearchList[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SearchList[0].Date)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.SearchList)
+        {
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.SearchList[0].Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SearchList[0].Image)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SearchList[0].Ingredients)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SearchList[0].Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SearchList[0].Date)
-                </th>
-                <th></th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Image)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ingredients)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-route-id="@item.RecipeID" />
+                        <input type="submit" name="Like" value="Like" />
+                    </form>
+
+                    <a asp-page="/Recipes/AddFavourite" asp-route-id="@item.RecipeID">Do ulubionych</a> |
+
+                    <a asp-page="/Recipes/Edit" asp-route-id="@item.RecipeID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.RecipeID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.RecipeID">Delete</a>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.SearchList)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Image)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Ingredients)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Date)
-                    </td>
-                    <td>
-                        <form method="post">
-                        <input type="submit" name="Like" value="Like" asp-for="LikedRecipe = @item.RecipeID" />
-                       </form>
-                        <a type="text/asp" asp-action="Like" asp-route-id="LikedRecipe">Like</a>
-                        <button  asp-action="Like" asp-route-id="@item.RecipeID">Dislike</button>
-                        <a asp-page="./Edit" asp-route-id="@item.RecipeID">Edit</a> |
-                        <a asp-page="./Details" asp-route-id="@item.RecipeID">Details</a> |
-                        <a asp-page="./Delete" asp-route-id="@item.RecipeID">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>
 
 
 
@@ -114,3 +117,7 @@
 </div>
 
 
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -48,5 +48,7 @@ namespace PrzepisyWeb.Models
 
         }
 
+        public LikeDislikeModel() { }
+
     }
 }

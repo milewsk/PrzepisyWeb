@@ -27,7 +27,7 @@ namespace PrzepisyWeb.Pages
 
 
         //foricz ()
-        
+
         [BindProperty]
         public Recipe Recipe { get; set; }
 
@@ -41,7 +41,21 @@ namespace PrzepisyWeb.Pages
 
         public IList<LikeDislikeModel> LikeDislikeList { get; set; }
 
-        public IActionResult OnPost()
+
+        public async Task<IActionResult> OnGet()
+        {
+            var GetLikeDislike = from L in _context.LikeDislikeList select L;
+
+            var GetFullList = from X in _context.Recipes select X;
+
+            SearchList = await GetFullList.ToListAsync();
+
+            LikeDislikeList = await GetLikeDislike.ToListAsync();
+
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync()
         {
 
             if (ModelState.IsValid)
@@ -56,19 +70,22 @@ namespace PrzepisyWeb.Pages
                                       X.Ingredients.Contains(SearchString) ||
                                       X.Description.Contains(SearchString)) select X;
 
-                    SearchList = SearchQuery.ToList();
+                    SearchList =  SearchQuery.ToList();
                 }
 
                 if (Request.Form.Keys.Contains("Like"))
                 {
-                    var IsCreated = from IS in _context.LikeDislikeList where (IS.RecipeID == LikedRecipe) && (IS.UserID == _userManager.GetUserId(User)) select IS;
+                    var IsCreated = from IS in _context.LikeDislikeList where (IS.RecipeID == Recipe.RecipeID) && (IS.UserID == _userManager.GetUserId(User)) select IS;
 
 
                     if (IsCreated.Count() == 0)
                     {
-                        LikeDislikeModel newOne = new LikeDislikeModel(LikedRecipe, _userManager.GetUserId(User));
+                        var newOne = new LikeDislikeModel();
+                        newOne.RecipeID = Recipe.RecipeID;
+                        newOne.UserID = _userManager.GetUserId(User);
                         newOne.Like = true;
                         _context.LikeDislikeList.Add(newOne);
+                        await _context.SaveChangesAsync();
 
                     }
 
@@ -113,16 +130,7 @@ namespace PrzepisyWeb.Pages
             return Page();
         }
 
-        public void OnGet()
-        {
-            var GetLikeDislike = from L in _context.LikeDislikeList select L;
-
-            var GetFullList = (from X in _context.Recipes  select X);
-
-            SearchList = GetFullList.ToList();
-
-            LikeDislikeList = GetLikeDislike.ToList();
-        }
+    
 
         
         public  ActionResult Like(int R)

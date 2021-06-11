@@ -48,6 +48,8 @@ namespace PrzepisyWeb.Pages.Recipes
                 return Page();
             }
 
+            var temp = Recipe.RecipeID;
+
             _context.Attach(Recipe).State = EntityState.Modified;
 
             try
