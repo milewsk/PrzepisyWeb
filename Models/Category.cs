@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,10 +8,12 @@ namespace PrzepisyWeb.Models
 {
     public class Category
     {
+        [Key]
         public int categoryID { get; set; }
 
-        protected string categoryName;
+        public string categoryName { get; set; }
 
-        protected ICollection<RecipesCategory> RecipesCategories;
+        public ICollection<RecipeCategory> RecipeCategories { get; set; }
+
     }
 }

@@ -1,0 +1,60 @@
+﻿@page
+@model PrzepisyWeb.Pages.Recipes.AddFavouriteModel
+
+@{
+    ViewData["Title"] = "AddFavourite";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>AddFavourite</h1>
+ 
+
+<!--Czy chcesz dodać ten przepis do ulubionych... (Wrzucić to w boxa))-->
+
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Recipe.RecipeID" />
+    <div class="form-group">
+        <label asp-for="Recipe.Name" class="control-label"></label>
+        <input asp-for="Recipe.Name" class="form-control" />
+        <span asp-validation-for="Recipe.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Recipe.Image" class="control-label"></label>
+        <input asp-for="Recipe.Image" class="form-control" />
+        <span asp-validation-for="Recipe.Image" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Recipe.Ingredients" class="control-label"></label>
+        <input asp-for="Recipe.Ingredients" class="form-control" />
+        <span asp-validation-for="Recipe.Ingredients" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Recipe.Description" class="control-label"></label>
+        <input asp-for="Recipe.Description" class="form-control" />
+        <span asp-validation-for="Recipe.Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Recipe.Date" class="control-label"></label>
+        <input asp-for="Recipe.Date" class="form-control" />
+        <span asp-validation-for="Recipe.Date" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Czy chcesz dodać ten przepis do ulubionych?</label>
+        <input type="submit" value="Dodaj" class="btn btn-primary" />
+    </div>
+
+</form>
+
+<!-- Dodać przyciski dwa (dodaj) (wróć)-->
+
+
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

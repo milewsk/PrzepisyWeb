@@ -1,0 +1,135 @@
+﻿@page
+@model PrzepisyWeb.Pages.RecipiesModel
+@{
+    ViewData["Title"] = "Przepisy - ";
+}
+
+
+<form method="post">
+    <div class="form-group justify-content-center">
+        <label id="search_1" style="margin: 10px 0 5px 0; font-size: 18px" asp-for="SearchString"><b>Wyszukiwarka</b></label>
+        <input type="text" class="form-control" id="search_1" asp-for="SearchString" placeholder="Nazwa przepisu, autor, kategoria..." />
+        <small id="search_1" class="form-text text-muted">Maksymalnie 50 znaków</small>
+        <span asp-validation-for="SearchString" class="text-danger"></span>
+    </div>
+    <div class="justify-content-center align-content-center">
+        <input type="submit" name="Search" value="Szukaj" class="btn btn-primary" />
+    </div>
+</form>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SearchList[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SearchList[0].Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SearchList[0].Ingredients)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SearchList[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SearchList[0].Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SearchList[0].Owner.UserName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.SearchList)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ingredients)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OwnerUserName)
+            </td>
+            <td>
+                <form method="post">
+
+                    <input type="hidden" name="Like" asp-for="@item.RecipeID" />
+                    <input type="submit" name="Like" value="Like" />
+                </form>
+                @Html.DisplayFor(modelItem => item.LikeCounter)
+                <form method="post">
+
+                    <input type="hidden" name="Like" asp-for="@item.RecipeID" />
+                    <input type="submit" name="Dislike" value="Dislike" />
+                </form>
+
+                <a asp-page="/Recipes/AddFavourite" asp-route-id="@item.RecipeID">Do ulubionych</a> |
+
+
+                <a asp-page="./Details" asp-route-id="@item.RecipeID">Details</a> |
+
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="https://www.telepolis.pl/images/2021/02/pale-moon-browser-29.jpg" alt="Card image cap">
+    <div class="card-body">
+        <!---<h5 class="card-title">Card title</h5>-->
+        <!---<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+        <a href="#" class="btn btn-primary btn-lg btn-block" style="">Zobacz ↑</a>
+    </div>
+</div>
+
+<div class="card" style="card_p; margin: 0 0 15px 0">
+    <img class="card-img-top" src="https://assets.tmecosys.com/image/upload/t_web767x639/img/recipe/vimdb/202564_0-1059-5478-5478.jpg" alt="Card image cap">
+    <div class="card-body">
+        <!---<h5 class="card-title">Card title</h5>-->
+        <!---<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+        <a href="#" class="btn btn-primary btn-lg btn-block">Zobacz ↑</a>
+    </div>
+</div>
+
+<div class="card" style="card_p; margin: 0 0 15px 0">
+    <img class="card-img-top" src="https://natashaskitchen.com/wp-content/uploads/2018/08/Chicken-Stir-Fry-1-1.jpg" alt="Card image cap">
+    <div class="card-body">
+        <!---<h5 class="card-title">Card title</h5>-->
+        <!---<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+        <a href="#" class="btn btn-primary btn-lg btn-block">Zobacz ↑</a>
+    </div>
+</div>
+
+<div class="card" style="card_p; margin: 0 0 15px 0">
+    <img class="card-img-top" src="https://ocdn.eu/pulscms-transforms/1/NB6k9kpTURBXy82YmJjYTRkZGQwN2I4MGQ4NTlkZmEzODg3MmRjMGZmOS5qcGeTlQMBzMjNBEXNAmeTBc0DFM0BvJMJpjA3NjE4NQaBoTAB/meksykanskie-buritto.jpg" alt="Card image cap">
+    <div class="card-body">
+        <!---<h5 class="card-title">Card title</h5>-->
+        <!---<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+        <a href="#" class="btn btn-primary btn-lg btn-block">Zobacz ↑</a>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

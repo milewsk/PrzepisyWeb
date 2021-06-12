@@ -1,0 +1,34 @@
+﻿@page
+@model PrzepisyWeb.Pages.Recipes.DeleteFavouriteModel
+
+@{
+    ViewData["Title"] = "DeleteFavourite";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+
+<!-- Dodać przyciski dwa (usuń) (wróć)-->
+
+<h4>Usuwanie</h4>
+<hr />
+
+<div>
+    <h3>Czy chcesz usunąć podany przepis z ulubionych?</h3>
+    <p>@Html.DisplayNameFor(model => model.Recipe.Name) : @Html.DisplayFor(model => model.Recipe.Name)</p>
+    <p>@Html.DisplayNameFor(model => model.Recipe.Date) : @Html.DisplayFor(model => model.Recipe.Date)</p>
+    <p>@Html.DisplayNameFor(model => model.Recipe.Ingredients) : @Html.DisplayFor(model => model.Recipe.Ingredients)</p>
+    <p>@Html.DisplayNameFor(model => model.Recipe.Description) : @Html.DisplayFor(model => model.Recipe.Description)</p>
+    <form method="post">
+        <input type="hidden"  asp-for="Recipe.RecipeID"/>
+        <input type="submit" value="Usuń" class="btn btn-danger" />
+    </form>
+</div>
+
+
+<div>
+    <a asp-page="./Favourite">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

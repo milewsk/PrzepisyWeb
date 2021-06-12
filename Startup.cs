@@ -1,9 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PrzepisyWeb.Data;
+using PrzepisyWeb.Models;
+using PrzepisyWeb.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +27,15 @@ namespace PrzepisyWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<RecipeContext>(options => {
+                options.UseSqlServer(Configuration.GetConnectionString("RecipeDB"));
+            });
+
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            .AddEntityFrameworkStores<RecipeContext>();
+
             services.AddRazorPages();
+            services.AddTransient<JsonFileRecipeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +57,7 @@ namespace PrzepisyWeb
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

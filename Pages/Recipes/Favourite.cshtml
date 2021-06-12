@@ -1,0 +1,57 @@
+﻿@page
+@model PrzepisyWeb.Pages.Recipes.FavouriteModel
+
+@{
+    ViewData["Title"] = "Favourite";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Twoje ulubione przepisy</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Recipe[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Recipe[0].Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Recipe[0].Ingredients)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Recipe[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Recipe[0].Date)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Recipe) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ingredients)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                <a asp-page="./DeleteFavourite" asp-route-id="@item.RecipeID">Usuń z ulubionych</a> 
+               
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
