@@ -26,10 +26,10 @@ namespace PrzepisyWeb.Models
 
         public ApplicationUser User { get; set; }
 
-        [DefaultValue(false)]
+        [DefaultValue(0)]
         public bool Like { get { return BoolBoxLike; } set { BoolBoxLike = value; } }
 
-        [DefaultValue(false)]
+        [DefaultValue(0)]
         public bool Dislike { get { return BoolBoxDislike; } set { BoolBoxDislike = value; } }
 
 
