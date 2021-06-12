@@ -18,7 +18,7 @@
     <p>@Html.DisplayNameFor(model => model.Recipe.Date) : @Html.DisplayFor(model => model.Recipe.Date)</p>
     <p>@Html.DisplayNameFor(model => model.Recipe.Ingredients) : @Html.DisplayFor(model => model.Recipe.Ingredients)</p>
     <p>@Html.DisplayNameFor(model => model.Recipe.Description) : @Html.DisplayFor(model => model.Recipe.Description)</p>
-    <form>
+    <form method="post">
         <input type="hidden"  asp-for="Recipe.RecipeID"/>
         <input type="submit" value="Usuń" class="btn btn-danger" />
     </form>
