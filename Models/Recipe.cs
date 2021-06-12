@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -43,6 +44,11 @@ namespace PrzepisyWeb.Models
         //polubienia
 
         public ICollection<LikeDislikeModel> LikeDislikeList { get; set; }
+
+
+        private int LikeCounterParam = 0;
+
+        public int LikeCounter { get { return LikeCounterParam; } set { LikeCounterParam = value; } }
 
         // polubienia i listy użytkowników którzy polublili
        /* public int LikeCounter { get; set; }
