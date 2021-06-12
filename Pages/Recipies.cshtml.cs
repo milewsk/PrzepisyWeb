@@ -43,7 +43,7 @@ namespace PrzepisyWeb.Pages
 
         public  IActionResult OnGet()
         {
-            var GetFullList = from X in _context.Recipes select X;
+            var GetFullList = from X in _context.Recipes orderby X.Date descending select X;
 
             var GetLikeDislike = from L in _context.LikeDislikeList select L;
 
@@ -77,6 +77,7 @@ namespace PrzepisyWeb.Pages
                                       X.Owner.UserName.Contains(SearchString) ||
                                       X.Ingredients.Contains(SearchString) ||
                                       X.Description.Contains(SearchString))
+                                      orderby X.Date descending
                                       select X;
 
                     SearchList = SearchQuery.ToList();
