@@ -46,8 +46,9 @@ namespace PrzepisyWeb.Models
         public ICollection<LikeDislikeModel> LikeDislikeList { get; set; }
 
 
-        [DefaultValue(false)]
-        public int LikeCounter { get { return LikeCounter; } set { LikeCounter = value; } }
+        private int LikeCounterParam = 0;
+
+        public int LikeCounter { get { return LikeCounterParam; } set { LikeCounterParam = value; } }
 
         // polubienia i listy użytkowników którzy polublili
        /* public int LikeCounter { get; set; }
