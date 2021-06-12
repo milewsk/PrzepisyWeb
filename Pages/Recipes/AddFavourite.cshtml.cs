@@ -37,7 +37,7 @@ namespace PrzepisyWeb.Pages.Recipes
         {
             var IsFav = from X in _context.FavouriteRecipes where (X.RecipeID == id) && (X.UserID == _userManager.GetUserId(User)) select X;
 
-            if (IsFav != null)
+            if (IsFav.Count() != 0)
             {
                 return RedirectToPage("/Recipies");
             }
