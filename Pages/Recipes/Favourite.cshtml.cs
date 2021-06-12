@@ -38,7 +38,7 @@ namespace PrzepisyWeb.Pages.Recipes
        
      
 
-        public async Task OnGetAsync()
+        public  IActionResult OnGet()
         {
             if (_signInManager.IsSignedIn(User))
             {
@@ -49,9 +49,11 @@ namespace PrzepisyWeb.Pages.Recipes
                             where (f.UserID == userid && f.RecipeID == x.RecipeID)
                             select x;
 
-                Recipe = await _context.Recipes.ToListAsync();
+                Recipe = Query.ToList();
+
+                
             }
-            
+            return Page();
         }
     }
 }

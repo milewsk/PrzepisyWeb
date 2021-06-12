@@ -257,9 +257,6 @@ namespace PrzepisyWeb.Migrations
                     b.Property<string>("UserID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("CounterLike")
-                        .HasColumnType("int");
-
                     b.Property<bool>("Dislike")
                         .HasColumnType("bit");
 
@@ -294,6 +291,9 @@ namespace PrzepisyWeb.Migrations
 
                     b.Property<string>("Ingredients")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LikeCounter")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");

@@ -6,58 +6,27 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>DeleteFavourite</h1>
-
-
-
-<!--Czy chcesz usunąć ten przepis do ulubionych... (Wrzucić to w boxa))-->
-@Html.DisplayNameFor(model => model.Recipe.Name)
-@Html.DisplayNameFor(model => model.Recipe.Image)
-@Html.DisplayNameFor(model => model.Recipe.Description)
-@Html.DisplayNameFor(model => model.Recipe.Ingredients)
 
 <!-- Dodać przyciski dwa (usuń) (wróć)-->
 
-<h4>Recipe</h4>
+<h4>Usuwanie</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Recipe.Name" class="control-label"></label>
-                <input asp-for="Recipe.Name" class="form-control" />
-                <span asp-validation-for="Recipe.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Recipe.Image" class="control-label"></label>
-                <input asp-for="Recipe.Image" class="form-control" />
-                <span asp-validation-for="Recipe.Image" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Recipe.Ingredients" class="control-label"></label>
-                <input asp-for="Recipe.Ingredients" class="form-control" />
-                <span asp-validation-for="Recipe.Ingredients" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Recipe.Description" class="control-label"></label>
-                <input asp-for="Recipe.Description" class="form-control" />
-                <span asp-validation-for="Recipe.Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Recipe.Date" class="control-label"></label>
-                <input asp-for="Recipe.Date" class="form-control" />
-                <span asp-validation-for="Recipe.Date" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <h3>Czy chcesz usunąć podany przepis z ulubionych?</h3>
+    <p>@Html.DisplayNameFor(model => model.Recipe.Name) : @Html.DisplayFor(model => model.Recipe.Name)</p>
+    <p>@Html.DisplayNameFor(model => model.Recipe.Date) : @Html.DisplayFor(model => model.Recipe.Date)</p>
+    <p>@Html.DisplayNameFor(model => model.Recipe.Ingredients) : @Html.DisplayFor(model => model.Recipe.Ingredients)</p>
+    <p>@Html.DisplayNameFor(model => model.Recipe.Description) : @Html.DisplayFor(model => model.Recipe.Description)</p>
+    <form method="post">
+        <input type="hidden"  asp-for="Recipe.RecipeID"/>
+        <input type="submit" value="Usuń" class="btn btn-danger" />
+    </form>
+</div>
+
+
+<div>
+    <a asp-page="./Favourite">Back to List</a>
 </div>
 
 @section Scripts {

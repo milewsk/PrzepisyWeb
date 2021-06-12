@@ -10,8 +10,8 @@ using PrzepisyWeb.Data;
 namespace PrzepisyWeb.Migrations
 {
     [DbContext(typeof(RecipeContext))]
-    [Migration("20210609091135_Mig_v3")]
-    partial class Mig_v3
+    [Migration("20210612094752_Migracja_test")]
+    partial class Migracja_test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -259,9 +259,6 @@ namespace PrzepisyWeb.Migrations
                     b.Property<string>("UserID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("CounterLike")
-                        .HasColumnType("int");
-
                     b.Property<bool>("Dislike")
                         .HasColumnType("bit");
 
@@ -296,6 +293,9 @@ namespace PrzepisyWeb.Migrations
 
                     b.Property<string>("Ingredients")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LikeCounter")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");

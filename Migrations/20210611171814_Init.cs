@@ -176,7 +176,8 @@ namespace PrzepisyWeb.Migrations
                     Ingredients = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false),
-                    OwnerId = table.Column<string>(nullable: true)
+                    OwnerId = table.Column<string>(nullable: true),
+                    LikeCounter = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -207,6 +208,33 @@ namespace PrzepisyWeb.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_FavouriteRecipes_AspNetUsers_UserID",
+                        column: x => x.UserID,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LikeDislikeList",
+                columns: table => new
+                {
+                    RecipeID = table.Column<int>(nullable: false),
+                    UserID = table.Column<string>(nullable: false),
+                    LikeID = table.Column<string>(nullable: true),
+                    Like = table.Column<bool>(nullable: false),
+                    Dislike = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LikeDislikeList", x => new { x.RecipeID, x.UserID });
+                    table.ForeignKey(
+                        name: "FK_LikeDislikeList_Recipes_RecipeID",
+                        column: x => x.RecipeID,
+                        principalTable: "Recipes",
+                        principalColumn: "RecipeID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_LikeDislikeList_AspNetUsers_UserID",
                         column: x => x.UserID,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -282,6 +310,11 @@ namespace PrzepisyWeb.Migrations
                 column: "UserID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_LikeDislikeList_UserID",
+                table: "LikeDislikeList",
+                column: "UserID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_RecipeCategories_CategoryID",
                 table: "RecipeCategories",
                 column: "CategoryID");
@@ -311,6 +344,9 @@ namespace PrzepisyWeb.Migrations
 
             migrationBuilder.DropTable(
                 name: "FavouriteRecipes");
+
+            migrationBuilder.DropTable(
+                name: "LikeDislikeList");
 
             migrationBuilder.DropTable(
                 name: "RecipeCategories");

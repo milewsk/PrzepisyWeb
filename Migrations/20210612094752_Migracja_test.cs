@@ -2,7 +2,7 @@
 
 namespace PrzepisyWeb.Migrations
 {
-    public partial class Piotrek1 : Migration
+    public partial class Migracja_test : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
