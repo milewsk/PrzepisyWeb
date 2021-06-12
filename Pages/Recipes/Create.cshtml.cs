@@ -38,6 +38,8 @@ namespace PrzepisyWeb.Pages.Recipes
                 return Page();
             }
 
+            
+
             _context.Recipes.Add(Recipe);
             await _context.SaveChangesAsync();
 

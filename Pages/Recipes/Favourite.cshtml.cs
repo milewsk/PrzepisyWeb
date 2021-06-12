@@ -49,9 +49,9 @@ namespace PrzepisyWeb.Pages.Recipes
                             where (f.UserID == userid && f.RecipeID == x.RecipeID)
                             select x;
 
-                Recipe = await _context.Recipes.ToListAsync();
+                Recipe =  await _context.Recipes.ToListAsync();
             }
-            
+          
         }
     }
 }
