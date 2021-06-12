@@ -19,15 +19,14 @@
         </header>
         <nav>
             <a class="menu" asp-area="" asp-page="/Index">Strona głowna</a>
-            <a class="menu" asp-area="" asp-page="/AddRecipe">Dodaj przepis</a>
-            <a class="menu" asp-area="" asp-page="/Categories/Index">Kategorie</a>
+            <a class="menu" asp-area="" asp-page="/Recipes/Create">Dodaj przepis</a>
             <a class="menu" asp-area="" asp-page="/Recipies">Przepisy</a>
             <a class="menu" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Moje Konto </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="menu" style="color: black" asp-area="" asp-page="/Identity/Pages/Account/Manage/PersonalData">Mój profil</a>
-                <a class="menu" style="color: black" asp-area="" asp-page="#">Ulubione</a>
-                <a class="menu" style="color: black" asp-area="" asp-page="#">Moje przepisy</a>
-            </div>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="menu" style="color: black" asp-area="" asp-page="/Identity/Account/Manage">Mój profil</a>
+                            <a class="menu" style="color: black" asp-area="" asp-page="/Recipes/Favourite">Ulubione</a>
+                            <a class="menu" style="color: black" asp-area="" asp-page="">Moje przepisy</a>
+                        </div>
             <partial name="_LoginPartial.cshtml" />
 
         </nav>
