@@ -41,6 +41,8 @@ namespace PrzepisyWeb.Pages
 
         public IList<LikeDislikeModel> LikeDislikeList { get; set; }
 
+        public IList<Category> CategoriesList { get; set; }
+
         public IActionResult OnPost()
         {
 
@@ -119,9 +121,14 @@ namespace PrzepisyWeb.Pages
 
             var GetFullList = (from X in _context.Recipes  select X);
 
+            var GetCategories = from X in _context.Categories select X;
+
             SearchList = GetFullList.ToList();
 
             LikeDislikeList = GetLikeDislike.ToList();
+
+            CategoriesList = GetCategories.ToList();
+
         }
 
         
