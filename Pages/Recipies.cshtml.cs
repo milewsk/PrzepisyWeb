@@ -38,6 +38,8 @@ namespace PrzepisyWeb.Pages
 
         public IList<LikeDislikeModel> LikeDislikeList { get; set; }
 
+        public IList<FavouriteRecipe> FavRecipeList { get; set; }
+
 
         public  IActionResult OnGet()
         {
@@ -45,11 +47,15 @@ namespace PrzepisyWeb.Pages
 
             var GetLikeDislike = from L in _context.LikeDislikeList select L;
 
-            
+            var FavList = from F in _context.FavouriteRecipes select F;
+
+
 
             SearchList =  GetFullList.ToList();
 
             LikeDislikeList =  GetLikeDislike.ToList();
+
+            FavRecipeList = FavList.ToList();
 
             return Page();
         }
