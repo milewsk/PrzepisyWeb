@@ -35,6 +35,13 @@ namespace PrzepisyWeb.Pages.Recipes
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            var IsFav = from X in _context.FavouriteRecipes where (X.RecipeID == id) && (X.UserID == _userManager.GetUserId(User)) select X;
+
+            if (IsFav != null)
+            {
+                return RedirectToPage("/Recipies");
+            }
+
 
             if (id == null)
             {
@@ -60,13 +67,15 @@ namespace PrzepisyWeb.Pages.Recipes
         // POST
         public async Task<IActionResult> OnPostAsync()
         {
+
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-
             if (_signInManager.IsSignedIn(User))
             {
+              
                 //  FavouriteRecipe FavRecipe = new FavouriteRecipe(Recipe.RecipeID, _userManager.GetUserId(User));
                 FavRec = new FavouriteRecipe();
 

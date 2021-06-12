@@ -38,18 +38,24 @@ namespace PrzepisyWeb.Pages
 
         public IList<LikeDislikeModel> LikeDislikeList { get; set; }
 
+        public IList<FavouriteRecipe> FavRecipeList { get; set; }
+
 
         public  IActionResult OnGet()
         {
-            var GetFullList = from X in _context.Recipes select X;
+            var GetFullList = from X in _context.Recipes orderby X.Date descending select X;
 
             var GetLikeDislike = from L in _context.LikeDislikeList select L;
 
-            
+            var FavList = from F in _context.FavouriteRecipes select F;
+
+
 
             SearchList =  GetFullList.ToList();
 
             LikeDislikeList =  GetLikeDislike.ToList();
+
+            FavRecipeList = FavList.ToList();
 
             return Page();
         }
@@ -71,6 +77,7 @@ namespace PrzepisyWeb.Pages
                                       X.Owner.UserName.Contains(SearchString) ||
                                       X.Ingredients.Contains(SearchString) ||
                                       X.Description.Contains(SearchString))
+                                      orderby X.Date descending
                                       select X;
 
                     SearchList = SearchQuery.ToList();
