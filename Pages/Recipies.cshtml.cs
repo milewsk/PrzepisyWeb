@@ -32,9 +32,6 @@ namespace PrzepisyWeb.Pages
         public Recipe Recipe { get; set; }
 
         [BindProperty]
-        public int LikedRecipe { get; set; }
-
-        [BindProperty]
         public string SearchString { get; set; }
 
         public IList<Recipe> SearchList { get; set; }
