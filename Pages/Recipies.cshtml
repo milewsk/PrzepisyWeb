@@ -77,6 +77,7 @@
                     <input type="submit" name="Dislike" value="Dislike" />
                 </form>
 
+                <a asp-page="/Categories/AddCategory" asp-route-id="@item.RecipeID">Dodaj kategorie</a>
                 <a asp-page="/Recipes/AddFavourite" asp-route-id="@item.RecipeID">Do ulubionych</a> |
 
 

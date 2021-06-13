@@ -32,7 +32,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Recipe[0].LikeCounter)
             </th>
-            <th></th>
+            <th>
+                
+            </th>
+            <th>
+                Kategorie
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -59,7 +64,8 @@
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.RecipeID">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.RecipeID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.RecipeID">Delete</a>
+                <a asp-page="./Delete" asp-route-id="@item.RecipeID">Delete</a> |
+                <a asp-page="/Categories/AddCategory" asp-route-id="@item.RecipeID">Dodaj kategorie</a>
             </td>
         </tr>
 }
