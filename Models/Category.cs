@@ -9,9 +9,9 @@ namespace PrzepisyWeb.Models
     public class Category
     {
         [Key]
-        public int categoryID { get; set; }
+        public int CategoryID { get; set; }
 
-        public string categoryName { get; set; }
+        public string CategoryName { get; set; }
 
         public ICollection<RecipeCategory> RecipeCategories { get; set; }
 

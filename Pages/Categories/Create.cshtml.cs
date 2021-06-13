@@ -36,6 +36,8 @@ namespace PrzepisyWeb.Pages.Categories
                 return Page();
             }
 
+            Category.CategoryName = Category.CategoryName.ToLower();
+
             _context.Categories.Add(Category);
             await _context.SaveChangesAsync();
 

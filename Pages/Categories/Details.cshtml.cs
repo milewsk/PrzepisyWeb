@@ -28,7 +28,7 @@ namespace PrzepisyWeb.Pages.Categories
                 return NotFound();
             }
 
-            Category = await _context.Categories.FirstOrDefaultAsync(m => m.categoryID == id);
+            Category = await _context.Categories.FirstOrDefaultAsync(m => m.CategoryID == id);
 
             if (Category == null)
             {
