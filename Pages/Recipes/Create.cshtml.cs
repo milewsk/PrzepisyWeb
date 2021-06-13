@@ -17,7 +17,7 @@ namespace PrzepisyWeb.Pages.Recipes
     {
         private readonly PrzepisyWeb.Data.RecipeContext _context;
 
-
+        public IList<Category> CategoriesList { get; set; }
 
         private UserManager<ApplicationUser> _userManager;
 
@@ -32,6 +32,11 @@ namespace PrzepisyWeb.Pages.Recipes
 
         public IActionResult OnGet()
         {
+
+            var GetCategoriesList = from X in _context.Categories select X;
+
+            CategoriesList = GetCategoriesList.ToList();
+
             return Page();
         }
 
@@ -55,8 +60,9 @@ namespace PrzepisyWeb.Pages.Recipes
             _context.Recipes.Add(Recipe);
                 await _context.SaveChangesAsync();
             }
-
+            
             return RedirectToPage("./Index");
         }
+
     }
 }

@@ -17,8 +17,5 @@ namespace PrzepisyWeb.Models
         public int CategoryID { get; set; }
         public Category category { get; set; }
 
-
-       
-
     }
 }

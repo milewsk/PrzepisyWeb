@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PrzepisyWeb.Migrations
 {
-    public partial class Init : Migration
+    public partial class MigrDB_v4 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -177,6 +177,7 @@ namespace PrzepisyWeb.Migrations
                     Description = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false),
                     OwnerId = table.Column<string>(nullable: true),
+                    OwnerUserName = table.Column<string>(nullable: true),
                     LikeCounter = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

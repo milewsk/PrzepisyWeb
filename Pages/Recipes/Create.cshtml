@@ -34,7 +34,14 @@
                 <input asp-for="Recipe.Description" class="form-control" />
                 <span asp-validation-for="Recipe.Description" class="text-danger"></span>
             </div>
-            
+            <div>
+                Kategorie<br />
+
+                @foreach (var item in Model.CategoriesList)
+                {
+                    <input id="CheckBox1" type="checkbox" name="CheckBox1" /><label for="CheckBox1">@Html.DisplayFor(modelItem => item.categoryName)</label>
+                }
+            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

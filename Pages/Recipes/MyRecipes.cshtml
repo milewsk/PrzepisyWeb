@@ -7,7 +7,6 @@
 }
 
 <h1>MyRecipes</h1>
-
 <p>
     <a asp-page="Create">Create New</a>
 </p>
@@ -15,28 +14,29 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Recipe[0].Name)
+                @Html.DisplayNameFor(model => model.MyRecipes[0].Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Recipe[0].Image)
+                @Html.DisplayNameFor(model => model.MyRecipes[0].Image)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Recipe[0].Ingredients)
+                @Html.DisplayNameFor(model => model.MyRecipes[0].Ingredients)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Recipe[0].Description)
+                @Html.DisplayNameFor(model => model.MyRecipes[0].Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Recipe[0].Date)
+                @Html.DisplayNameFor(model => model.MyRecipes[0].Date)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Recipe[0].LikeCounter)
+                @Html.DisplayNameFor(model => model.MyRecipes[0].LikeCounter)
             </th>
             <th></th>
         </tr>
     </thead>
-    <tbody>
-@foreach (var item in Model.Recipe) {
+    <tbody>  
+@foreach (var item in Model.MyRecipes) 
+{
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
