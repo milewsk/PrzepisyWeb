@@ -2,32 +2,32 @@
 @model PrzepisyWeb.Pages.Recipes.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lista przepisów - ";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1 style="padding: 20px 0 30px 0">Lista przepisów</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create" id="go" type="submit" class="nav-link btn btn-outline-warning">Dodaj nowy przepis</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Recipe[0].Name)
+                Nazwa
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Recipe[0].Image)
+                Zdjęcie
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Recipe[0].Ingredients)
+                Składniki
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Recipe[0].Description)
+                Sposob przygotowania
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Recipe[0].Date)
+                Data dodania
             </th>
             <th></th>
         </tr>
@@ -51,9 +51,9 @@
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.RecipeID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.RecipeID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.RecipeID">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.RecipeID">Edytuj</a> 
+                <a asp-page="./Details" asp-route-id="@item.RecipeID">Szczegóły</a> 
+                <a asp-page="./Delete" asp-route-id="@item.RecipeID">Usuń</a>
             </td>
         </tr>
 }
