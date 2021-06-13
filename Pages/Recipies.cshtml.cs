@@ -60,13 +60,15 @@ namespace PrzepisyWeb.Pages
             return Page();
         }
 
-        
+        public string RequestId { get; set; }
+
         public ActionResult OnPostAsync(int Like)
         {
 
             if (ModelState.IsValid)
             {
 
+                RequestId = HttpContext.Request.Path;
 
                 // if (Request.Form.Keys.Contains("Search"))
                 //{
