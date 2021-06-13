@@ -29,14 +29,17 @@ namespace PrzepisyWeb.Pages.Recipes
         [BindProperty]
         public Recipe Recipe { get; set; }
 
+        public string UsernameDisplay { get; set; }
+
         public IList<Recipe> RecipeList { get;set; }
 
         public IActionResult OnGet(string UserName)
         {
+            UsernameDisplay = UserName;
+
             var UserList = from X in _context.Recipes where X.OwnerUserName == UserName select X;
 
-
-            RecipeList =  UserList.ToList();
+            RecipeList = UserList.ToList();
             return Page();
         }
 
@@ -45,6 +48,7 @@ namespace PrzepisyWeb.Pages.Recipes
 
             if (ModelState.IsValid)
             {
+                UsernameDisplay = UserName;
                 var UserList = from X in _context.Recipes where X.OwnerUserName == UserName select X;
 
 
