@@ -39,6 +39,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.SearchList[0].Owner.UserName)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SearchList[0].RecipeCategories)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -62,7 +65,10 @@
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                <a asp-page="/Recipes/UserPage" asp-route-UserName="@item.OwnerUserName">@Html.DisplayFor(modelItem => item.OwnerUserName)</a> 
+                <a href="@Url.Page("./Recipes/UserRecipes")">@Html.DisplayFor(modelItem => item.OwnerUserName)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecipeCategories)
             </td>
             <td>
                 <form method="post">
