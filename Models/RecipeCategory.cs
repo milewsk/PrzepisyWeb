@@ -10,12 +10,12 @@ namespace PrzepisyWeb.Models
     public class RecipeCategory
     {
         
-        public int recipeID { get; set; }
-        public Recipe recipe { get; set; }
+        public int RecipeID { get; set; }
+        public Recipe Recipe { get; set; }
 
         
         public int CategoryID { get; set; }
-        public Category category { get; set; }
+        public Category Category { get; set; }
 
 
        

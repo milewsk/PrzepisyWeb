@@ -17,8 +17,6 @@ namespace PrzepisyWeb.Pages.Recipes
     {
         private readonly PrzepisyWeb.Data.RecipeContext _context;
 
-
-
         private UserManager<ApplicationUser> _userManager;
 
         private SignInManager<ApplicationUser> _signInManager;
@@ -30,14 +28,18 @@ namespace PrzepisyWeb.Pages.Recipes
             _userManager = userManager;
         }
 
+        //Properties
+
+        [BindProperty]
+        public Recipe Recipe { get; set; }
+
+
         public IActionResult OnGet()
         {
             return Page();
         }
 
-        [BindProperty]
-        public Recipe Recipe { get; set; }
-
+      
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
@@ -55,6 +57,7 @@ namespace PrzepisyWeb.Pages.Recipes
             _context.Recipes.Add(Recipe);
                 await _context.SaveChangesAsync();
             }
+
 
             return RedirectToPage("./Index");
         }
