@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PrzepisyWeb.Data;
 
 namespace PrzepisyWeb.Migrations
 {
     [DbContext(typeof(RecipeContext))]
-    partial class RecipeContextModelSnapshot : ModelSnapshot
+    [Migration("20210612215700_Migracja_test1")]
+    partial class Migracja_test1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -221,15 +223,15 @@ namespace PrzepisyWeb.Migrations
 
             modelBuilder.Entity("PrzepisyWeb.Models.Category", b =>
                 {
-                    b.Property<int>("CategoryID")
+                    b.Property<int>("categoryID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CategoryName")
+                    b.Property<string>("categoryName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CategoryID");
+                    b.HasKey("categoryID");
 
                     b.ToTable("Categories");
                 });
@@ -313,13 +315,13 @@ namespace PrzepisyWeb.Migrations
 
             modelBuilder.Entity("PrzepisyWeb.Models.RecipeCategory", b =>
                 {
-                    b.Property<int>("RecipeID")
+                    b.Property<int>("recipeID")
                         .HasColumnType("int");
 
                     b.Property<int>("CategoryID")
                         .HasColumnType("int");
 
-                    b.HasKey("RecipeID", "CategoryID");
+                    b.HasKey("recipeID", "CategoryID");
 
                     b.HasIndex("CategoryID");
 
@@ -416,15 +418,15 @@ namespace PrzepisyWeb.Migrations
 
             modelBuilder.Entity("PrzepisyWeb.Models.RecipeCategory", b =>
                 {
-                    b.HasOne("PrzepisyWeb.Models.Category", "Category")
+                    b.HasOne("PrzepisyWeb.Models.Category", "category")
                         .WithMany("RecipeCategories")
                         .HasForeignKey("CategoryID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PrzepisyWeb.Models.Recipe", "Recipe")
+                    b.HasOne("PrzepisyWeb.Models.Recipe", "recipe")
                         .WithMany("RecipeCategories")
-                        .HasForeignKey("RecipeID")
+                        .HasForeignKey("recipeID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

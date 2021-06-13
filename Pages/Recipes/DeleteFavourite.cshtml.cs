@@ -31,6 +31,8 @@ namespace PrzepisyWeb.Pages.Recipes
         [BindProperty]
         public Recipe Recipe { get; set; }
 
+        public FavouriteRecipe FavouriteRecipe { get; set; }
+        
         public IActionResult OnGet(int? id)
         {
             if (id == null)
@@ -48,19 +50,25 @@ namespace PrzepisyWeb.Pages.Recipes
         }
 
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+        //    FavouriteRecipe = await _context.FavouriteRecipes.FindAsync(FavouriteRecipe.RecipeID == id);
 
             if (_signInManager.IsSignedIn(User))
             {
                 FavouriteRecipe DeleteFav = new FavouriteRecipe();
 
-                DeleteFav.RecipeID = Recipe.RecipeID;
+                DeleteFav.RecipeID = (int)id;
                 DeleteFav.UserID = _userManager.GetUserId(User);
 
                 _context.FavouriteRecipes.Remove(DeleteFav);
