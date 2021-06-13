@@ -23,6 +23,8 @@ namespace PrzepisyWeb.Pages.Recipes
 
         private SignInManager<ApplicationUser> _signInManager;
 
+        public bool IsChecked { get; set; }
+
         public CreateModel(PrzepisyWeb.Data.RecipeContext context, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _context = context;
@@ -64,5 +66,12 @@ namespace PrzepisyWeb.Pages.Recipes
             return RedirectToPage("./Index");
         }
 
+        public void CategoryIsChecked(string CategoryName)
+        {
+            if(IsChecked == true)
+            {
+
+            }
+        }
     }
 }
