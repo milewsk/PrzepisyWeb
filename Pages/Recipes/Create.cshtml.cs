@@ -17,13 +17,11 @@ namespace PrzepisyWeb.Pages.Recipes
     {
         private readonly PrzepisyWeb.Data.RecipeContext _context;
 
-        public IList<Category> CategoriesList { get; set; }
 
         private UserManager<ApplicationUser> _userManager;
 
         private SignInManager<ApplicationUser> _signInManager;
 
-        public bool IsChecked { get; set; }
 
         public CreateModel(PrzepisyWeb.Data.RecipeContext context, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
@@ -34,11 +32,6 @@ namespace PrzepisyWeb.Pages.Recipes
 
         public IActionResult OnGet()
         {
-
-            var GetCategoriesList = from X in _context.Categories select X;
-
-            CategoriesList = GetCategoriesList.ToList();
-
             return Page();
         }
 
@@ -49,29 +42,25 @@ namespace PrzepisyWeb.Pages.Recipes
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            if (_signInManager.IsSignedIn(User))
+            {
+
+                Recipe.Date = DateTime.Now;
+                Recipe.Owner = await _userManager.GetUserAsync(User);
+                Recipe.OwnerUserName = _userManager.GetUserName(User);
+
+                _context.Recipes.Add(Recipe);
+                await _context.SaveChangesAsync();
+            }
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            if (_signInManager.IsSignedIn(User)) {
-
-            Recipe.Date = DateTime.Now;
-            Recipe.Owner = await _userManager.GetUserAsync(User);
-            Recipe.OwnerUserName = _userManager.GetUserName(User);
-            _context.Recipes.Add(Recipe);
-                await _context.SaveChangesAsync();
-            }
             
             return RedirectToPage("./Index");
         }
 
-        public void CategoryIsChecked(string CategoryName)
-        {
-            if(IsChecked == true)
-            {
-
-            }
-        }
+       
     }
 }

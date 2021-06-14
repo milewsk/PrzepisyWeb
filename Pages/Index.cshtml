@@ -23,7 +23,20 @@
 <section>
     <article>
         <h2 style="margin: 50px 0 0 0">Oto TOP 10 przepisów według naszych użytkowników</h2>
-        
+
+        @foreach (var item in Model.SearchList)
+        {
+            <div class="card m-2">
+                <h3 style="text-align:center" class="card-title">@item.Name</h3>
+                <img class="card-img-top" src="@item.Image">
+                <div class="card-body">
+                    <p style="text-align:center" class="card-text">@item.Description</p>
+                    <div class="col-md-12 text-center">
+                        <a href="/Recipes/Details?id=@item.RecipeID">Zobacz szczegóły przepisu.</a>
+                    </div>
+                </div>
+            </div>
+        }
         <!-- Miejsce na karty-->
     </article>
 </section>
