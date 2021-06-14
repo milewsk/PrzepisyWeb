@@ -35,6 +35,8 @@ namespace PrzepisyWeb.Pages.Categories
 
             var ListOfRecipies = from X in _context.RecipeCategories where X.CategoryID == id select X;
 
+            RecipeCategories = ListOfRecipies.ToList();
+
             if (Category == null)
             {
                 return NotFound();
@@ -51,9 +53,18 @@ namespace PrzepisyWeb.Pages.Categories
 
             Category = await _context.Categories.FindAsync(id);
 
+            var ListOfRecipies = from X in _context.RecipeCategories where X.CategoryID == id select X;
+
+            RecipeCategories = ListOfRecipies.ToList();
+
             if (Category != null)
             {
-                _context.Categories.Remove(Category);
+                foreach (var item in RecipeCategories) 
+                {
+                    _context.RecipeCategories.Remove(item);
+                    
+                }
+                    _context.Categories.Remove(Category);
                 await _context.SaveChangesAsync();
             }
 

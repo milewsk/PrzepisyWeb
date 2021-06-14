@@ -42,7 +42,7 @@ namespace PrzepisyWeb.Pages
 
         //kategorie
 
-        public IList<Category> Categories { get; set; }
+
 
         public int CategoriesID { get; set; }
 
@@ -58,9 +58,11 @@ namespace PrzepisyWeb.Pages
 
             var FavList = from F in _context.FavouriteRecipes select F;
 
-       
+            var HiddenList = from Z in _context.Recipes where Z.RecipeID == 0 select Z;
 
-            SearchList =  GetFullList.ToList();
+            SearchCategegoryRecipe = HiddenList.ToList();
+
+            SearchList = GetFullList.ToList();
 
             LikeDislikeList =  GetLikeDislike.ToList();
 
@@ -81,19 +83,19 @@ namespace PrzepisyWeb.Pages
                 //{
                 if (SearchString != "" && SearchString != null)
                 {
-                    var ListOfCategory = from z in _context.RecipeCategories where Recipe.RecipeID == z.RecipeID select z.Category;
-
-                    Categories = ListOfCategory.ToList();
+                   
 
 
                     //wypisaæ ID?
-                    var Query_2 =(from Q in Categories where Q.CategoryName.Contains(SearchString) select Q.CategoryID).First();
+                    var Query_2 =(from Q in _context.Categories where Q.CategoryName.Contains(SearchString.ToLower()) select Q.CategoryID).FirstOrDefault();
 
                     CategoriesID = Query_2;
                     //szukaæ id przepisu w tablicy poœredniej
                     var Query_3 = (from T in _context.RecipeCategories where T.CategoryID == CategoriesID select T.Recipe);
 
                     SearchCategegoryRecipe = Query_3.ToList();
+
+
 
                     //szukaæ przepisów z danymi id 
 
@@ -111,6 +113,7 @@ namespace PrzepisyWeb.Pages
                    
 
                     SearchList = SearchQuery.ToList();
+
                 }
                 else
                 {
