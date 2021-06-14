@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -50,7 +50,7 @@ namespace PrzepisyWeb.Pages
 
         public List<Recipe> SearchCategegoryRecipe { get; set; }
 
-        public  IActionResult OnGet()
+        public IActionResult OnGet()
         {
             var GetFullList = from X in _context.Recipes orderby X.Date descending select X;
 
@@ -64,14 +64,13 @@ namespace PrzepisyWeb.Pages
 
             SearchList = GetFullList.ToList();
 
-            LikeDislikeList =  GetLikeDislike.ToList();
+            LikeDislikeList = GetLikeDislike.ToList();
 
             FavRecipeList = FavList.ToList();
 
             return Page();
         }
 
-        public string RequestId { get; set; }
 
         public ActionResult OnPostAsync(int Like)
         {
@@ -79,40 +78,39 @@ namespace PrzepisyWeb.Pages
             if (ModelState.IsValid)
             {
 
-                RequestId = HttpContext.Request.Path;
 
                 // if (Request.Form.Keys.Contains("Search"))
                 //{
                 if (SearchString != "" && SearchString != null)
                 {
-                   
 
 
-                    //wypisaæ ID?
-                    var Query_2 =(from Q in _context.Categories where Q.CategoryName.Contains(SearchString.ToLower()) select Q.CategoryID).FirstOrDefault();
+
+                    //wypisaÃ¦ ID?
+                    var Query_2 = (from Q in _context.Categories where Q.CategoryName.Contains(SearchString.ToLower()) select Q.CategoryID).FirstOrDefault();
 
                     CategoriesID = Query_2;
-                    //szukaæ id przepisu w tablicy poœredniej
+                    //szukaÃ¦ id przepisu w tablicy poÅ“redniej
                     var Query_3 = (from T in _context.RecipeCategories where T.CategoryID == CategoriesID select T.Recipe);
 
                     SearchCategegoryRecipe = Query_3.ToList();
 
 
 
-                    //szukaæ przepisów z danymi id 
+                    //szukaÃ¦ przepisÃ³w z danymi id 
 
-                    //dodaæ do listy Modelu do wypisana
+                    //dodaÃ¦ do listy Modelu do wypisana
 
                     var SearchQuery = from X in _context.Recipes
                                       where (X.Name.Contains(SearchString) ||
                                       X.Owner.UserName.Contains(SearchString) ||
                                       X.Ingredients.Contains(SearchString) ||
-                                      X.Description.Contains(SearchString)) 
-                                    //  X.RecipeCategories.Contains((from Q in _context.RecipeCategories where  Q.Category == (from E in Categories where E.CategoryName.Contains(SearchString)  select E) select Q).Single())
+                                      X.Description.Contains(SearchString))
+                                      //  X.RecipeCategories.Contains((from Q in _context.RecipeCategories where  Q.Category == (from E in Categories where E.CategoryName.Contains(SearchString)  select E) select Q).Single())
                                       orderby X.Date descending
                                       select X;
                     // || (from Z in _context.Categories where Z.CategoryName.Contains(SearchString.ToLower()) && (Z.CategoryID = (from Y in _context.RecipeCategories where Y.RecipeID == Recipe.RecipeID select Y.CategoryID)))
-                   
+
 
                     SearchList = SearchQuery.ToList();
 
@@ -129,7 +127,7 @@ namespace PrzepisyWeb.Pages
 
                     if (Request.Form.Keys.Contains("Like"))
                     {
-                        Recipe =  _context.Recipes.FirstOrDefault(m => m.RecipeID == Like);
+                        Recipe = _context.Recipes.FirstOrDefault(m => m.RecipeID == Like);
 
                         var IsCreated = from IS in _context.LikeDislikeList where (IS.RecipeID == Recipe.RecipeID) && (IS.UserID == _userManager.GetUserId(User)) select IS;
 
@@ -157,7 +155,7 @@ namespace PrzepisyWeb.Pages
                         }
                         else
                         {
-                            // albo var coœ tam taki sam jak obecny i usun¹æ
+                            // albo var coÅ“ tam taki sam jak obecny i usunÂ¹Ã¦
                             LikeDislikeModel ToDelete = new LikeDislikeModel();
                             ToDelete.UserID = _userManager.GetUserId(User);
                             ToDelete.RecipeID = Recipe.RecipeID;
@@ -170,26 +168,26 @@ namespace PrzepisyWeb.Pages
                             ToDelete.Like = true;
                             Recipe.LikeCounter++;
                             _context.LikeDislikeList.Add(ToDelete);
-                          
+
                             _context.SaveChanges();
 
                         }
 
-                        //iloœæ wszystkich rekordów
-                        //iloœæ rekrdów dla danego id gdzie dislike jest true
-                        //odj¹æ od siebie bêdzie liczba lików
+                        //iloÅ“Ã¦ wszystkich rekordÃ³w
+                        //iloÅ“Ã¦ rekrdÃ³w dla danego id gdzie dislike jest true
+                        //odjÂ¹Ã¦ od siebie bÃªdzie liczba likÃ³w
                         // var AllLikedRecords = (from X in _context.LikeDislikeList where (X.RecipeID == Recipe.RecipeID) && (X.Like == true) select X).Count();
 
                         // var AllDislikedRecords = (from X in _context.LikeDislikeList where (X.RecipeID == Recipe.RecipeID) && (X.Dislike == true) select X).Count();
 
 
 
-                        //zmieniæ counter
+                        //zmieniÃ¦ counter
 
                     }
                     if (Request.Form.Keys.Contains("Dislike"))
                     {
-                        Recipe =  _context.Recipes.FirstOrDefault(m => m.RecipeID == Like);
+                        Recipe = _context.Recipes.FirstOrDefault(m => m.RecipeID == Like);
 
                         var IsCreated = from IS in _context.LikeDislikeList where (IS.RecipeID == Recipe.RecipeID) && (IS.UserID == _userManager.GetUserId(User)) select IS;
 
@@ -217,8 +215,8 @@ namespace PrzepisyWeb.Pages
                         }
                         else
                         {
-                            
-                            // albo var coœ tam taki sam jak obecny i usun¹æ
+
+                            // albo var coÅ“ tam taki sam jak obecny i usunÂ¹Ã¦
                             LikeDislikeModel ToDelete = new LikeDislikeModel();
                             ToDelete.RecipeID = Recipe.RecipeID;
                             ToDelete.UserID = _userManager.GetUserId(User);
@@ -226,7 +224,7 @@ namespace PrzepisyWeb.Pages
                             Recipe.LikeCounter--;
                             _context.SaveChanges();
 
-                   
+
 
 
                             ToDelete.Dislike = true;
@@ -243,7 +241,7 @@ namespace PrzepisyWeb.Pages
 
             }
             return Page();
-        }  
+        }
     }
 
 }
