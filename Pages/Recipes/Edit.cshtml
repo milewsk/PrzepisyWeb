@@ -40,7 +40,21 @@
                 <textarea asp-for="Recipe.Description" class="form-control" id="textForIngredients" rows="6" placeholder="Tutaj podaj swój przepis"></textarea>
                 <span asp-validation-for="Recipe.Description" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Recipe.Images" class="control-label">Zdjęcie 1</label>
+                <input asp-for="Img_1" class="form-control" />
 
+            </div>
+            <div class="form-group">
+                <label asp-for="Recipe.Images" class="control-label">Zdjęcie 2</label>
+                <input asp-for="Img_2" class="form-control" />
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Recipe.Images" class="control-label">Zdjęcie 3</label>
+                <input asp-for="Img_3" class="form-control" />
+
+            </div>
             <div class="form-group">
                 <input type="submit" value="Zapisz" class="nav-link btn btn-outline-success" />
             </div>
