@@ -18,16 +18,30 @@
 
 @for (int i = 0; i < Model.SearchList.Count(); i++)
 {
-<div class="card">
-    <h3 style="text-align:center" class="card-title">@Model.SearchList[i].Name</h3>
-    <img class="card-img-top" src="@Model.SearchList[i].Image">
-    <div class="card-body">
-        <p style="text-align:center" class="card-text">@Model.SearchList[i].Description</p>
-        <div class="col-md-12 text-center">
-            <a href="/Recipes/Details?id=@Model.SearchList[i].RecipeID">Zobacz szczegóły przepisu.</a>
+    <div class="card">
+        <h3 style="text-align:center" class="card-title">@Model.SearchList[i].Name</h3>
+        <img class="card-img-top" src="@Model.SearchList[i].Image">
+        <div class="card-body">
+            <p style="text-align:center" class="card-text">@Model.SearchList[i].Description</p>
+            <div class="col-md-12 text-center">
+                <a href="/Recipes/Details?id=@Model.SearchList[i].RecipeID">Zobacz szczegóły przepisu.</a>
+            </div>
         </div>
     </div>
-</div>
+}
+
+@for (int i = 0; i < Model.SearchCategegoryRecipe.Count(); i++)
+{
+    <div class="card">
+        <h3 style="text-align:center" class="card-title">@Model.SearchCategegoryRecipe[i].Name</h3>
+        <img class="card-img-top" src="@Model.SearchCategegoryRecipe[i].Image">
+        <div class="card-body">
+            <p style="text-align:center" class="card-text">@Model.SearchCategegoryRecipe[i].Description</p>
+            <div class="col-md-12 text-center">
+                <a href="/Recipes/Details?id=@Model.SearchCategegoryRecipe[i].RecipeID">Zobacz szczegóły przepisu.</a>
+            </div>
+        </div>
+    </div>
 }
 
 @section Scripts {

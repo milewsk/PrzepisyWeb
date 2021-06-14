@@ -33,15 +33,15 @@ namespace PrzepisyWeb.Data
                 .WithMany(r => r.Recipes);
 
             //many to many Kategorie
-            modelBuilder.Entity<RecipeCategory>().HasKey(rc => new { rc.recipeID, rc.CategoryID });
+            modelBuilder.Entity<RecipeCategory>().HasKey(rc => new { rc.RecipeID, rc.CategoryID });
 
             modelBuilder.Entity<RecipeCategory>()
-                        .HasOne(rc => rc.recipe)
+                        .HasOne(rc => rc.Recipe)
                         .WithMany(r => r.RecipeCategories)
-                        .HasForeignKey(rc => rc.recipeID);
+                        .HasForeignKey(rc => rc.RecipeID);
 
             modelBuilder.Entity<RecipeCategory>()
-                        .HasOne(rc => rc.category)
+                        .HasOne(rc => rc.Category)
                         .WithMany(c => c.RecipeCategories)
                         .HasForeignKey(rc => rc.CategoryID);
 
