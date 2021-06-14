@@ -4,6 +4,12 @@
     ViewData["Title"] = "Przepisy - ";
 }
 
+<h1 style="padding: 20px 0 30px 0">Lista przepisów</h1>
+
+<p>
+    <a asp-page="/Recipes/Create" id="go" type="submit" class="nav-link btn btn-outline-warning">Dodaj nowy przepis</a>
+</p>
+
 <form method="post">
     <div class="form-group justify-content-center">
         <label id="search_1" style="margin: 10px 0 5px 0; font-size: 18px" asp-for="SearchString"><b>Wyszukiwarka</b></label>
@@ -12,37 +18,38 @@
         <span asp-validation-for="SearchString" class="text-danger"></span>
     </div>
     <div class="justify-content-center align-content-center">
-        <input type="submit" name="Search" value="Szukaj" class="btn btn-primary" />
+        <input type="submit" name="Search" value="Szukaj" class="btn btn-outline-info" style="margin: 0 0 50px 0" />
     </div>
 </form>
 
-@for (int i = 0; i < Model.SearchList.Count(); i++)
+@foreach(var item in Model.SearchList)
 {
     <div class="card">
-        <h3 style="text-align:center" class="card-title">@Model.SearchList[i].Name</h3>
-        <img class="card-img-top" src="@Model.SearchList[i].Image">
+        <h3 style="text-align:center" class="card-title">@item.Name</h3>
+        <img class="card-img-top" src="@item.Image">
         <div class="card-body">
-            <p style="text-align:center" class="card-text">@Model.SearchList[i].Description</p>
+            <p style="text-align:center" class="card-text">@item.Description</p>
+            <form method="post">
+
+                <input type="hidden" name="Like" asp-for="@item.RecipeID" />
+                <input type="submit" name="Like" value="Like" />
+            </form>
+            @Html.DisplayFor(modelItem => item.LikeCounter)
+            <form method="post">
+
+                <input type="hidden" name="Like" asp-for="@item.RecipeID" />
+                <input type="submit" name="Dislike" value="Dislike" />
+            </form>
+
+            <a asp-page="/Recipes/AddFavourite" asp-route-id="@item.RecipeID">Do ulubionych</a> |
+
             <div class="col-md-12 text-center">
-                <a href="/Recipes/Details?id=@Model.SearchList[i].RecipeID">Zobacz szczegóły przepisu.</a>
+                <a href="/Recipes/Details?id=@item.RecipeID">Zobacz szczegóły przepisu.</a>
             </div>
         </div>
     </div>
 }
 
-@for (int i = 0; i < Model.SearchCategegoryRecipe.Count(); i++)
-{
-    <div class="card">
-        <h3 style="text-align:center" class="card-title">@Model.SearchCategegoryRecipe[i].Name</h3>
-        <img class="card-img-top" src="@Model.SearchCategegoryRecipe[i].Image">
-        <div class="card-body">
-            <p style="text-align:center" class="card-text">@Model.SearchCategegoryRecipe[i].Description</p>
-            <div class="col-md-12 text-center">
-                <a href="/Recipes/Details?id=@Model.SearchCategegoryRecipe[i].RecipeID">Zobacz szczegóły przepisu.</a>
-            </div>
-        </div>
-    </div>
-}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

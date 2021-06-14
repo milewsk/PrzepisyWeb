@@ -2,29 +2,32 @@
 @model PrzepisyWeb.Pages.Recipes.FavouriteModel
 
 @{
-    ViewData["Title"] = "Favourite";
+    ViewData["Title"] = "Ulubione - ";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Twoje ulubione przepisy</h1>
+<h1 style="padding: 20px 0 30px 0">Twoje ulubione przepisy</h1>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Recipe[0].Name)
+                Nazwa przepisu
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Recipe[0].Image)
+                Zdjęcia
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Recipe[0].Ingredients)
+                Składniki
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Recipe[0].Description)
+                Sposób przygotowania
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Recipe[0].Date)
+                Data dodania
+            </th>
+            <th>
+                Nazwa użytkownika
             </th>
             <th></th>
         </tr>
@@ -48,8 +51,11 @@
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                <a asp-page="./DeleteFavourite" asp-route-id="@item.RecipeID">Usuń z ulubionych</a> 
-               
+                <a asp-page="/Recipes/UserPage" asp-route-UserName="@item.OwnerUserName">@Html.DisplayFor(modelItem => item.OwnerUserName)</a>
+            </td>
+            <td>
+                <a asp-page="./DeleteFavourite" asp-route-id="@item.RecipeID" class="btn btn-outline-danger">Usuń z ulubionych</a>
+
             </td>
         </tr>
 }

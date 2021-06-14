@@ -137,7 +137,7 @@ namespace PrzepisyWeb.Pages.Categories
 
              _context.SaveChanges();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Recipes/MyRecipes");
         }
     }
 }

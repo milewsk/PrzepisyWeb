@@ -2,11 +2,11 @@
 @model PrzepisyWeb.Pages.Recipes.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lista przepisów - ";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1 style="padding: 20px 0 30px 0">Lista przepisów</h1>
 
 <form method="post">
     <div class="form-group justify-content-center">
@@ -25,7 +25,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.SearchList[0].Name)
+                Nazwa
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.SearchList[0].Ingredients)

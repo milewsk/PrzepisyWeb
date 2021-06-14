@@ -2,18 +2,21 @@
 @model PrzepisyWeb.Pages.Recipes.MyRecipesModel
 
 @{
-    ViewData["Title"] = "MyRecipes";
+    ViewData["Title"] = "Moje przepisy - ";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>MyRecipes</h1>
+<h1 style="padding: 20px 0 30px 0">Moje przepisy</h1>
+
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="./Create" id="go" type="submit" class="nav-link btn btn-outline-warning" style="margin: 0 0 20px 0">Dodaj nowy przepis</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
             <th>
+                Nazwa przepisu
                 @Html.DisplayNameFor(model => model.MyRecipes[0].Name)
             </th>
             <th>
@@ -34,6 +37,7 @@
             <th>
                 Kategorie
             </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>  
@@ -53,13 +57,16 @@
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LikeCounter)
+                <b>@Html.DisplayFor(modelItem => item.LikeCounter)</b>
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.RecipeID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.RecipeID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.RecipeID">Delete</a> |
-                <a asp-page="/Categories/AddCategory" asp-route-id="@item.RecipeID">Dodaj kategorie</a>
+                @Html.DisplayFor(modelItem => item.RecipeCategories)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.RecipeID" class="btn btn-light" style="margin: 0 0 5px 0">Edytuj</a>
+                <br /><a asp-page="./Details" asp-route-id="@item.RecipeID" class="btn btn-light" style="margin: 0 0 5px 0">Szczegóły</a>
+                <br /><a asp-page="./Delete" asp-route-id="@item.RecipeID" class="btn btn-light" style="margin: 0 0 5px 0">Usuń</a>
+                <br /><a asp-page="/Categories/AddCategory" asp-route-id="@item.RecipeID" class="btn btn-light">Dodaj kategorie</a>
             </td>
         </tr>
 }

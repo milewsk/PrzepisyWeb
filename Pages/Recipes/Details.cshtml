@@ -2,49 +2,28 @@
 @model PrzepisyWeb.Pages.Recipes.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Szczegóły - ";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1 style="padding: 20px 0 0 0">Szczegóły</h1>
+<h4>Przepis</h4>
+<hr color="red" />
 
-<div>
-    <h4>Recipe</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Recipe.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Recipe.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Recipe.Image)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Recipe.Image)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Recipe.Ingredients)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Recipe.Ingredients)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Recipe.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Recipe.Description)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Recipe.Date)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Recipe.Date)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Recipe.RecipeID">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+<div class="shadow-lg p-3 mb-5 bg-white rounded">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Recipe.RecipeID" />
+
+    <p><b>Nazwa przepisu</b> : @Html.DisplayFor(model => model.Recipe.Name)</p>
+    <p><b>Zdjęcia</b> : @Html.DisplayFor(model => model.Recipe.Image)</p>
+    <p><b>Składniki</b> : @Html.DisplayFor(model => model.Recipe.Ingredients)</p>
+    <p><b>Sposób przygotowania</b> : @Html.DisplayFor(model => model.Recipe.Description)</p>
+    <p><b>Data dodania</b> : @Html.DisplayFor(model => model.Recipe.Date)</p>
+
+    <form method="post">
+        <a asp-page="./Edit" asp-route-id="@Model.Recipe.RecipeID" class=" btn btn-outline-info" style="margin: 0 0 10px 0">Edytuj</a>
+        <div>
+            <a asp-page="./MyRecipes" class=" btn btn-outline-danger">Wróć do listy swoich przepisów</a>
+        </div>
+    </form>
 </div>

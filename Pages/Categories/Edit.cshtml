@@ -2,33 +2,38 @@
 @model PrzepisyWeb.Pages.Categories.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edycja - ";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<h1 style="padding: 20px 0 0 0">Edycja</h1>
 
-<h4>Category</h4>
-<hr />
+<h4>Kategoria</h4>
+<hr color="red" />
+
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Category.CategoryID" />
+
             <div class="form-group">
-                <label asp-for="Category.CategoryName" class="control-label"></label>
-                <input asp-for="Category.CategoryName" class="form-control" />
+                <label asp-for="Category.CategoryName" class="control-label">Nazwa kategorii</label>
+                <textarea asp-for="Category.CategoryName" class="form-control" id="textForIngredients" rows="6" placeholder="Tutaj podaj kategorię, którą chcesz dodać..."></textarea>
                 <span asp-validation-for="Category.CategoryName" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Zapisz" class="nav-link btn btn-outline-success" />
+            </div>
+            <div>
+                <a asp-page="./Index" class=" btn btn-outline-danger">Wróć do listy kategorii</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-page="./Index">Back to List</a>
+    <div class="col-md-6 col-md-offset-2">
+        <img class="right" src="~/my_img/collector-3930337_1920.jpg" alt="foldery" />
+    </div>
 </div>
 
 @section Scripts {

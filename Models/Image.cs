@@ -11,12 +11,12 @@ namespace PrzepisyWeb.Models
         [Key]
         public int Id { get; set; }
 
+        [Required]
         public string Url { get; set; }
 
         public Recipe Recipe { get; set; }
 
         public Image() { }
-
-        
     }
+
 }

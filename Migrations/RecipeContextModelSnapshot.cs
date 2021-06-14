@@ -227,7 +227,9 @@ namespace PrzepisyWeb.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CategoryName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.HasKey("CategoryID");
 
@@ -260,13 +262,14 @@ namespace PrzepisyWeb.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Url")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RecipeID");
 
-                    b.ToTable("Images");
+                    b.ToTable("Image");
                 });
 
             modelBuilder.Entity("PrzepisyWeb.Models.LikeDislikeModel", b =>
@@ -304,24 +307,31 @@ namespace PrzepisyWeb.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Ingredients")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(350)")
+                        .HasMaxLength(350);
 
                     b.Property<int>("LikeCounter")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(40)")
+                        .HasMaxLength(40);
 
                     b.Property<string>("OwnerId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("OwnerUserName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RecipeID");
@@ -416,7 +426,8 @@ namespace PrzepisyWeb.Migrations
                 {
                     b.HasOne("PrzepisyWeb.Models.Recipe", "Recipe")
                         .WithMany("Images")
-                        .HasForeignKey("RecipeID");
+                        .HasForeignKey("RecipeID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("PrzepisyWeb.Models.LikeDislikeModel", b =>

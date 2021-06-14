@@ -6,28 +6,25 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-
-<!-- Dodać przyciski dwa (usuń) (wróć)-->
+<h3 style="padding: 20px 0 0 0">Czy na pewno chcesz usunąć podany przepis z ulubionych?</h3>
 
 <h4>Usuwanie</h4>
-<hr />
-
-<div>
-    <h3>Czy chcesz usunąć podany przepis z ulubionych?</h3>
-    <p>@Html.DisplayNameFor(model => model.Recipe.Name) : @Html.DisplayFor(model => model.Recipe.Name)</p>
-    <p>@Html.DisplayNameFor(model => model.Recipe.Date) : @Html.DisplayFor(model => model.Recipe.Date)</p>
-    <p>@Html.DisplayNameFor(model => model.Recipe.Ingredients) : @Html.DisplayFor(model => model.Recipe.Ingredients)</p>
-    <p>@Html.DisplayNameFor(model => model.Recipe.Description) : @Html.DisplayFor(model => model.Recipe.Description)</p>
+<hr color="red" />
+<div class="shadow-lg p-3 mb-5 bg-white rounded">
+    <p><b>Nazwa przepisu</b> : @Html.DisplayFor(model => model.Recipe.Name)</p>
+    <p><b>Zdjęcia</b> : @Html.DisplayFor(model => model.Recipe.Image)</p>
+    <p><b>Składniki</b> : @Html.DisplayFor(model => model.Recipe.Ingredients)</p>
+    <p><b>Sposób przygotowania</b> : @Html.DisplayFor(model => model.Recipe.Description)</p>
+    <p><b>Data dodania</b> : @Html.DisplayFor(model => model.Recipe.Date)</p>
     <form method="post">
-        <input type="hidden"  asp-for="Recipe.RecipeID"/>
-        <input type="submit" value="Usuń" class="btn btn-danger" />
+        <input type="hidden" asp-for="Recipe.RecipeID" />
+        <input type="submit" value="Usuń" class="nav-link btn btn-outline-danger" style="margin: 0 0 10px 0" />
+        <div>
+            <a asp-page="./Favourite" class=" btn btn-outline-success">Wróć do listy ulubionych przepisów</a>
+        </div>
     </form>
 </div>
 
-
-<div>
-    <a asp-page="./Favourite">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -2,59 +2,34 @@
 @model PrzepisyWeb.Pages.Recipes.AddFavouriteModel
 
 @{
-    ViewData["Title"] = "AddFavourite";
+    ViewData["Title"] = "Dodaj przepis - ";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>AddFavourite</h1>
- 
+<h3 style="padding: 20px 0 0 0">Czy chcesz dodać ten przepis do ulubionych?</h3>
+    <h4>Dodawanie</h4>
+    <hr color="red" />
 
-<!--Czy chcesz dodać ten przepis do ulubionych... (Wrzucić to w boxa))-->
+    <div class="shadow-lg p-3 mb-5 bg-white rounded">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" name="id" asp-for="Recipe.RecipeID" />
 
+        <p><b>Nazwa przepisu</b>  : @Html.DisplayFor(model => model.Recipe.Name)</p>
+        <p><b>Zdjęcia</b> : @Html.DisplayFor(model => model.Recipe.Image)</p>
+        <p><b>Składniki</b> : @Html.DisplayFor(model => model.Recipe.Ingredients)</p>
+        <p><b>Sposób przygotowania</b>: @Html.DisplayFor(model => model.Recipe.Description)</p>
+        <p><b>Data dodania</b> : @Html.DisplayFor(model => model.Recipe.Date)</p>
 
-<form method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="Recipe.RecipeID" />
-    <div class="form-group">
-        <label asp-for="Recipe.Name" class="control-label"></label>
-        <input asp-for="Recipe.Name" class="form-control" />
-        <span asp-validation-for="Recipe.Name" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Recipe.Image" class="control-label"></label>
-        <input asp-for="Recipe.Image" class="form-control" />
-        <span asp-validation-for="Recipe.Image" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Recipe.Ingredients" class="control-label"></label>
-        <input asp-for="Recipe.Ingredients" class="form-control" />
-        <span asp-validation-for="Recipe.Ingredients" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Recipe.Description" class="control-label"></label>
-        <input asp-for="Recipe.Description" class="form-control" />
-        <span asp-validation-for="Recipe.Description" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Recipe.Date" class="control-label"></label>
-        <input asp-for="Recipe.Date" class="form-control" />
-        <span asp-validation-for="Recipe.Date" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label>Czy chcesz dodać ten przepis do ulubionych?</label>
-        <input type="submit" value="Dodaj" class="btn btn-primary" />
+        <form method="post">
+            <input type="hidden" asp-for="Recipe.RecipeID" />
+            <input type="submit" value="Dodaj" class="btn btn-outline-success" style="margin: 0 0 10px 0" />
+            <div>
+                <input type="button" class="nav-link btn btn-outline-danger" value="Wróć do listy przepisów" onClick="history.back();" />
+            </div>
+        </form>
     </div>
 
-</form>
 
-<!-- Dodać przyciski dwa (dodaj) (wróć)-->
-
-
-
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+        @section Scripts {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        }
