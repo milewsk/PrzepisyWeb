@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PrzepisyWeb.Migrations
 {
-    public partial class MigrDB_v4 : Migration
+    public partial class MigTest : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -50,13 +50,13 @@ namespace PrzepisyWeb.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    categoryID = table.Column<int>(nullable: false)
+                    CategoryID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    categoryName = table.Column<string>(nullable: true)
+                    CategoryName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.categoryID);
+                    table.PrimaryKey("PK_Categories", x => x.CategoryID);
                 });
 
             migrationBuilder.CreateTable(
@@ -246,21 +246,21 @@ namespace PrzepisyWeb.Migrations
                 name: "RecipeCategories",
                 columns: table => new
                 {
-                    recipeID = table.Column<int>(nullable: false),
+                    RecipeID = table.Column<int>(nullable: false),
                     CategoryID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RecipeCategories", x => new { x.recipeID, x.CategoryID });
+                    table.PrimaryKey("PK_RecipeCategories", x => new { x.RecipeID, x.CategoryID });
                     table.ForeignKey(
                         name: "FK_RecipeCategories_Categories_CategoryID",
                         column: x => x.CategoryID,
                         principalTable: "Categories",
-                        principalColumn: "categoryID",
+                        principalColumn: "CategoryID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_RecipeCategories_Recipes_recipeID",
-                        column: x => x.recipeID,
+                        name: "FK_RecipeCategories_Recipes_RecipeID",
+                        column: x => x.RecipeID,
                         principalTable: "Recipes",
                         principalColumn: "RecipeID",
                         onDelete: ReferentialAction.Cascade);

@@ -10,8 +10,8 @@ using PrzepisyWeb.Data;
 namespace PrzepisyWeb.Migrations
 {
     [DbContext(typeof(RecipeContext))]
-    [Migration("20210614110743_migr_v13")]
-    partial class migr_v13
+    [Migration("20210614190439_Mig-Test")]
+    partial class MigTest
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
