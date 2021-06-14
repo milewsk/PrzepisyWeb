@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -16,13 +17,28 @@ namespace PrzepisyWeb.Pages.Recipes
     {
         private readonly PrzepisyWeb.Data.RecipeContext _context;
 
-        public CreateModel(PrzepisyWeb.Data.RecipeContext context)
+        public IList<Category> CategoriesList { get; set; }
+
+        private UserManager<ApplicationUser> _userManager;
+
+        private SignInManager<ApplicationUser> _signInManager;
+
+        public bool IsChecked { get; set; }
+
+        public CreateModel(PrzepisyWeb.Data.RecipeContext context, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _signInManager = signInManager;
+            _userManager = userManager;
         }
 
         public IActionResult OnGet()
         {
+
+            var GetCategoriesList = from X in _context.Categories select X;
+
+            CategoriesList = GetCategoriesList.ToList();
+
             return Page();
         }
 
@@ -38,10 +54,24 @@ namespace PrzepisyWeb.Pages.Recipes
                 return Page();
             }
 
-            _context.Recipes.Add(Recipe);
-            await _context.SaveChangesAsync();
+            if (_signInManager.IsSignedIn(User)) {
 
+            Recipe.Date = DateTime.Now;
+            Recipe.Owner = await _userManager.GetUserAsync(User);
+            Recipe.OwnerUserName = _userManager.GetUserName(User);
+            _context.Recipes.Add(Recipe);
+                await _context.SaveChangesAsync();
+            }
+            
             return RedirectToPage("./Index");
+        }
+
+        public void CategoryIsChecked(string CategoryName)
+        {
+            if(IsChecked == true)
+            {
+
+            }
         }
     }
 }

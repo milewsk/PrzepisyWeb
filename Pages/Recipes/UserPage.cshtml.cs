@@ -11,83 +11,48 @@ using PrzepisyWeb.Models;
 
 namespace PrzepisyWeb.Pages.Recipes
 {
-    public class IndexModel : PageModel
+    public class UserPageModel : PageModel
     {
         private readonly PrzepisyWeb.Data.RecipeContext _context;
+
 
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public IndexModel(PrzepisyWeb.Data.RecipeContext context, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
+        public UserPageModel(PrzepisyWeb.Data.RecipeContext context, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _signInManager = signInManager;
             _userManager = userManager;
         }
 
-
-        //foricz ()
-
         [BindProperty]
         public Recipe Recipe { get; set; }
 
-        [BindProperty]
-        public string SearchString { get; set; }
+        public string UsernameDisplay { get; set; }
 
-        public IList<Recipe> SearchList { get; set; }
+        public IList<Recipe> RecipeList { get;set; }
 
-        public IList<LikeDislikeModel> LikeDislikeList { get; set; }
-
-        public IList<FavouriteRecipe> FavRecipeList { get; set; }
-
-
-        public IActionResult OnGet()
+        public IActionResult OnGet(string UserName)
         {
-            var GetFullList = from X in _context.Recipes orderby X.Date descending select X;
+            UsernameDisplay = UserName;
 
-            var GetLikeDislike = from L in _context.LikeDislikeList select L;
+            var UserList = from X in _context.Recipes where X.OwnerUserName == UserName select X;
 
-            var FavList = from F in _context.FavouriteRecipes select F;
-
-
-
-            SearchList = GetFullList.ToList();
-
-            LikeDislikeList = GetLikeDislike.ToList();
-
-            FavRecipeList = FavList.ToList();
-
+            RecipeList = UserList.ToList();
             return Page();
         }
 
-
-        public ActionResult OnPostAsync(int Like)
+        public ActionResult OnPostAsync(int Like, string UserName)
         {
 
             if (ModelState.IsValid)
             {
+                UsernameDisplay = UserName;
+                var UserList = from X in _context.Recipes where X.OwnerUserName == UserName select X;
 
 
-                // if (Request.Form.Keys.Contains("Search"))
-                //{
-                if (SearchString != "" && SearchString != null)
-                {
-                    var SearchQuery = from X in _context.Recipes
-                                      where (X.Name.Contains(SearchString) ||
-                                      X.Owner.UserName.Contains(SearchString) ||
-                                      X.Ingredients.Contains(SearchString) ||
-                                      X.Description.Contains(SearchString))
-                                      orderby X.Date descending
-                                      select X;
-
-                    SearchList = SearchQuery.ToList();
-                }
-                else
-                {
-                    var GetFullList = from X in _context.Recipes select X;
-                    SearchList = GetFullList.ToList();
-                }
-                //}
+                RecipeList = UserList.ToList();
 
                 if (_signInManager.IsSignedIn(User))
                 {
@@ -210,5 +175,4 @@ namespace PrzepisyWeb.Pages.Recipes
             return Page();
         }
     }
-
 }

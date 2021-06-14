@@ -13,7 +13,7 @@ using PrzepisyWeb.Models;
 namespace PrzepisyWeb.Pages.Recipes
 {
     [Authorize]
-    public class FavouriteModel : PageModel
+    public class MyRecipesModel : PageModel
     {
         private readonly PrzepisyWeb.Data.RecipeContext _context;
 
@@ -21,37 +21,26 @@ namespace PrzepisyWeb.Pages.Recipes
 
         private SignInManager<ApplicationUser> _signInManager;
 
-        public FavouriteModel(PrzepisyWeb.Data.RecipeContext context, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
+        public MyRecipesModel(PrzepisyWeb.Data.RecipeContext context, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _signInManager = signInManager;
             _userManager = userManager;
         }
 
-    
+        public IList<Recipe> MyRecipes { get; set; }
 
-       /// public FavouriteRecipe FavouriteRecipe { get; set; }
-       
-
-        //zmienić nazwe
-        public IList<Recipe> Recipe{ get; set; }
-       
-     
-
-        public  IActionResult OnGet()
+        public IActionResult OnGet()
         {
             if (_signInManager.IsSignedIn(User))
             {
-                var userid = _userManager.GetUserId(User);
+                var username = _userManager.GetUserName(User);
 
                 var Query = from x in _context.Recipes
-                            from f in _context.FavouriteRecipes
-                            where (f.UserID == userid && f.RecipeID == x.RecipeID)
+                            where (username == x.OwnerUserName)
                             select x;
 
-                Recipe = Query.ToList();
-
-                
+                MyRecipes = Query.ToList();
             }
             return Page();
         }

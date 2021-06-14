@@ -28,37 +28,54 @@ namespace PrzepisyWeb.Pages.Recipes
             _userManager = userManager;
         }
 
-        public IActionResult OnGet(Recipe recipe)
-        {
-            Recipe = recipe;
-            return Page();
-            
-        }
-
         [BindProperty]
         public Recipe Recipe { get; set; }
 
-        [BindProperty]
         public FavouriteRecipe FavouriteRecipe { get; set; }
+        
+        public IActionResult OnGet(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        public async Task<IActionResult> OnPostAsync()
+            Recipe =  _context.Recipes.FirstOrDefault(m => m.RecipeID == id);
+
+            if (Recipe == null)
+            {
+                return NotFound();
+            }
+            return Page();
+        }
+
+
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+        //    FavouriteRecipe = await _context.FavouriteRecipes.FindAsync(FavouriteRecipe.RecipeID == id);
 
             if (_signInManager.IsSignedIn(User))
             {
-                FavouriteRecipe.RecipeID = Recipe.RecipeID;
-                FavouriteRecipe.UserID = _userManager.GetUserId(User);
+                FavouriteRecipe DeleteFav = new FavouriteRecipe();
 
-                _context.FavouriteRecipes.Remove(FavouriteRecipe);
+                DeleteFav.RecipeID = (int)id;
+                DeleteFav.UserID = _userManager.GetUserId(User);
+
+                _context.FavouriteRecipes.Remove(DeleteFav);
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Favourite");
         }
     }
 }

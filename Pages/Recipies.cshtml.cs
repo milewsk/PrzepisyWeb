@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,8 +27,9 @@ namespace PrzepisyWeb.Pages
 
 
         //foricz ()
-        
 
+        [BindProperty]
+        public Recipe Recipe { get; set; }
 
         [BindProperty]
         public string SearchString { get; set; }
@@ -37,128 +38,208 @@ namespace PrzepisyWeb.Pages
 
         public IList<LikeDislikeModel> LikeDislikeList { get; set; }
 
-        public IActionResult OnPost()
+        public IList<FavouriteRecipe> FavRecipeList { get; set; }
+
+        //kategorie
+
+
+
+        public int CategoriesID { get; set; }
+
+        public int CategoryRecipeID { get; set; }
+
+        public List<Recipe> SearchCategegoryRecipe { get; set; }
+
+        public IActionResult OnGet()
         {
-            if(ModelState.IsValid)
-            {
+            var GetFullList = from X in _context.Recipes orderby X.Date descending select X;
 
-                var SearchQuery = from X in _context.Recipes
-                                  where (X.Name.Contains(SearchString) ||
-                                  X.Owner.UserName.Contains(SearchString) ||
-                                  X.Ingredients.Contains(SearchString) ||
-                                  X.Description.Contains(SearchString)) select X;
-
-                SearchList = SearchQuery.ToList();
-            }
-
-
-            return Page();
-        }
-
-        public void OnGet()
-        {
             var GetLikeDislike = from L in _context.LikeDislikeList select L;
 
-            var GetFullList = (from X in _context.Recipes  select X).Take(20);
+            var FavList = from F in _context.FavouriteRecipes select F;
+
+            var HiddenList = from Z in _context.Recipes where Z.RecipeID == 0 select Z;
+
+            SearchCategegoryRecipe = HiddenList.ToList();
 
             SearchList = GetFullList.ToList();
 
             LikeDislikeList = GetLikeDislike.ToList();
+
+            FavRecipeList = FavList.ToList();
+
+            return Page();
         }
 
-        
-        public  ActionResult Like(int R)
-        {
-            var IsCreated = from IS in _context.LikeDislikeList where IS.RecipeID == R select IS;
 
-            var tempLike = (from IS in _context.LikeDislikeList where ((IS.RecipeID == R) || (IS.UserID == _userManager.GetUserId(User))) select IS.Like).Single();
-
-            var tempDislike = (from IS in _context.LikeDislikeList where ((IS.RecipeID == R) || (IS.UserID == _userManager.GetUserId(User))) select IS.Dislike).Single();
-
-            if (IsCreated == null)
-            {
-                LikeDislikeModel newOne = new LikeDislikeModel(R, _userManager.GetUserId(User));
-                newOne.Like = true;
-                _context.LikeDislikeList.Add(newOne);
-          
-            }
-            else if(tempLike == true)
-            {
-               
-            }
-            else 
-            {
-                // albo var coœ tam taki sam jak obecny i usun¹æ
-                LikeDislikeModel ToDelete = new LikeDislikeModel(R, _userManager.GetUserId(User));
-                _context.LikeDislikeList.Remove(ToDelete);
-
-                
-
-                ToDelete.Dislike = false;
-                ToDelete.Like = true;
-                _context.LikeDislikeList.Add(ToDelete);
-
-            }
-
-            //iloœæ wszystkich rekordów
-            //iloœæ rekrdów dla danego id gdzie dislike jest true
-            //odj¹æ od siebie bêdzie liczba lików
-            var AllLikedRecords = (from X in _context.LikeDislikeList where (X.RecipeID == R )&& (X.Like == true) select X).Count();
-
-            var AllDislikedRecords = (from X in _context.LikeDislikeList where (X.RecipeID == R) && (X.Dislike == true) select X).Count();
-
-
-
-            //zmieniæ counter
-
-            return  Page();
-        }
-    
-        public IActionResult Dislike(int R)
+        public ActionResult OnPostAsync(int Like)
         {
 
-            var IsCreated = from IS in _context.LikeDislikeList where IS.RecipeID == R select IS;
-
-            var tempLike = (from IS in _context.LikeDislikeList where ((IS.RecipeID == R) || (IS.UserID == _userManager.GetUserId(User))) select IS.Like).Single();
-
-            var tempDislike = (from IS in _context.LikeDislikeList where ((IS.RecipeID == R) || (IS.UserID == _userManager.GetUserId(User))) select IS.Dislike).Single();
-
-            if (IsCreated == null)
-            {
-                LikeDislikeModel newOne = new LikeDislikeModel(R, _userManager.GetUserId(User));
-                newOne.Like = true;
-                _context.LikeDislikeList.Add(newOne);
-
-            }
-            else if (tempLike == true)
+            if (ModelState.IsValid)
             {
 
+
+                // if (Request.Form.Keys.Contains("Search"))
+                //{
+                if (SearchString != "" && SearchString != null)
+                {
+
+
+
+                    //wypisaÃ¦ ID?
+                    var Query_2 = (from Q in _context.Categories where Q.CategoryName.Contains(SearchString.ToLower()) select Q.CategoryID).FirstOrDefault();
+
+                    CategoriesID = Query_2;
+                    //szukaÃ¦ id przepisu w tablicy poÅ“redniej
+                    var Query_3 = (from T in _context.RecipeCategories where T.CategoryID == CategoriesID select T.Recipe);
+
+                    SearchCategegoryRecipe = Query_3.ToList();
+
+
+
+                    //szukaÃ¦ przepisÃ³w z danymi id 
+
+                    //dodaÃ¦ do listy Modelu do wypisana
+
+                    var SearchQuery = from X in _context.Recipes
+                                      where (X.Name.Contains(SearchString) ||
+                                      X.Owner.UserName.Contains(SearchString) ||
+                                      X.Ingredients.Contains(SearchString) ||
+                                      X.Description.Contains(SearchString))
+                                      //  X.RecipeCategories.Contains((from Q in _context.RecipeCategories where  Q.Category == (from E in Categories where E.CategoryName.Contains(SearchString)  select E) select Q).Single())
+                                      orderby X.Date descending
+                                      select X;
+                    // || (from Z in _context.Categories where Z.CategoryName.Contains(SearchString.ToLower()) && (Z.CategoryID = (from Y in _context.RecipeCategories where Y.RecipeID == Recipe.RecipeID select Y.CategoryID)))
+
+
+                    SearchList = SearchQuery.ToList();
+
+                }
+                else
+                {
+                    var GetFullList = from X in _context.Recipes select X;
+                    SearchList = GetFullList.ToList();
+                }
+                //}
+
+                if (_signInManager.IsSignedIn(User))
+                {
+
+                    if (Request.Form.Keys.Contains("Like"))
+                    {
+                        Recipe = _context.Recipes.FirstOrDefault(m => m.RecipeID == Like);
+
+                        var IsCreated = from IS in _context.LikeDislikeList where (IS.RecipeID == Recipe.RecipeID) && (IS.UserID == _userManager.GetUserId(User)) select IS;
+
+
+                        if (IsCreated.Count() == 0)
+                        {
+                            var newOne = new LikeDislikeModel();
+                            newOne.RecipeID = Recipe.RecipeID;
+                            newOne.UserID = _userManager.GetUserId(User);
+                            newOne.Like = true;
+                            _context.LikeDislikeList.Add(newOne);
+                            Recipe.LikeCounter++;
+                            _context.SaveChanges();
+
+                        }
+
+
+                        var tempLike = from IS in _context.LikeDislikeList where (IS.RecipeID == Recipe.RecipeID) && (IS.UserID == _userManager.GetUserId(User)) && (IS.Like == true) select IS;
+
+                        var tempDislike = from IS in _context.LikeDislikeList where (IS.RecipeID == Recipe.RecipeID) && (IS.UserID == _userManager.GetUserId(User)) && (IS.Dislike == true) select IS;
+
+                        if (tempLike.Count() > 0)
+                        {
+
+                        }
+                        else
+                        {
+                            // albo var coÅ“ tam taki sam jak obecny i usunÂ¹Ã¦
+                            LikeDislikeModel ToDelete = new LikeDislikeModel();
+                            ToDelete.UserID = _userManager.GetUserId(User);
+                            ToDelete.RecipeID = Recipe.RecipeID;
+                            Recipe.LikeCounter++;
+                            _context.LikeDislikeList.Remove(ToDelete);
+                            _context.SaveChanges();
+
+
+                            ToDelete.Dislike = false;
+                            ToDelete.Like = true;
+                            Recipe.LikeCounter++;
+                            _context.LikeDislikeList.Add(ToDelete);
+
+                            _context.SaveChanges();
+
+                        }
+
+                        //iloÅ“Ã¦ wszystkich rekordÃ³w
+                        //iloÅ“Ã¦ rekrdÃ³w dla danego id gdzie dislike jest true
+                        //odjÂ¹Ã¦ od siebie bÃªdzie liczba likÃ³w
+                        // var AllLikedRecords = (from X in _context.LikeDislikeList where (X.RecipeID == Recipe.RecipeID) && (X.Like == true) select X).Count();
+
+                        // var AllDislikedRecords = (from X in _context.LikeDislikeList where (X.RecipeID == Recipe.RecipeID) && (X.Dislike == true) select X).Count();
+
+
+
+                        //zmieniÃ¦ counter
+
+                    }
+                    if (Request.Form.Keys.Contains("Dislike"))
+                    {
+                        Recipe = _context.Recipes.FirstOrDefault(m => m.RecipeID == Like);
+
+                        var IsCreated = from IS in _context.LikeDislikeList where (IS.RecipeID == Recipe.RecipeID) && (IS.UserID == _userManager.GetUserId(User)) select IS;
+
+
+                        if (IsCreated.Count() == 0)
+                        {
+                            var newOne = new LikeDislikeModel();
+                            newOne.RecipeID = Recipe.RecipeID;
+                            newOne.UserID = _userManager.GetUserId(User);
+                            newOne.Dislike = true;
+                            _context.LikeDislikeList.Add(newOne);
+                            Recipe.LikeCounter--;
+                            _context.SaveChanges();
+
+                        }
+
+
+                        var tempLike = from IS in _context.LikeDislikeList where (IS.RecipeID == Recipe.RecipeID) && (IS.UserID == _userManager.GetUserId(User)) && (IS.Like == true) select IS;
+
+                        var tempDislike = from IS in _context.LikeDislikeList where (IS.RecipeID == Recipe.RecipeID) && (IS.UserID == _userManager.GetUserId(User)) && (IS.Dislike == true) select IS;
+
+                        if (tempDislike.Count() > 0)
+                        {
+
+                        }
+                        else
+                        {
+
+                            // albo var coÅ“ tam taki sam jak obecny i usunÂ¹Ã¦
+                            LikeDislikeModel ToDelete = new LikeDislikeModel();
+                            ToDelete.RecipeID = Recipe.RecipeID;
+                            ToDelete.UserID = _userManager.GetUserId(User);
+                            _context.LikeDislikeList.Remove(ToDelete);
+                            Recipe.LikeCounter--;
+                            _context.SaveChanges();
+
+
+
+
+                            ToDelete.Dislike = true;
+                            ToDelete.Like = false;
+                            _context.LikeDislikeList.Add(ToDelete);
+                            Recipe.LikeCounter--;
+                            _context.SaveChanges();
+
+                        }
+
+
+                    }
+                }
+
             }
-            else
-            {
-                // albo var coœ tam taki sam jak obecny i usun¹æ
-                LikeDislikeModel ToDelete = new LikeDislikeModel(R, _userManager.GetUserId(User));
-                _context.LikeDislikeList.Remove(ToDelete);
-
-
-
-                ToDelete.Dislike = false;
-                ToDelete.Like = true;
-                _context.LikeDislikeList.Add(ToDelete);
-
-            }
-
-            //iloœæ wszystkich rekordów
-            //iloœæ rekrdów dla danego id gdzie dislike jest true
-            //odj¹æ od siebie bêdzie liczba lików
-            var AllLikedRecords = (from X in _context.LikeDislikeList where (X.RecipeID == R) && (X.Like == true) select X).Count();
-
-            var AllDislikedRecords = (from X in _context.LikeDislikeList where (X.RecipeID == R) && (X.Dislike == true) select X).Count();
-
-
-
-            //zmieniæ counter
-
             return Page();
         }
     }

@@ -10,8 +10,8 @@ using PrzepisyWeb.Data;
 namespace PrzepisyWeb.Migrations
 {
     [DbContext(typeof(RecipeContext))]
-    [Migration("20210604155033_Init")]
-    partial class Init
+    [Migration("20210612223708_MigrDB_v4")]
+    partial class MigrDB_v4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -156,7 +156,7 @@ namespace PrzepisyWeb.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("PrzepisyWeb.Areas.Identity.Data.ApplicationUser", b =>
+            modelBuilder.Entity("PrzepisyWeb.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -251,6 +251,30 @@ namespace PrzepisyWeb.Migrations
                     b.ToTable("FavouriteRecipes");
                 });
 
+            modelBuilder.Entity("PrzepisyWeb.Models.LikeDislikeModel", b =>
+                {
+                    b.Property<int>("RecipeID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("Dislike")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Like")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LikeID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RecipeID", "UserID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("LikeDislikeList");
+                });
+
             modelBuilder.Entity("PrzepisyWeb.Models.Recipe", b =>
                 {
                     b.Property<int>("RecipeID")
@@ -270,11 +294,17 @@ namespace PrzepisyWeb.Migrations
                     b.Property<string>("Ingredients")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("LikeCounter")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OwnerId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("OwnerUserName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RecipeID");
 
@@ -309,7 +339,7 @@ namespace PrzepisyWeb.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("PrzepisyWeb.Areas.Identity.Data.ApplicationUser", null)
+                    b.HasOne("PrzepisyWeb.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -318,7 +348,7 @@ namespace PrzepisyWeb.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("PrzepisyWeb.Areas.Identity.Data.ApplicationUser", null)
+                    b.HasOne("PrzepisyWeb.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -333,7 +363,7 @@ namespace PrzepisyWeb.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PrzepisyWeb.Areas.Identity.Data.ApplicationUser", null)
+                    b.HasOne("PrzepisyWeb.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -342,7 +372,7 @@ namespace PrzepisyWeb.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("PrzepisyWeb.Areas.Identity.Data.ApplicationUser", null)
+                    b.HasOne("PrzepisyWeb.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -357,8 +387,23 @@ namespace PrzepisyWeb.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PrzepisyWeb.Areas.Identity.Data.ApplicationUser", "User")
+                    b.HasOne("PrzepisyWeb.Models.ApplicationUser", "User")
                         .WithMany("favouriteRecipes")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PrzepisyWeb.Models.LikeDislikeModel", b =>
+                {
+                    b.HasOne("PrzepisyWeb.Models.Recipe", "Recipe")
+                        .WithMany("LikeDislikeList")
+                        .HasForeignKey("RecipeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PrzepisyWeb.Models.ApplicationUser", "User")
+                        .WithMany("LikeDislikeList")
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -366,8 +411,8 @@ namespace PrzepisyWeb.Migrations
 
             modelBuilder.Entity("PrzepisyWeb.Models.Recipe", b =>
                 {
-                    b.HasOne("PrzepisyWeb.Areas.Identity.Data.ApplicationUser", "Owner")
-                        .WithMany()
+                    b.HasOne("PrzepisyWeb.Models.ApplicationUser", "Owner")
+                        .WithMany("Recipes")
                         .HasForeignKey("OwnerId");
                 });
 

@@ -221,15 +221,15 @@ namespace PrzepisyWeb.Migrations
 
             modelBuilder.Entity("PrzepisyWeb.Models.Category", b =>
                 {
-                    b.Property<int>("categoryID")
+                    b.Property<int>("CategoryID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("categoryName")
+                    b.Property<string>("CategoryName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("categoryID");
+                    b.HasKey("CategoryID");
 
                     b.ToTable("Categories");
                 });
@@ -256,9 +256,6 @@ namespace PrzepisyWeb.Migrations
 
                     b.Property<string>("UserID")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("CounterLike")
-                        .HasColumnType("int");
 
                     b.Property<bool>("Dislike")
                         .HasColumnType("bit");
@@ -295,11 +292,17 @@ namespace PrzepisyWeb.Migrations
                     b.Property<string>("Ingredients")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("LikeCounter")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OwnerId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("OwnerUserName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RecipeID");
 
@@ -310,13 +313,13 @@ namespace PrzepisyWeb.Migrations
 
             modelBuilder.Entity("PrzepisyWeb.Models.RecipeCategory", b =>
                 {
-                    b.Property<int>("recipeID")
+                    b.Property<int>("RecipeID")
                         .HasColumnType("int");
 
                     b.Property<int>("CategoryID")
                         .HasColumnType("int");
 
-                    b.HasKey("recipeID", "CategoryID");
+                    b.HasKey("RecipeID", "CategoryID");
 
                     b.HasIndex("CategoryID");
 
@@ -413,15 +416,15 @@ namespace PrzepisyWeb.Migrations
 
             modelBuilder.Entity("PrzepisyWeb.Models.RecipeCategory", b =>
                 {
-                    b.HasOne("PrzepisyWeb.Models.Category", "category")
+                    b.HasOne("PrzepisyWeb.Models.Category", "Category")
                         .WithMany("RecipeCategories")
                         .HasForeignKey("CategoryID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PrzepisyWeb.Models.Recipe", "recipe")
+                    b.HasOne("PrzepisyWeb.Models.Recipe", "Recipe")
                         .WithMany("RecipeCategories")
-                        .HasForeignKey("recipeID")
+                        .HasForeignKey("RecipeID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

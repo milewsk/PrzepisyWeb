@@ -10,8 +10,8 @@ using PrzepisyWeb.Data;
 namespace PrzepisyWeb.Migrations
 {
     [DbContext(typeof(RecipeContext))]
-    [Migration("20210608135104_Mig_v1")]
-    partial class Mig_v1
+    [Migration("20210613174332_Migracja_v1")]
+    partial class Migracja_v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -223,15 +223,15 @@ namespace PrzepisyWeb.Migrations
 
             modelBuilder.Entity("PrzepisyWeb.Models.Category", b =>
                 {
-                    b.Property<int>("categoryID")
+                    b.Property<int>("CategoryID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("categoryName")
+                    b.Property<string>("CategoryName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("categoryID");
+                    b.HasKey("CategoryID");
 
                     b.ToTable("Categories");
                 });
@@ -249,6 +249,30 @@ namespace PrzepisyWeb.Migrations
                     b.HasIndex("UserID");
 
                     b.ToTable("FavouriteRecipes");
+                });
+
+            modelBuilder.Entity("PrzepisyWeb.Models.LikeDislikeModel", b =>
+                {
+                    b.Property<int>("RecipeID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("Dislike")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Like")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LikeID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RecipeID", "UserID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("LikeDislikeList");
                 });
 
             modelBuilder.Entity("PrzepisyWeb.Models.Recipe", b =>
@@ -279,6 +303,9 @@ namespace PrzepisyWeb.Migrations
                     b.Property<string>("OwnerId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("OwnerUserName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("RecipeID");
 
                     b.HasIndex("OwnerId");
@@ -288,13 +315,13 @@ namespace PrzepisyWeb.Migrations
 
             modelBuilder.Entity("PrzepisyWeb.Models.RecipeCategory", b =>
                 {
-                    b.Property<int>("recipeID")
+                    b.Property<int>("RecipeID")
                         .HasColumnType("int");
 
                     b.Property<int>("CategoryID")
                         .HasColumnType("int");
 
-                    b.HasKey("recipeID", "CategoryID");
+                    b.HasKey("RecipeID", "CategoryID");
 
                     b.HasIndex("CategoryID");
 
@@ -367,24 +394,39 @@ namespace PrzepisyWeb.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("PrzepisyWeb.Models.LikeDislikeModel", b =>
+                {
+                    b.HasOne("PrzepisyWeb.Models.Recipe", "Recipe")
+                        .WithMany("LikeDislikeList")
+                        .HasForeignKey("RecipeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PrzepisyWeb.Models.ApplicationUser", "User")
+                        .WithMany("LikeDislikeList")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("PrzepisyWeb.Models.Recipe", b =>
                 {
                     b.HasOne("PrzepisyWeb.Models.ApplicationUser", "Owner")
-                        .WithMany()
+                        .WithMany("Recipes")
                         .HasForeignKey("OwnerId");
                 });
 
             modelBuilder.Entity("PrzepisyWeb.Models.RecipeCategory", b =>
                 {
-                    b.HasOne("PrzepisyWeb.Models.Category", "category")
+                    b.HasOne("PrzepisyWeb.Models.Category", "Category")
                         .WithMany("RecipeCategories")
                         .HasForeignKey("CategoryID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PrzepisyWeb.Models.Recipe", "recipe")
+                    b.HasOne("PrzepisyWeb.Models.Recipe", "Recipe")
                         .WithMany("RecipeCategories")
-                        .HasForeignKey("recipeID")
+                        .HasForeignKey("RecipeID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

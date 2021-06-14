@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using PrzepisyWeb.Data;
 using PrzepisyWeb.Models;
 
@@ -21,6 +22,10 @@ namespace PrzepisyWeb.Pages.Recipes
 
         private SignInManager<ApplicationUser> _signInManager;
 
+        [BindProperty]
+        public Recipe Recipe { get; set; }
+
+
         public AddFavouriteModel(PrzepisyWeb.Data.RecipeContext context, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _context = context;
@@ -28,37 +33,64 @@ namespace PrzepisyWeb.Pages.Recipes
             _userManager = userManager;
         }
 
-        public IActionResult OnGet(Recipe recipe)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
+            var IsFav = from X in _context.FavouriteRecipes where (X.RecipeID == id) && (X.UserID == _userManager.GetUserId(User)) select X;
+
+            if (IsFav.Count() != 0)
+            {
+                return RedirectToPage("/Recipies");
+            }
+
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            // var RecipeList = from X in _context.Recipes select X;
+
+            Recipe = await _context.Recipes.FirstOrDefaultAsync(m => m.RecipeID == id);
+
+            if (Recipe == null)
+            {
+                return NotFound();
+            }
+
             //Przechwycenie podanego przepisu zależy czy będziecie przerzucać obiekt czy 
-            // będziecie przerzucać asp-for itp tak to bindproperty
-            Recipe = recipe;
+            // będziecie przerzucać asp-for itp tak to bindproperty         
             return Page();
         }
-
-        [BindProperty(SupportsGet =true)]
-        public Recipe Recipe { get; set; }
-
-        [BindProperty]
-        public FavouriteRecipe FavouriteRecipe { get; set; }
+      
+       public FavouriteRecipe FavRec { get; set; }
 
         // POST
         public async Task<IActionResult> OnPostAsync()
         {
+
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-
             if (_signInManager.IsSignedIn(User))
             {
-                FavouriteRecipe.UserID = _userManager.GetUserId(User);
-                FavouriteRecipe.RecipeID = Recipe.RecipeID;
-                _context.FavouriteRecipes.Add(FavouriteRecipe);
+              
+                //  FavouriteRecipe FavRecipe = new FavouriteRecipe(Recipe.RecipeID, _userManager.GetUserId(User));
+                FavRec = new FavouriteRecipe();
+
+                var temp = Recipe.RecipeID;
+
+                FavRec.RecipeID = temp;
+                FavRec.UserID = _userManager.GetUserId(User);
+
+                _context.FavouriteRecipes.Add(FavRec);
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Index");
         }
+
+
     }
 }

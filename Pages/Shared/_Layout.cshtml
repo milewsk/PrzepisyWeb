@@ -3,53 +3,43 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - PrzepisyWeb</title>
+    <title>@ViewData["Title"] PrzepisyWeb </title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@900&display=swap" rel="stylesheet">
+    <link rel="icon" href="~/my_img/favicon-16x16.png">
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 ml-1 mr-1">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Strona Główna</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Recipies">Przepisy</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Konto
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-dark" asp-area="" asp-page="/Identity/Pages/Account/Manage/PersonalData">Mój profil</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-page="#">Ulubione</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-page="/Recipes/Index">Moje Przepisy</a>
-                                <div class="dropdown-divider">  </div>
-                                <a class="dropdown-item" asp-area="" asp-page="/Recipes/Create">Dodaj przepis</a>
-                            </div>
-                        </li>
-                        <partial name="_LoginPartial.cshtml" />
-                    </ul>
 
-                </div>
+    <div id="wrapper">
+        <header>
+            <img src="~/my_img/chef-1417239_1280.png" alt="kucharze - header" />
+        </header>
+        <nav>
+            <a class="menu" asp-area="" asp-page="/Index">Strona głowna</a>
+            <a class="menu" asp-area="" asp-page="/Recipes/Create">Dodaj przepis</a>
+            <a class="menu" asp-area="" asp-page="/Categories/Index">Kategorie</a>
+            <a class="menu" asp-area="" asp-page="/Recipies">Przepisy</a>
+            <a class="menu" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Moje Konto </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="menu" style="color: black" asp-area="" asp-page="/Identity/Account/Manage">Mój profil</a>
+                <a class="menu" style="color: black" asp-area="" asp-page="/Recipes/Favourite">Ulubione</a>
+                <a class="menu" style="color: black" asp-area="" asp-page="/Recipes/MyRecipes">Moje przepisy</a>
             </div>
+            <partial name="_LoginPartial.cshtml" />
+
         </nav>
-    </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - PrzepisyWeb - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
+    <footer>
+        &copy; 2021 - PrzepisyWeb - <a asp-area="" asp-page="/Privacy">Privacy</a>   
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -58,4 +48,4 @@
 
     @RenderSection("Scripts", required: false)
 </body>
-</html>
+    </html>

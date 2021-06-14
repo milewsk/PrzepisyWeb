@@ -1,0 +1,36 @@
+﻿@page
+@model PrzepisyWeb.Pages.Categories.AddCategoryModel
+
+@{
+    ViewData["Title"] = "AddCategory";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Dodaj Kategorie</h1>
+
+<h4>Podaj kategorię, która chcesz dodać do przepisu</h4>
+<hr />
+
+
+{
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label class="control-label">Wpisz tutaj</label>
+            <input type="hidden" name="id" asp-for="@Model.Recipe.RecipeID" / />
+            <input type="text" asp-for="CategoriesText" placeholder="Przykład: kategoria nr1, kategoria nr2, ..." />
+        </div>
+        <div class="form-group">
+
+            <input type="submit" value="Dodaj" class="btn btn-primary" />
+        </div>
+    </form>
+
+
+    <div>
+        <a asp-page="Index">Powrót</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

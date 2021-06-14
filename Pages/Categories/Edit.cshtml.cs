@@ -30,7 +30,7 @@ namespace PrzepisyWeb.Pages.Categories
                 return NotFound();
             }
 
-            Category = await _context.Categories.FirstOrDefaultAsync(m => m.categoryID == id);
+            Category = await _context.Categories.FirstOrDefaultAsync(m => m.CategoryID == id);
 
             if (Category == null)
             {
@@ -56,7 +56,7 @@ namespace PrzepisyWeb.Pages.Categories
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CategoryExists(Category.categoryID))
+                if (!CategoryExists(Category.CategoryID))
                 {
                     return NotFound();
                 }
@@ -71,7 +71,7 @@ namespace PrzepisyWeb.Pages.Categories
 
         private bool CategoryExists(int id)
         {
-            return _context.Categories.Any(e => e.categoryID == id);
+            return _context.Categories.Any(e => e.CategoryID == id);
         }
     }
 }
