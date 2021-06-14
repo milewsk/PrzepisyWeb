@@ -2,32 +2,37 @@
 @model PrzepisyWeb.Pages.Categories.CreateModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Dodawanie - ";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+<h1 style="padding: 20px 0 0 0">Dodaj nową kategorię!</h1>
 
-<h4>Category</h4>
-<hr />
+<h4>Kategoria</h4>
+<hr color="red" />
+
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
-                <label asp-for="Category.CategoryName" class="control-label"></label>
-                <input asp-for="Category.CategoryName" class="form-control" />
+                <label asp-for="Category.CategoryName" class="control-label">Nazwa kategorii</label>
+                <textarea asp-for="Category.CategoryName" class="form-control" id="titleHelpMeBlock" rows="3" placeholder="Tutaj podaj kategorię, którą chcesz dodać..."></textarea>
                 <span asp-validation-for="Category.CategoryName" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Stwórz kategorię" class="nav-link btn btn-outline-success" />
+            </div>
+            <div>
+                <input type="button" class="nav-link btn btn-outline-danger" value="Wróć do listy kategorii" onClick="history.back();" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-page="Index">Back to List</a>
+    <div class="col-md-6 col-md-offset-2">
+        <img class="right" src="~/my_img/collector-3930337_1920.jpg" alt="foldery" />
+    </div>
 </div>
 
 @section Scripts {
