@@ -36,6 +36,8 @@ namespace PrzepisyWeb.Models
 
         public string OwnerUserName { get; set; }
 
+        //public string Category { get; set; }
+
         //Użytkownik ulubione
        // public ApplicationUser FavUser { get; set; }
 
