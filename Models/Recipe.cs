@@ -36,6 +36,10 @@ namespace PrzepisyWeb.Models
 
         public string OwnerUserName { get; set; }
 
+        //galeria obrazów
+
+        public ICollection<Image> Images { get; set; }
+
         //public string Category { get; set; }
 
         //Użytkownik ulubione

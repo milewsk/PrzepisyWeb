@@ -25,12 +25,24 @@ namespace PrzepisyWeb.Pages.Recipes
         [BindProperty]
         public Recipe Recipe { get; set; }
 
+        //3 stringi
+        [BindProperty]
+        public string Img_1 { get; set; }
+        [BindProperty]
+        public string Img_2 { get; set; }
+        [BindProperty]
+        public string Img_3 { get; set; }
+        [BindProperty]
+        public IList<Image> Images { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
+
+
 
             Recipe = await _context.Recipes.FirstOrDefaultAsync(m => m.RecipeID == id);
 
@@ -52,6 +64,29 @@ namespace PrzepisyWeb.Pages.Recipes
 
             var temp = Recipe.RecipeID;
             Recipe.Date = DateTime.Now;
+
+            Image Image1 = new Image();
+            Image Image2 = new Image();
+            Image Image3 = new Image();
+
+            Image1.Url = Img_1;
+            Image1.Recipe = Recipe;
+
+            Image2.Url = Img_2;
+            Image2.Recipe = Recipe;
+
+            Image3.Url = Img_3;
+            Image3.Recipe = Recipe;
+
+            Images.Add(Image1);
+            Images.Add(Image2);
+            Images.Add(Image3);
+
+            Images.ToList();
+
+            Recipe.Images = Images;
+
+
 
             _context.Attach(Recipe).State = EntityState.Modified;
 

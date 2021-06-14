@@ -24,6 +24,8 @@ namespace PrzepisyWeb.Data
 
         public DbSet<LikeDislikeModel> LikeDislikeList { get; set; }
 
+        public DbSet<Image> Images { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -57,13 +59,6 @@ namespace PrzepisyWeb.Data
                         .HasOne(r => r.User)
                         .WithMany(u => u.LikeDislikeList)
                         .HasForeignKey(r => r.UserID);
-         //   modelBuilder.Entity<FavouriteRecipe>().HasKey(fr => new { fr.RecipeID, fr.Id });
-
-          //  modelBuilder.Entity<FavouriteRecipe>().HasOne(fr => fr.person).WithMany(u => u.favouriteRecipesUser).HasForeignKey(fr => fr.Id);
-          //  modelBuilder.Entity<FavouriteRecipe>().HasOne(fr => fr.recipe).WithMany(r => r.favouriteRecipe).HasForeignKey(fr => fr.RecipeID);
-            //one to many
-           // modelBulider.Entity<Recipe>().HasRequired<ApplicationUser>(r => r.User).WithMany(a => a.FavRecipes).HasForeignKey(r => r.ApplicationUser.Id);
-
             //Ulubione
             modelBuilder.Entity<FavouriteRecipe>().HasKey(fr => new { fr.RecipeID, fr.UserID });
           
@@ -76,6 +71,11 @@ namespace PrzepisyWeb.Data
                         .HasOne(fr => fr.User)
                         .WithMany(u => u.favouriteRecipes)
                         .HasForeignKey(fr => fr.UserID);
+
+            //galeria
+
+            modelBuilder.Entity<Image>().HasOne(r => r.Recipe).WithMany(i => i.Images);
+
         }
 
         //zrobić coś takiego tylko połączyć userów z polubieniami

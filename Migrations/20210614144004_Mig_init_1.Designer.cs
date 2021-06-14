@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PrzepisyWeb.Data;
 
 namespace PrzepisyWeb.Migrations
 {
     [DbContext(typeof(RecipeContext))]
-    partial class RecipeContextModelSnapshot : ModelSnapshot
+    [Migration("20210614144004_Mig_init_1")]
+    partial class Mig_init_1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -249,26 +251,6 @@ namespace PrzepisyWeb.Migrations
                     b.ToTable("FavouriteRecipes");
                 });
 
-            modelBuilder.Entity("PrzepisyWeb.Models.Image", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("RecipeID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RecipeID");
-
-                    b.ToTable("Images");
-                });
-
             modelBuilder.Entity("PrzepisyWeb.Models.LikeDislikeModel", b =>
                 {
                     b.Property<int>("RecipeID")
@@ -410,13 +392,6 @@ namespace PrzepisyWeb.Migrations
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("PrzepisyWeb.Models.Image", b =>
-                {
-                    b.HasOne("PrzepisyWeb.Models.Recipe", "Recipe")
-                        .WithMany("Images")
-                        .HasForeignKey("RecipeID");
                 });
 
             modelBuilder.Entity("PrzepisyWeb.Models.LikeDislikeModel", b =>
