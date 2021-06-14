@@ -2,21 +2,21 @@
 @model PrzepisyWeb.Pages.Recipes.IndexModel
 
 @{
-    ViewData["Title"] = "Lista przepisów - ";
+    ViewData["Title"] = "Głosowanie - ";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1 style="padding: 20px 0 30px 0">Lista przepisów</h1>
+<h2 style="padding: 20px 0 30px 0">Lista przepisów do głosowania</h2>
 
 <form method="post">
     <div class="form-group justify-content-center">
-        <label id="search_1" style="margin: 10px 0 5px 0; font-size: 18px" asp-for="SearchString"><b>Wyszukiwarka</b></label>
+        <label id="search_1" style="margin: 10px 0 5px 0; font-size: 18px" asp-for="SearchString"><b>Wyszukaj przepis, na który chcesz zagłosować</b></label>
         <input type="text" class="form-control" id="search_1" asp-for="SearchString" placeholder="Nazwa przepisu, autor, kategoria..." />
         <small id="search_1" class="form-text text-muted">Maksymalnie 50 znaków</small>
         <span asp-validation-for="SearchString" class="text-danger"></span>
     </div>
     <div class="justify-content-center align-content-center">
-        <input type="submit" name="Search" value="Szukaj" class="btn btn-primary" />
+        <input type="submit" name="Search" value="Szukaj" class="btn btn-outline-info" style="margin: 0 0 50px 0" />
     </div>
 </form>
 
@@ -28,16 +28,19 @@
                 Nazwa
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SearchList[0].Ingredients)
+                Składniki
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SearchList[0].Description)
+                Spsób przygotowania
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SearchList[0].Date)
+                Data dodania
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SearchList[0].Owner.UserName)
+                Nazwa użytkownika
+            </th>
+            <th>
+                Liczba polubień
             </th>
             <th></th>
         </tr>
@@ -45,42 +48,40 @@
     <tbody>
         @foreach (var item in Model.SearchList)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Ingredients)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    <a asp-page="/Recipes/UserPage" asp-route-UserName="@item.OwnerUserName">@Html.DisplayFor(modelItem => item.OwnerUserName)</a>
-                </td>
-                <td>
-                    <form method="post">
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ingredients)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                <a asp-page="/Recipes/UserPage" asp-route-UserName="@item.OwnerUserName">@Html.DisplayFor(modelItem => item.OwnerUserName)</a>
+            </td>
+            <td>
+                <b>@Html.DisplayFor(modelItem => item.LikeCounter)</b>
+            </td>
+            <td>
+                <form method="post">
+                    <input type="hidden" name="UserName" asp-for="@item.OwnerUserName" />
 
-                        <input type="hidden" name="Like" asp-for="@item.RecipeID" />
-                        <input type="submit" name="Like" value="Like" />
-                    </form>
-                    @Html.DisplayFor(modelItem => item.LikeCounter)
-                    <form method="post">
+                    <input type="hidden" name="Like" asp-for="@item.RecipeID" />
+                    <br /><input type="submit" name="Like" value="Lubię" class="btn btn-success" style="margin: 0 0 5px 0" />
 
-                        <input type="hidden" name="Like" asp-for="@item.RecipeID" />
-                        <input type="submit" name="Dislike" value="Dislike" />
-                    </form>
+                    <!--input type="hidden" name="Like" asp-for="@item.RecipeID" /-->
+                    <br /><input type="submit" name="Dislike" value="Nie lubię" class="btn btn-danger" style="margin: 0 0 5px 0" />
+                </form>
 
-                    <a asp-page="/Recipes/AddFavourite" asp-route-id="@item.RecipeID">Do ulubionych</a> |
+                <a asp-page="./Details" asp-route-id="@item.RecipeID" class="btn btn-outline-secondary" style="margin: 0 0 5px 0">Zobacz szczegóły przepisu</a>
 
-
-                    <a asp-page="./Details" asp-route-id="@item.RecipeID">Details</a> |
-
-                </td>
-            </tr>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

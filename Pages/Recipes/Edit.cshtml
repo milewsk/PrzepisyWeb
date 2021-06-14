@@ -26,6 +26,7 @@
             <div class="form-group">
                 <label asp-for="Recipe.Image" class="control-label">Prześlij zdjęcia</label>
                 <!--input asp-for="Recipe.Image" class="form-control" /-->
+                <textarea asp-for="Recipe.Image" class="form-control" id="titleHelpMeBlock" rows="3" placeholder="Tutaj wklej link do zdjęcia potrawy"></textarea>
                 <span asp-validation-for="Recipe.Image" class="text-danger"></span>
             </div>
             <div class="form-group">

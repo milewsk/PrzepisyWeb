@@ -8,7 +8,7 @@
 
 <h1 style="padding: 20px 0 30px 0"1>Kategorie</h1>
 <p>
-    <a asp-page="Create" id="go" type="submit" class="nav-link btn btn-outline-warning">Dodaj nową kategorię</a>
+    <a asp-page="Create" id="go" type="submit" class="nav-link btn btn-outline-warning">Stwórz nową kategorię</a>
 </p>
 
 <table class="table">
@@ -27,9 +27,9 @@
                 @Html.DisplayFor(modelItem => item.CategoryName)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.CategoryID" class="btn btn-light" style="margin: 0 0 5px 0">Edytuj</a>
-                <br /><a asp-page="./Details" asp-route-id="@item.CategoryID" class="btn btn-light" style="margin: 0 0 5px 0">Szczegóły</a>
-                <br /><a asp-page="./Delete" asp-route-id="@item.CategoryID" class="btn btn-light" style="margin: 0 0 5px 0">Usuń</a>
+                <a asp-page="./Edit" asp-route-id="@item.CategoryID" class="btn btn-outline-secondary" style="margin: 0 5px 0 0">Edytuj</a>
+                <a asp-page="./Details" asp-route-id="@item.CategoryID" class="btn btn-outline-secondary" style="margin: 0 5px 0 0">Szczegóły</a>
+                <a asp-page="./Delete" asp-route-id="@item.CategoryID" class="btn btn-outline-secondary" style="margin: 0 5px 0 0">Usuń</a>
             </td>
         </tr>
 }

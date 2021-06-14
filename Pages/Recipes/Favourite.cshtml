@@ -15,9 +15,6 @@
                 Nazwa przepisu
             </th>
             <th>
-                Zdjęcia
-            </th>
-            <th>
                 Składniki
             </th>
             <th>
@@ -39,9 +36,6 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Image)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Ingredients)
             </td>
             <td>
@@ -53,7 +47,8 @@
             <td>
                 <a asp-page="/Recipes/UserPage" asp-route-UserName="@item.OwnerUserName">@Html.DisplayFor(modelItem => item.OwnerUserName)</a>
             </td>
-            <td>
+            <td> 
+                <a asp-page="./Details" asp-route-id="@item.RecipeID"class="btn btn-outline-success" style="margin: 10px 0 5px 0">Zobacz szczegóły przepisu</a>
                 <a asp-page="./DeleteFavourite" asp-route-id="@item.RecipeID" class="btn btn-outline-danger">Usuń z ulubionych</a>
 
             </td>
@@ -61,3 +56,4 @@
 }
     </tbody>
 </table>
+

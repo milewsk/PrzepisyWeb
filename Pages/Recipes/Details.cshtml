@@ -22,8 +22,9 @@
 
     <form method="post">
         <a asp-page="./Edit" asp-route-id="@Model.Recipe.RecipeID" class=" btn btn-outline-info" style="margin: 0 0 10px 0">Edytuj</a>
-        <div>
-            <a asp-page="./MyRecipes" class=" btn btn-outline-danger">Wróć do listy swoich przepisów</a>
-        </div>
+    </form>
+    <form>
+        <!--a asp-page="Recipies" class=" btn btn-outline-danger">Wróć do listy przepisów</a-->
+        <input type="button" class="nav-link btn btn-outline-danger" value="Wróć do listy przepisów" onClick="history.back();" />
     </form>
 </div>

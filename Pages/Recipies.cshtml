@@ -7,12 +7,13 @@
 <h1 style="padding: 20px 0 30px 0">Lista przepisów</h1>
 
 <p>
-    <a asp-page="/Recipes/Create" id="go" type="submit" class="nav-link btn btn-outline-warning">Dodaj nowy przepis</a>
+    <a asp-page="/Recipes/Create" id="go" type="submit" class="nav-link btn btn-outline-warning" style="margin: 0 0 5px 0">Dodaj nowy przepis</a>
+    <a asp-page="/Categories/Index" id="go" type="submit" class="nav-link btn btn-outline-dark">Zobacz listę kategorii</a>
 </p>
 
 <form method="post">
     <div class="form-group justify-content-center">
-        <label id="search_1" style="margin: 10px 0 5px 0; font-size: 18px" asp-for="SearchString"><b>Wyszukiwarka</b></label>
+        <label id="search_1" style="margin: 10px 0 5px 0; font-size: 18px" asp-for="SearchString"><b>Wyszukaj przepis, którego szukasz</b></label>
         <input type="text" class="form-control" id="search_1" asp-for="SearchString" placeholder="Nazwa przepisu, autor, kategoria..." />
         <small id="search_1" class="form-text text-muted">Maksymalnie 50 znaków</small>
         <span asp-validation-for="SearchString" class="text-danger"></span>
@@ -25,12 +26,15 @@
 @for (int i = 0; i < Model.SearchList.Count(); i++)
 {
     <div class="card">
-        <h3 style="text-align:center" class="card-title">@Model.SearchList[i].Name</h3>
-        <img class="card-img-top" src="@Model.SearchList[i].Image">
+        <h3 style="text-align:center; margin: 10px 0 0 0; font-family:Jazz LET, fantasy; color: purple" class="card-title"><em>@Model.SearchList[i].Name</em></h3>
         <div class="card-body">
-            <p style="text-align:center" class="card-text">@Model.SearchList[i].Description</p>
-            <div class="col-md-12 text-center">
-                <a href="/Recipes/Details?id=@Model.SearchList[i].RecipeID">Zobacz szczegóły przepisu.</a>
+            <div class="text-center">
+                <img class="card-img" style="width: 30%; float: inherit; margin: 0 0 10px 0; border-radius: 10%" src="@Model.SearchList[i].Image">
+            </div>
+            <div class="text-center">
+
+                <br /><a href="/Recipes/Details?id=@Model.SearchList[i].RecipeID" class="btn btn-outline-success" style="margin: 10px 0 5px 0">Zobacz szczegóły przepisu</a>
+                <br /><a asp-page="/Recipes/AddFavourite" asp-route-id="@Model.SearchList[i].RecipeID" class="btn btn-outline-danger">Dodaj do ulubionych</a>
             </div>
         </div>
     </div>

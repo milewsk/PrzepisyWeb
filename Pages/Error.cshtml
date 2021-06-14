@@ -1,26 +1,29 @@
 ﻿@page
 @model ErrorModel
 @{
-    ViewData["Title"] = "Error";
+    ViewData["Title"] = "Błąd - ";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<h1 style="padding: 20px 0 0 0">Błąd strony</h1>
+<h3 class="text-danger" style="padding: 10px 0 20px 0">Podczas przetwarzania żądania wystąpił błąd!</h3>
 
 @if (Model.ShowRequestId)
 {
-    <p>
-        <strong>Request ID:</strong> <code>@Model.RequestId</code>
-    </p>
+    <h3 style="margin-top: 20px; text-align: center;">
+        <strong>Żądanie ID:</strong> <code>@Model.RequestId</code>
+    </h3>
 }
 
-<h3>Development Mode</h3>
-<p>
-    Swapping to the <strong>Development</strong> environment displays detailed information about the error that occurred.
+<section>
+    <img class="inherit" style=" width: 100%" src="~/my_img/11104.jpg" alt="error" />
+</section>
+
+<h3>Strona w trakcie rozwoju</h3>
+<p style="text-align: center">
+    Zamiana na <strong>środowisko programistyczne</strong> wyświetla szczegółowe informacje o błędzie, który wystąpił.
 </p>
-<p>
-    <strong>The Development environment shouldn't be enabled for deployed applications.</strong>
-    It can result in displaying sensitive information from exceptions to end users.
-    For local debugging, enable the <strong>Development</strong> environment by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>
-    and restarting the app.
+<p style="text-align: center">
+    <strong>Środowisko programistyczne nie powinno być włączone dla wdrożonych aplikacji.</strong>
+    Może to skutkować wyświetlaniem poufnych informacji z wyjątków użytkownikom końcowym.
+    W przypadku debugowania lokalnego włącz  <strong>środowisko programistyczne</strong> , ustawiając zmienną środowiskową  <strong>ASPNETCORE_ENVIRONMENT</strong> na programowanie i ponownie uruchamiając aplikację.
 </p>

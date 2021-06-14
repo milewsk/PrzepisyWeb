@@ -19,7 +19,7 @@
         </header>
         <nav>
             <a class="menu" asp-area="" asp-page="/Index">Strona głowna</a>
-            <a class="menu" asp-area="" asp-page="/Categories/Index">Kategorie</a>
+            <a class="menu" asp-area="" asp-page="/Recipes/Index">Głosowanie</a>
             <a class="menu" asp-area="" asp-page="/Recipies">Przepisy</a>
             <a class="menu" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Moje Konto </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -30,16 +30,16 @@
             <partial name="_LoginPartial.cshtml" />
         </nav>
 
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-</div>
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
 
-    <footer>
-        &copy; 2021 - PrzepisyWeb - <a asp-area="" asp-page="/Privacy">Privacy</a>   
-    </footer>
+        <footer>
+            <a>&copy; 2021 - PrzepisyWeb - </a><a asp-area="" asp-page="/Privacy">Privacy</a>
+        </footer>
+    </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -47,4 +47,4 @@
 
     @RenderSection("Scripts", required: false)
 </body>
-    </html>
+</html>

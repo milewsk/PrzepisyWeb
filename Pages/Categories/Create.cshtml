@@ -2,7 +2,7 @@
 @model PrzepisyWeb.Pages.Categories.CreateModel
 
 @{
-    ViewData["Title"] = "Dodawanie - ";
+    ViewData["Title"] = "Tworzenie - ";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
@@ -26,7 +26,7 @@
                 <input type="submit" value="Stwórz kategorię" class="nav-link btn btn-outline-success" />
             </div>
             <div>
-                <input type="button" class="nav-link btn btn-outline-danger" value="Wróć do listy kategorii" onClick="history.back();" />
+                <input type="button" class="nav-link btn btn-outline-danger" value="Wróć do poprzedniej strony" onClick="history.back();"/>
             </div>
         </form>
     </div>

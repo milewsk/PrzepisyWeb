@@ -17,22 +17,18 @@
         <tr>
             <th>
                 Nazwa przepisu
-                @Html.DisplayNameFor(model => model.MyRecipes[0].Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MyRecipes[0].Ingredients)
+                Składniki
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MyRecipes[0].Description)
+                Spsób przygotowania
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MyRecipes[0].Date)
+                Data dodania
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MyRecipes[0].LikeCounter)
-            </th>
-            <th>
-                
+                Liczba polubień
             </th>
             <th>
                 Kategorie
@@ -63,10 +59,10 @@
                 @Html.DisplayFor(modelItem => item.RecipeCategories)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.RecipeID" class="btn btn-light" style="margin: 0 0 5px 0">Edytuj</a>
-                <br /><a asp-page="./Details" asp-route-id="@item.RecipeID" class="btn btn-light" style="margin: 0 0 5px 0">Szczegóły</a>
-                <br /><a asp-page="./Delete" asp-route-id="@item.RecipeID" class="btn btn-light" style="margin: 0 0 5px 0">Usuń</a>
-                <br /><a asp-page="/Categories/AddCategory" asp-route-id="@item.RecipeID" class="btn btn-light">Dodaj kategorie</a>
+                <a asp-page="./Edit" asp-route-id="@item.RecipeID" class="btn btn-outline-secondary" style="margin: 0 0 5px 0">Edytuj</a>
+                <br /><a asp-page="./Details" asp-route-id="@item.RecipeID" class="btn btn-outline-secondary" style="margin: 0 0 5px 0">Szczegóły</a>
+                <br /><a asp-page="./Delete" asp-route-id="@item.RecipeID" class="btn btn-outline-secondary" style="margin: 0 0 5px 0">Usuń</a>
+                <br /><a asp-page="/Categories/AddCategory" asp-route-id="@item.RecipeID" class="btn btn-outline-secondary">Dodaj kategorie</a>
             </td>
         </tr>
 }

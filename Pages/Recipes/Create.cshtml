@@ -17,38 +17,40 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="Recipe.Name" class="control-label">Nazwa przepisu</label>
+                <label asp-for="Recipe.Name" class="control-label"><b>Nazwa przepisu</b></label>
                 <!--input asp-for="Recipe.Name" class="form-control" /-->
                 <textarea asp-for="Recipe.Name" class="form-control" id="titleHelpMeBlock" rows="3" placeholder="Tytuł może pomieścić maksymalnie 80 znaków!"></textarea>
                 <span asp-validation-for="Recipe.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Recipe.Image" class="control-label">Prześlij zdjęcia</label>
+                <label asp-for="Recipe.Image" class="control-label"><b>Prześlij zdjęcia</b></label>
                 <!--input asp-for="Recipe.Image" class="form-control" /-->
+                <textarea asp-for="Recipe.Image" class="form-control" id="titleHelpMeBlock" rows="3" placeholder="Tutaj wklej link do zdjęcia potrawy"></textarea>
                 <span asp-validation-for="Recipe.Image" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Recipe.Ingredients" class="control-label">Składniki</label>
+                <label asp-for="Recipe.Ingredients" class="control-label"><b>Składniki</b></label>
                 <!--input asp-for="Recipe.Ingredients" class="form-control" /-->
                 <textarea asp-for="Recipe.Ingredients" class="form-control" id="textForIngredients" rows="3" placeholder="Przykład - 200g mąki, 100ml mleka..."></textarea>
                 <span asp-validation-for="Recipe.Ingredients" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Recipe.Description" class="control-label">Sposób przygotowania</label>
+                <label asp-for="Recipe.Description" class="control-label"><b>Sposób przygotowania</b></label>
                 <!--input asp-for="Recipe.Description" class="form-control" /-->
                 <textarea asp-for="Recipe.Description" class="form-control" id="textForIngredients" rows="6" placeholder="Tutaj podaj swój przepis"></textarea>
                 <span asp-validation-for="Recipe.Description" class="text-danger"></span>
             </div>
             <div>
-                Kategorie<br />
+                <b>Zaznacz kategorie przepisu</b>
+                <br />
 
-                @for (var i = 0; i < Model.CategoriesList.Count() ; i++)
+                @for (var i = 0; i < Model.CategoriesList.Count(); i++)
                 {
-                    <input name="@Model.CategoriesList[i].CategoryName" type="checkbox" id="@Model.CategoriesList[i].CategoryID" />@Model.CategoriesList[i].CategoryName<br />
+                    <input name="@Model.CategoriesList[i].CategoryName" type="checkbox" id="@Model.CategoriesList[i].CategoryID" style="margin: 10px 0 5px 0" />@Model.CategoriesList[i].CategoryName<br />
                 }
             </div>
             <div class="form-group">
-                <input type="submit" value="Stwórz przepis" class="nav-link btn btn-outline-success" />
+                <input type="submit" value="Stwórz przepis" class="nav-link btn btn-outline-success" style="margin: 10px 0 0 0" />
             </div>
             <div>
                 <input type="button" class="nav-link btn btn-outline-danger" value="Wróć do listy przepisów" onClick="history.back();" />
