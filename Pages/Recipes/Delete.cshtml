@@ -2,52 +2,26 @@
 @model PrzepisyWeb.Pages.Recipes.DeleteModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Usuwanie - ";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Delete</h1>
+<h3 style="padding: 20px 0 0 0">Czy na pewno chcesz usunąć podany przepis?</h3>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Recipe</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Recipe.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Recipe.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Recipe.Image)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Recipe.Image)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Recipe.Ingredients)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Recipe.Ingredients)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Recipe.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Recipe.Description)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Recipe.Date)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Recipe.Date)
-        </dd>
-    </dl>
-    
+<h4>Przepis</h4>
+<hr color="red" />
+
+<div class="shadow-lg p-3 mb-5 bg-white rounded">
+    <p><b>Nazwa przepisu</b>  : @Html.DisplayFor(model => model.Recipe.Name)</p>
+    <p><b>Zdjęcia</b> : @Html.DisplayFor(model => model.Recipe.Image)</p>
+    <p><b>Składniki</b>  : @Html.DisplayFor(model => model.Recipe.Ingredients)</p>
+    <p><b>Sposób przygotowania</b> : @Html.DisplayFor(model => model.Recipe.Description)</p>
+    <p><b>Data dodania</b> : @Html.DisplayFor(model => model.Recipe.Date)</p>
     <form method="post">
         <input type="hidden" asp-for="Recipe.RecipeID" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
+        <input type="submit" value="Usuń" class="nav-link btn btn-outline-danger" style="margin: 0 0 10px 0" />
+        <div>
+            <a asp-page="./MyRecipes" class=" btn btn-outline-success">Wróć do listy swoich przepisów</a>
+        </div>
     </form>
 </div>

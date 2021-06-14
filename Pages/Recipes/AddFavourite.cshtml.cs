@@ -88,7 +88,7 @@ namespace PrzepisyWeb.Pages.Recipes
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("/Index");
+            return RedirectToPage("./Favourite");
         }
 
 

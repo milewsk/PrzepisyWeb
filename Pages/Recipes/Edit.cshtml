@@ -2,49 +2,56 @@
 @model PrzepisyWeb.Pages.Recipes.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edycja - ";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<h1 style="padding: 20px 0 0 0">Edycja</h1>
 
-<h4>Recipe</h4>
-<hr />
+<h4>Przepis</h4>
+<hr color="red" />
+
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Recipe.RecipeID" />
+
             <div class="form-group">
-                <label asp-for="Recipe.Name" class="control-label"></label>
-                <input asp-for="Recipe.Name" class="form-control" />
+                <label asp-for="Recipe.Name" class="control-label">Nazwa</label>
+                <!--input asp-for="Recipe.Name" class="form-control" /-->
+                <textarea asp-for="Recipe.Name" class="form-control" id="titleHelpMeBlock" rows="3" placeholder="Tytuł może pomieścić maksymalnie 80 znaków!"></textarea>
                 <span asp-validation-for="Recipe.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Recipe.Image" class="control-label"></label>
-                <input asp-for="Recipe.Image" class="form-control" />
+                <label asp-for="Recipe.Image" class="control-label">Prześlij zdjęcia</label>
+                <!--input asp-for="Recipe.Image" class="form-control" /-->
                 <span asp-validation-for="Recipe.Image" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Recipe.Ingredients" class="control-label"></label>
-                <input asp-for="Recipe.Ingredients" class="form-control" />
+                <label asp-for="Recipe.Ingredients" class="control-label">Składniki</label>
+                <!--input asp-for="Recipe.Ingredients" class="form-control" /-->
+                <textarea asp-for="Recipe.Ingredients" class="form-control" id="textForIngredients" rows="3" placeholder="Przykład - 200g mąki, 100ml mleka..."></textarea>
                 <span asp-validation-for="Recipe.Ingredients" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Recipe.Description" class="control-label"></label>
-                <input asp-for="Recipe.Description" class="form-control" />
+                <label asp-for="Recipe.Description" class="control-label">Sposób przygotowania</label>
+                <!--input asp-for="Recipe.Description" class="form-control" /-->
+                <textarea asp-for="Recipe.Description" class="form-control" id="textForIngredients" rows="6" placeholder="Tutaj podaj swój przepis"></textarea>
                 <span asp-validation-for="Recipe.Description" class="text-danger"></span>
             </div>
-           
+
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Zapisz" class="nav-link btn btn-outline-success" />
+            </div>
+            <div>
+                <a asp-page="./MyRecipes" class=" btn btn-outline-danger">Wróć do listy swoich przepisów</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-page="./Index">Back to List</a>
+    <div class="col-md-6 col-md-offset-2">
+        <img class="right" src="~/my_img/35619.jpg" alt="przepisy" />
+    </div>
 </div>
 
 @section Scripts {
