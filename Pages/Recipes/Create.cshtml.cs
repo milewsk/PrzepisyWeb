@@ -17,9 +17,13 @@ namespace PrzepisyWeb.Pages.Recipes
     {
         private readonly PrzepisyWeb.Data.RecipeContext _context;
 
+        public IList<Category> CategoriesList { get; set; }
+
         private UserManager<ApplicationUser> _userManager;
 
         private SignInManager<ApplicationUser> _signInManager;
+
+        public bool IsChecked { get; set; }
 
         public CreateModel(PrzepisyWeb.Data.RecipeContext context, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
@@ -28,18 +32,19 @@ namespace PrzepisyWeb.Pages.Recipes
             _userManager = userManager;
         }
 
-        //Properties
+        public IActionResult OnGet()
+        {
+
+            var GetCategoriesList = from X in _context.Categories select X;
+
+            CategoriesList = GetCategoriesList.ToList();
+
+            return Page();
+        }
 
         [BindProperty]
         public Recipe Recipe { get; set; }
 
-
-        public IActionResult OnGet()
-        {
-            return Page();
-        }
-
-      
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
@@ -57,9 +62,16 @@ namespace PrzepisyWeb.Pages.Recipes
             _context.Recipes.Add(Recipe);
                 await _context.SaveChangesAsync();
             }
-
-
+            
             return RedirectToPage("./Index");
+        }
+
+        public void CategoryIsChecked(string CategoryName)
+        {
+            if(IsChecked == true)
+            {
+
+            }
         }
     }
 }

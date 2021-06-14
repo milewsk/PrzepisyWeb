@@ -4,7 +4,6 @@
     ViewData["Title"] = "Przepisy - ";
 }
 
-
 <form method="post">
     <div class="form-group justify-content-center">
         <label id="search_1" style="margin: 10px 0 5px 0; font-size: 18px" asp-for="SearchString"><b>Wyszukiwarka</b></label>
@@ -17,119 +16,33 @@
     </div>
 </form>
 
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.SearchList[0].Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SearchList[0].Image)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SearchList[0].Ingredients)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SearchList[0].Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SearchList[0].Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SearchList[0].Owner.UserName)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.SearchList)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Image)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ingredients)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                <a asp-page="/Recipes/UserPage" asp-route-UserName="@item.OwnerUserName">@Html.DisplayFor(modelItem => item.OwnerUserName)</a> 
-            </td>
-            <td>
-                <form method="post">
-
-                    <input type="hidden" name="Like" asp-for="@item.RecipeID" />
-                    <input type="submit" name="Like" value="Like" />
-                </form>
-                @Html.DisplayFor(modelItem => item.LikeCounter)
-                <form method="post">
-
-                    <input type="hidden" name="Like" asp-for="@item.RecipeID" />
-                    <input type="submit" name="Dislike" value="Dislike" />
-                </form>
-
-                <a asp-page="/Categories/AddCategory" asp-route-id="@item.RecipeID">Dodaj kategorie</a>
-                <a asp-page="/Recipes/AddFavourite" asp-route-id="@item.RecipeID">Do ulubionych</a> |
-
-
-                <a asp-page="./Details" asp-route-id="@item.RecipeID">Details</a> |
-
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
-
-
-
-
-
-<div class="card" style="card_p; margin: 0 0 15px 0">
-    <img class="card-img-top" src="https://www.telepolis.pl/images/2021/02/pale-moon-browser-29.jpg" alt="Card image cap">
-    <div class="card-body">
-        <!---<h5 class="card-title">Card title</h5>-->
-        <!---<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-        <a href="#" class="btn btn-primary btn-lg btn-block" style="">Zobacz ↑</a>
+@for (int i = 0; i < Model.SearchList.Count(); i++)
+{
+    <div class="card">
+        <h3 style="text-align:center" class="card-title">@Model.SearchList[i].Name</h3>
+        <img class="card-img-top" src="@Model.SearchList[i].Image">
+        <div class="card-body">
+            <p style="text-align:center" class="card-text">@Model.SearchList[i].Description</p>
+            <div class="col-md-12 text-center">
+                <a href="/Recipes/Details?id=@Model.SearchList[i].RecipeID">Zobacz szczegóły przepisu.</a>
+            </div>
+        </div>
     </div>
-</div>
+}
 
-<div class="card" style="card_p; margin: 0 0 15px 0">
-    <img class="card-img-top" src="https://assets.tmecosys.com/image/upload/t_web767x639/img/recipe/vimdb/202564_0-1059-5478-5478.jpg" alt="Card image cap">
-    <div class="card-body">
-        <!---<h5 class="card-title">Card title</h5>-->
-        <!---<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-        <a href="#" class="btn btn-primary btn-lg btn-block">Zobacz ↑</a>
+@for (int i = 0; i < Model.SearchCategegoryRecipe.Count(); i++)
+{
+    <div class="card">
+        <h3 style="text-align:center" class="card-title">@Model.SearchCategegoryRecipe[i].Name</h3>
+        <img class="card-img-top" src="@Model.SearchCategegoryRecipe[i].Image">
+        <div class="card-body">
+            <p style="text-align:center" class="card-text">@Model.SearchCategegoryRecipe[i].Description</p>
+            <div class="col-md-12 text-center">
+                <a href="/Recipes/Details?id=@Model.SearchCategegoryRecipe[i].RecipeID">Zobacz szczegóły przepisu.</a>
+            </div>
+        </div>
     </div>
-</div>
-
-<div class="card" style="card_p; margin: 0 0 15px 0">
-    <img class="card-img-top" src="https://natashaskitchen.com/wp-content/uploads/2018/08/Chicken-Stir-Fry-1-1.jpg" alt="Card image cap">
-    <div class="card-body">
-        <!---<h5 class="card-title">Card title</h5>-->
-        <!---<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-        <a href="#" class="btn btn-primary btn-lg btn-block">Zobacz ↑</a>
-    </div>
-</div>
-
-<div class="card" style="card_p; margin: 0 0 15px 0">
-    <img class="card-img-top" src="https://ocdn.eu/pulscms-transforms/1/NB6k9kpTURBXy82YmJjYTRkZGQwN2I4MGQ4NTlkZmEzODg3MmRjMGZmOS5qcGeTlQMBzMjNBEXNAmeTBc0DFM0BvJMJpjA3NjE4NQaBoTAB/meksykanskie-buritto.jpg" alt="Card image cap">
-    <div class="card-body">
-        <!---<h5 class="card-title">Card title</h5>-->
-        <!---<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-        <a href="#" class="btn btn-primary btn-lg btn-block">Zobacz ↑</a>
-    </div>
-</div>
-
-
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
