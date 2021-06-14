@@ -10,8 +10,8 @@ using PrzepisyWeb.Data;
 namespace PrzepisyWeb.Migrations
 {
     [DbContext(typeof(RecipeContext))]
-    [Migration("20210612094752_Migracja_test")]
-    partial class Migracja_test
+    [Migration("20210612223708_MigrDB_v4")]
+    partial class MigrDB_v4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -302,6 +302,9 @@ namespace PrzepisyWeb.Migrations
 
                     b.Property<string>("OwnerId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("OwnerUserName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RecipeID");
 

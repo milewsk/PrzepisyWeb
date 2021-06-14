@@ -69,8 +69,8 @@ namespace PrzepisyWeb.Pages.Categories
 
             CategoryName = CategoriesNames.ToList();
 
-            CategoriesText.ToLower();
-            string[] SplitString = CategoriesText.Split(",");
+            string TextToLower = CategoriesText.ToLower();
+            string[] SplitString = TextToLower.Split(",");
 
             
            

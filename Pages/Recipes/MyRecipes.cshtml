@@ -39,8 +39,9 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
-@foreach (var item in Model.Recipe) {
+    <tbody>  
+@foreach (var item in Model.MyRecipes) 
+{
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
