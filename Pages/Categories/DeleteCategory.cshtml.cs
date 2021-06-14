@@ -10,19 +10,17 @@ using PrzepisyWeb.Models;
 
 namespace PrzepisyWeb.Pages.Categories
 {
-    public class DeleteModel : PageModel
+    public class DeleteCategoryModel : PageModel
     {
         private readonly PrzepisyWeb.Data.RecipeContext _context;
 
-        public DeleteModel(PrzepisyWeb.Data.RecipeContext context)
+        public DeleteCategoryModel(PrzepisyWeb.Data.RecipeContext context)
         {
             _context = context;
         }
 
         [BindProperty]
         public Category Category { get; set; }
-
-        public IList<RecipeCategory> RecipeCategories { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -32,8 +30,6 @@ namespace PrzepisyWeb.Pages.Categories
             }
 
             Category = await _context.Categories.FirstOrDefaultAsync(m => m.CategoryID == id);
-
-            var ListOfRecipies = from X in _context.RecipeCategories where X.CategoryID == id select X;
 
             if (Category == null)
             {

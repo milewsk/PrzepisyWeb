@@ -40,6 +40,15 @@ namespace PrzepisyWeb.Pages
 
         public IList<FavouriteRecipe> FavRecipeList { get; set; }
 
+        //kategorie
+
+        public IList<Category> Categories { get; set; }
+
+        public int CategoriesID { get; set; }
+
+        public int CategoryRecipeID { get; set; }
+
+        public List<Recipe> SearchCategegoryRecipe { get; set; }
 
         public  IActionResult OnGet()
         {
@@ -49,7 +58,7 @@ namespace PrzepisyWeb.Pages
 
             var FavList = from F in _context.FavouriteRecipes select F;
 
-
+       
 
             SearchList =  GetFullList.ToList();
 
@@ -72,13 +81,34 @@ namespace PrzepisyWeb.Pages
                 //{
                 if (SearchString != "" && SearchString != null)
                 {
+                    var ListOfCategory = from z in _context.RecipeCategories where Recipe.RecipeID == z.RecipeID select z.Category;
+
+                    Categories = ListOfCategory.ToList();
+
+
+                    //wypisaæ ID?
+                    var Query_2 =(from Q in Categories where Q.CategoryName.Contains(SearchString) select Q.CategoryID).First();
+
+                    CategoriesID = Query_2;
+                    //szukaæ id przepisu w tablicy poœredniej
+                    var Query_3 = (from T in _context.RecipeCategories where T.CategoryID == CategoriesID select T.Recipe);
+
+                    SearchCategegoryRecipe = Query_3.ToList();
+
+                    //szukaæ przepisów z danymi id 
+
+                    //dodaæ do listy Modelu do wypisana
+
                     var SearchQuery = from X in _context.Recipes
                                       where (X.Name.Contains(SearchString) ||
                                       X.Owner.UserName.Contains(SearchString) ||
                                       X.Ingredients.Contains(SearchString) ||
-                                      X.Description.Contains(SearchString))
+                                      X.Description.Contains(SearchString)) 
+                                    //  X.RecipeCategories.Contains((from Q in _context.RecipeCategories where  Q.Category == (from E in Categories where E.CategoryName.Contains(SearchString)  select E) select Q).Single())
                                       orderby X.Date descending
                                       select X;
+                    // || (from Z in _context.Categories where Z.CategoryName.Contains(SearchString.ToLower()) && (Z.CategoryID = (from Y in _context.RecipeCategories where Y.RecipeID == Recipe.RecipeID select Y.CategoryID)))
+                   
 
                     SearchList = SearchQuery.ToList();
                 }
