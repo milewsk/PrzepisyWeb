@@ -17,21 +17,22 @@
         <tr>
             <th>
                 Nazwa przepisu
+                @Html.DisplayNameFor(model => model.MyRecipes[0].Name)
             </th>
             <th>
-                Zdjęcia
+                @Html.DisplayNameFor(model => model.MyRecipes[0].Ingredients)
             </th>
             <th>
-                Składniki
+                @Html.DisplayNameFor(model => model.MyRecipes[0].Description)
             </th>
             <th>
-                Sposób przygotowania
+                @Html.DisplayNameFor(model => model.MyRecipes[0].Date)
             </th>
             <th>
-                Data dodania
+                @Html.DisplayNameFor(model => model.MyRecipes[0].LikeCounter)
             </th>
             <th>
-                Liczba polubień
+                
             </th>
             <th>
                 Kategorie
@@ -39,14 +40,12 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
-@foreach (var item in Model.Recipe) {
+    <tbody>  
+@foreach (var item in Model.MyRecipes) 
+{
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Image)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Ingredients)

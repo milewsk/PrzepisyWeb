@@ -34,7 +34,9 @@ namespace PrzepisyWeb.Pages.Recipes
             {
                 return NotFound();
             }
+
             return Page();
         }
+
     }
 }
