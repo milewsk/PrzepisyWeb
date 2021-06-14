@@ -76,6 +76,11 @@ namespace PrzepisyWeb.Data
                         .HasOne(fr => fr.User)
                         .WithMany(u => u.favouriteRecipes)
                         .HasForeignKey(fr => fr.UserID);
+
+
+            //galeria 
+
+            modelBuilder.Entity<Recipe>().HasMany(i => i.Images).WithOne(r => r.Recipe).OnDelete(DeleteBehavior.Cascade);
         }
 
         //zrobić coś takiego tylko połączyć userów z polubieniami

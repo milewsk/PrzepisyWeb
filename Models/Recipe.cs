@@ -19,11 +19,22 @@ namespace PrzepisyWeb.Models
         //params
         [Key]
         public int RecipeID { get; set; }
+        [Required(ErrorMessage = "Proszę podać nazwę przepisu")]
+        [MaxLength(40)]
+        [MinLength(5)]
         public string Name { get; set; }
         [JsonPropertyName("img")]
         public string Image { get; set; }
+
+        [Required(ErrorMessage ="Podaj składniki")]
+        [MaxLength(350,ErrorMessage ="Za długa lista składników (max 350 znaków)")]
+        [MinLength(10)]
         public string Ingredients { get; set; }
+        [Required(ErrorMessage ="Podaj opis przepisu")]
+        [MaxLength(500,ErrorMessage ="Za długi opis (max 500 znaków)")]
+        [MinLength(10)]
         public string Description { get; set; }
+        [Required]
         public DateTime Date { get; set; }
 
         //public ICollection<int> Ratings { get; set; }
@@ -34,7 +45,12 @@ namespace PrzepisyWeb.Models
         //Owner
         public ApplicationUser Owner { get; set; }
 
+        [Required]
         public string OwnerUserName { get; set; }
+
+        //Image base
+
+        public ICollection<Image> Images { get; set; }
 
         //public string Category { get; set; }
 

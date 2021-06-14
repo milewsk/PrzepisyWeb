@@ -22,29 +22,29 @@
     </div>
 </form>
 
-@for (int i = 0; i < Model.SearchList.Count(); i++)
+@foreach(var item in Model.SearchList)
 {
     <div class="card">
-        <h3 style="text-align:center" class="card-title">@Model.SearchList[i].Name</h3>
-        <img class="card-img-top" src="@Model.SearchList[i].Image">
+        <h3 style="text-align:center" class="card-title">@item.Name</h3>
+        <img class="card-img-top" src="@item.Image">
         <div class="card-body">
-            <p style="text-align:center" class="card-text">@Model.SearchList[i].Description</p>
+            <p style="text-align:center" class="card-text">@item.Description</p>
             <form method="post">
 
-                <input type="hidden" name="Like" asp-for="@Model.SearchList[i].RecipeID" />
+                <input type="hidden" name="Like" asp-for="@item.RecipeID" />
                 <input type="submit" name="Like" value="Like" />
             </form>
-            @Html.DisplayFor(modelItem => Model.SearchList[i].LikeCounter)
+            @Html.DisplayFor(modelItem => item.LikeCounter)
             <form method="post">
 
-                <input type="hidden" name="Like" asp-for="@Model.SearchList[i].RecipeID" />
+                <input type="hidden" name="Like" asp-for="@item.RecipeID" />
                 <input type="submit" name="Dislike" value="Dislike" />
             </form>
 
-            <a asp-page="/Recipes/AddFavourite" asp-route-id="@Model.SearchList[i].RecipeID">Do ulubionych</a> |
+            <a asp-page="/Recipes/AddFavourite" asp-route-id="@item.RecipeID">Do ulubionych</a> |
 
             <div class="col-md-12 text-center">
-                <a href="/Recipes/Details?id=@Model.SearchList[i].RecipeID">Zobacz szczegóły przepisu.</a>
+                <a href="/Recipes/Details?id=@item.RecipeID">Zobacz szczegóły przepisu.</a>
             </div>
         </div>
     </div>
