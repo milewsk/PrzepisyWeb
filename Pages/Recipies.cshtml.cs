@@ -40,6 +40,7 @@ namespace PrzepisyWeb.Pages
 
         public IList<FavouriteRecipe> FavRecipeList { get; set; }
 
+        
 
         public  IActionResult OnGet()
         {
