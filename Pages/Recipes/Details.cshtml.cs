@@ -21,7 +21,7 @@ namespace PrzepisyWeb.Pages.Recipes
 
         public Recipe Recipe { get; set; }
 
-        public List<string> ListOfImages { get; set; }
+        public ICollection<Image> Images { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,11 +30,9 @@ namespace PrzepisyWeb.Pages.Recipes
                 return NotFound();
             }
 
+            var cs = (from X in _context.Recipes where X.RecipeID == id select X.Images);
+
             Recipe = await _context.Recipes.FirstOrDefaultAsync(m => m.RecipeID == id);
-
-            var ImgList = from X in _context.Images where Recipe == X.Recipe select X.Url;
-
-            ListOfImages = ImgList.ToList();
 
             if (Recipe == null)
             {

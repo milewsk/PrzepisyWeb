@@ -37,7 +37,7 @@
             @Html.DisplayFor(modelItem => item.LikeCounter)
             <form method="post">
 
-                <input type="hidden" name="Like" asp-for="@item.RecipeID" />
+                <input type="hidden" name="Dislike" asp-for="@item.RecipeID" />
                 <input type="submit" name="Dislike" value="Dislike" />
             </form>
 

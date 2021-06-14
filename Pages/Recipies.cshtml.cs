@@ -72,7 +72,7 @@ namespace PrzepisyWeb.Pages
         }
 
 
-        public ActionResult OnPostAsync(int Like)
+        public ActionResult OnPostAsync(int Like, int Dislike)
         {
 
             if (ModelState.IsValid)
@@ -117,7 +117,7 @@ namespace PrzepisyWeb.Pages
                 }
                 else
                 {
-                    var GetFullList = from X in _context.Recipes select X;
+                    var GetFullList = from X in _context.Recipes orderby X.Date select X;
                     SearchList = GetFullList.ToList();
                 }
                 //}
@@ -173,21 +173,10 @@ namespace PrzepisyWeb.Pages
 
                         }
 
-                        //iloœæ wszystkich rekordów
-                        //iloœæ rekrdów dla danego id gdzie dislike jest true
-                        //odj¹æ od siebie bêdzie liczba lików
-                        // var AllLikedRecords = (from X in _context.LikeDislikeList where (X.RecipeID == Recipe.RecipeID) && (X.Like == true) select X).Count();
-
-                        // var AllDislikedRecords = (from X in _context.LikeDislikeList where (X.RecipeID == Recipe.RecipeID) && (X.Dislike == true) select X).Count();
-
-
-
-                        //zmieniæ counter
-
                     }
                     if (Request.Form.Keys.Contains("Dislike"))
                     {
-                        Recipe = _context.Recipes.FirstOrDefault(m => m.RecipeID == Like);
+                        Recipe = _context.Recipes.FirstOrDefault(m => m.RecipeID == Dislike);
 
                         var IsCreated = from IS in _context.LikeDislikeList where (IS.RecipeID == Recipe.RecipeID) && (IS.UserID == _userManager.GetUserId(User)) select IS;
 

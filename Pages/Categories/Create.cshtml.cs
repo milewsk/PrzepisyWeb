@@ -27,6 +27,13 @@ namespace PrzepisyWeb.Pages.Categories
         [BindProperty]
         public Category Category { get; set; }
 
+        [BindProperty]
+        public string CategoriesText { get; set; }
+
+        public IList<Category> Categories { get; set; }
+
+        public List<string> CategoryName { get; set; }
+
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
@@ -36,10 +43,32 @@ namespace PrzepisyWeb.Pages.Categories
                 return Page();
             }
 
-            Category.CategoryName = Category.CategoryName.ToLower();
+            var CategoriesNames = from X in _context.Categories select X.CategoryName;
 
-            _context.Categories.Add(Category);
-            await _context.SaveChangesAsync();
+            CategoryName = CategoriesNames.ToList();
+
+            string TextToLower = CategoriesText.ToLower();
+            string[] SplitString = TextToLower.Split(",");
+
+
+            for (int i = 0; i < SplitString.Length; i++)
+            {
+                if (CategoryName.Contains(SplitString[i]))
+                {
+                }
+                else
+                {
+                    Category newCategory = new Category();
+                    newCategory.CategoryName = SplitString[i];
+
+                    _context.Categories.Add(newCategory);
+
+                    _context.SaveChanges();
+
+                }
+            }
+
+            _context.SaveChanges();
 
             return RedirectToPage("./Index");
         }
