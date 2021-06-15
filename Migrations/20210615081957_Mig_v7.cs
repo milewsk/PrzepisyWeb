@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PrzepisyWeb.Migrations
 {
-    public partial class MigrDB_v4 : Migration
+    public partial class Mig_v7 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -50,13 +50,13 @@ namespace PrzepisyWeb.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    categoryID = table.Column<int>(nullable: false)
+                    CategoryID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    categoryName = table.Column<string>(nullable: true)
+                    CategoryName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.categoryID);
+                    table.PrimaryKey("PK_Categories", x => x.CategoryID);
                 });
 
             migrationBuilder.CreateTable(
@@ -216,6 +216,26 @@ namespace PrzepisyWeb.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ImagesGallery",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Url = table.Column<string>(nullable: true),
+                    RecipeID = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ImagesGallery", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ImagesGallery_Recipes_RecipeID",
+                        column: x => x.RecipeID,
+                        principalTable: "Recipes",
+                        principalColumn: "RecipeID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "LikeDislikeList",
                 columns: table => new
                 {
@@ -246,21 +266,21 @@ namespace PrzepisyWeb.Migrations
                 name: "RecipeCategories",
                 columns: table => new
                 {
-                    recipeID = table.Column<int>(nullable: false),
+                    RecipeID = table.Column<int>(nullable: false),
                     CategoryID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RecipeCategories", x => new { x.recipeID, x.CategoryID });
+                    table.PrimaryKey("PK_RecipeCategories", x => new { x.RecipeID, x.CategoryID });
                     table.ForeignKey(
                         name: "FK_RecipeCategories_Categories_CategoryID",
                         column: x => x.CategoryID,
                         principalTable: "Categories",
-                        principalColumn: "categoryID",
+                        principalColumn: "CategoryID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_RecipeCategories_Recipes_recipeID",
-                        column: x => x.recipeID,
+                        name: "FK_RecipeCategories_Recipes_RecipeID",
+                        column: x => x.RecipeID,
                         principalTable: "Recipes",
                         principalColumn: "RecipeID",
                         onDelete: ReferentialAction.Cascade);
@@ -311,6 +331,11 @@ namespace PrzepisyWeb.Migrations
                 column: "UserID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ImagesGallery_RecipeID",
+                table: "ImagesGallery",
+                column: "RecipeID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_LikeDislikeList_UserID",
                 table: "LikeDislikeList",
                 column: "UserID");
@@ -345,6 +370,9 @@ namespace PrzepisyWeb.Migrations
 
             migrationBuilder.DropTable(
                 name: "FavouriteRecipes");
+
+            migrationBuilder.DropTable(
+                name: "ImagesGallery");
 
             migrationBuilder.DropTable(
                 name: "LikeDislikeList");

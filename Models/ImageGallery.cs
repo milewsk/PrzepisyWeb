@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 
 namespace PrzepisyWeb.Models
 {
-    public class Category
+    public class ImageGallery
     {
         [Key]
-        public int CategoryID { get; set; }
+        public int Id { get; set; }
 
-     
-        public string CategoryName { get; set; }
+      
+        public string Url { get; set; }
 
-        public ICollection<RecipeCategory> RecipeCategories { get; set; }
+        public Recipe Recipe { get; set; }
 
+        public ImageGallery() { }
     }
+
 }

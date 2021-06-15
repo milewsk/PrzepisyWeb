@@ -14,9 +14,7 @@
             <th>
                 Nazwa przepisu
             </th>
-            <th>
-                Zdjęcia
-            </th>
+           
             <th>
                 Składniki
             </th>
@@ -25,6 +23,9 @@
             </th>
             <th>
                 Data dodania
+            </th>
+            <th>
+
             </th>
             <th>
                 Nazwa użytkownika
@@ -38,9 +39,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Image)
-            </td>
+           
             <td>
                 @Html.DisplayFor(modelItem => item.Ingredients)
             </td>
@@ -49,6 +48,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                <a asp-page="/Recipes/Details" asp-route-id="@item.RecipeID" class="btn btn-light">Szczegóły</a>
             </td>
             <td>
                 <a asp-page="/Recipes/UserPage" asp-route-UserName="@item.OwnerUserName">@Html.DisplayFor(modelItem => item.OwnerUserName)</a>

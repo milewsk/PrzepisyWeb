@@ -15,10 +15,21 @@
     <input type="hidden" asp-for="Recipe.RecipeID" />
 
     <p><b>Nazwa przepisu</b> : @Html.DisplayFor(model => model.Recipe.Name)</p>
-    <p><b>Zdjęcia</b> : @Html.DisplayFor(model => model.Recipe.Image)</p>
+     <img src="@Html.DisplayFor(model =>model.Recipe.Image)" style="text-align: center;" />
     <p><b>Składniki</b> : @Html.DisplayFor(model => model.Recipe.Ingredients)</p>
     <p><b>Sposób przygotowania</b> : @Html.DisplayFor(model => model.Recipe.Description)</p>
     <p><b>Data dodania</b> : @Html.DisplayFor(model => model.Recipe.Date)</p>
+    <p><b>Kategorie</b></p>
+    @foreach(var cat in Model.CategoryNames)
+    {
+        <p class="btn btn-light m-1">@cat</p>
+       
+    }
+
+    @foreach(var imgg in Model.StringsUrl)
+    {
+        <img src="@imgg" style="max-height: 80%; max-height:60%;" />
+    }
 
     <form method="post">
         <a asp-page="./Edit" asp-route-id="@Model.Recipe.RecipeID" class=" btn btn-outline-info" style="margin: 0 0 10px 0">Edytuj</a>

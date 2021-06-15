@@ -21,6 +21,19 @@ namespace PrzepisyWeb.Pages.Recipes
 
         public Recipe Recipe { get; set; }
 
+        public ICollection<ImageGallery> Images { get; set; }
+
+        public List<int> CategoryIDs { get; set; }
+
+        public List<Category> Categories { get; set; }
+
+        public List<string> CategoryNames { get; set; }
+
+
+        //
+
+        public List<string> StringsUrl { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -28,7 +41,42 @@ namespace PrzepisyWeb.Pages.Recipes
                 return NotFound();
             }
 
+           
+
             Recipe = await _context.Recipes.FirstOrDefaultAsync(m => m.RecipeID == id);
+
+            var Query_1 = from X in _context.RecipeCategories where Recipe.RecipeID == X.RecipeID select X.CategoryID;
+
+            Categories = new List<Category>();
+            CategoryNames = new List<string>();
+
+            CategoryIDs = Query_1.ToList();
+
+            foreach (var item in CategoryIDs)
+            {
+                foreach(var cat in _context.Categories)
+                {
+                    if(item == cat.CategoryID)
+                    {
+                        Categories.Add(cat);
+                    }
+                }
+            }
+
+            foreach(var cat in Categories)
+            {
+                CategoryNames.Add(cat.CategoryName);
+            }
+
+            CategoryNames.ToList();
+
+
+            //obrazki
+
+            var Query_ob = from X in _context.ImagesGallery where Recipe.RecipeID == X.Recipe.RecipeID select X.Url;
+
+            StringsUrl = Query_ob.ToList();
+
 
             if (Recipe == null)
             {

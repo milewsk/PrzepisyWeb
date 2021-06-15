@@ -6,28 +6,27 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using PrzepisyWeb.Data;
 using PrzepisyWeb.Models;
-
 
 namespace PrzepisyWeb.Pages
 {
-    public class RecipiesModel : PageModel
+    public class CategorySearchModel : PageModel
     {
         private readonly PrzepisyWeb.Data.RecipeContext _context;
+
 
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public RecipiesModel(PrzepisyWeb.Data.RecipeContext context, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
+        public CategorySearchModel(PrzepisyWeb.Data.RecipeContext context, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _signInManager = signInManager;
             _userManager = userManager;
         }
 
-
-        //foricz ()
-
+    
         [BindProperty]
         public Recipe Recipe { get; set; }
 
@@ -36,19 +35,20 @@ namespace PrzepisyWeb.Pages
 
         public IList<Recipe> SearchList { get; set; }
 
-        public IList<LikeDislikeModel> LikeDislikeList { get; set; }
-
-        public IList<FavouriteRecipe> FavRecipeList { get; set; }
-
-        //kategorie
-
-
+        //Szukanie po kategorii
 
         public int CategoriesID { get; set; }
 
         public int CategoryRecipeID { get; set; }
 
         public List<Recipe> SearchCategegoryRecipe { get; set; }
+
+        //like / ulubione
+
+        public IList<LikeDislikeModel> LikeDislikeList { get; set; }
+
+        public IList<FavouriteRecipe> FavRecipeList { get; set; }
+
 
         public IActionResult OnGet()
         {
@@ -60,9 +60,9 @@ namespace PrzepisyWeb.Pages
 
             var HiddenList = from Z in _context.Recipes where Z.RecipeID == 0 select Z;
 
-            SearchCategegoryRecipe = HiddenList.ToList();
+            SearchCategegoryRecipe = GetFullList.ToList();
 
-            SearchList = GetFullList.ToList();
+         
 
             LikeDislikeList = GetLikeDislike.ToList();
 
@@ -70,7 +70,6 @@ namespace PrzepisyWeb.Pages
 
             return Page();
         }
-
 
         public ActionResult OnPostAsync(int Like, int Dislike)
         {
@@ -83,9 +82,6 @@ namespace PrzepisyWeb.Pages
                 //{
                 if (SearchString != "" && SearchString != null)
                 {
-
-
-
                     //wypisaæ ID?
                     var Query_2 = (from Q in _context.Categories where Q.CategoryName.Contains(SearchString.ToLower()) select Q.CategoryID).FirstOrDefault();
 
@@ -95,29 +91,11 @@ namespace PrzepisyWeb.Pages
 
                     SearchCategegoryRecipe = Query_3.ToList();
 
-
-
-                    //szukaæ przepisów z danymi id 
-
-                    //dodaæ do listy Modelu do wypisana
-
-                    var SearchQuery = from X in _context.Recipes
-                                      where (X.Name.Contains(SearchString) ||
-                                      X.OwnerUserName.Contains(SearchString)||
-                                      X.Ingredients.Contains(SearchString) ||
-                                      X.Description.Contains(SearchString))
-                                      orderby X.Date descending
-                                      select X;
-                    // || (from Z in _context.Categories where Z.CategoryName.Contains(SearchString.ToLower()) && (Z.CategoryID = (from Y in _context.RecipeCategories where Y.RecipeID == Recipe.RecipeID select Y.CategoryID)))
-
-
-                    SearchList = SearchQuery.ToList();
-
                 }
                 else
                 {
                     var GetFullList = from X in _context.Recipes orderby X.Date select X;
-                    SearchList = GetFullList.ToList();
+                    SearchCategegoryRecipe = GetFullList.ToList();
                 }
                 //}
 
@@ -231,5 +209,4 @@ namespace PrzepisyWeb.Pages
             return Page();
         }
     }
-
 }

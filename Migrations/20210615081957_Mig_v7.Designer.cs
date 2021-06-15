@@ -10,8 +10,8 @@ using PrzepisyWeb.Data;
 namespace PrzepisyWeb.Migrations
 {
     [DbContext(typeof(RecipeContext))]
-    [Migration("20210614110743_migr_v13")]
-    partial class migr_v13
+    [Migration("20210615081957_Mig_v7")]
+    partial class Mig_v7
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -251,6 +251,26 @@ namespace PrzepisyWeb.Migrations
                     b.ToTable("FavouriteRecipes");
                 });
 
+            modelBuilder.Entity("PrzepisyWeb.Models.ImageGallery", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("RecipeID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RecipeID");
+
+                    b.ToTable("ImagesGallery");
+                });
+
             modelBuilder.Entity("PrzepisyWeb.Models.LikeDislikeModel", b =>
                 {
                     b.Property<int>("RecipeID")
@@ -392,6 +412,14 @@ namespace PrzepisyWeb.Migrations
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("PrzepisyWeb.Models.ImageGallery", b =>
+                {
+                    b.HasOne("PrzepisyWeb.Models.Recipe", "Recipe")
+                        .WithMany("ImagesGallery")
+                        .HasForeignKey("RecipeID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("PrzepisyWeb.Models.LikeDislikeModel", b =>

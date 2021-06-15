@@ -19,11 +19,17 @@ namespace PrzepisyWeb.Models
         //params
         [Key]
         public int RecipeID { get; set; }
+      
         public string Name { get; set; }
         [JsonPropertyName("img")]
         public string Image { get; set; }
+
+        
         public string Ingredients { get; set; }
+
+     
         public string Description { get; set; }
+     
         public DateTime Date { get; set; }
 
         //public ICollection<int> Ratings { get; set; }
@@ -35,6 +41,10 @@ namespace PrzepisyWeb.Models
         public ApplicationUser Owner { get; set; }
 
         public string OwnerUserName { get; set; }
+
+        //Image base
+
+        public ICollection<ImageGallery> ImagesGallery { get; set; }
 
         //public string Category { get; set; }
 
