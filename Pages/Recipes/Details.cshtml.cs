@@ -23,6 +23,12 @@ namespace PrzepisyWeb.Pages.Recipes
 
         public ICollection<Image> Images { get; set; }
 
+        public List<int> CategoryIDs { get; set; }
+
+        public List<Category> Categories { get; set; }
+
+        public List<string> CategoryNames { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -33,6 +39,31 @@ namespace PrzepisyWeb.Pages.Recipes
             var cs = (from X in _context.Recipes where X.RecipeID == id select X.Images);
 
             Recipe = await _context.Recipes.FirstOrDefaultAsync(m => m.RecipeID == id);
+
+            var Query_1 = from X in _context.RecipeCategories where Recipe.RecipeID == X.RecipeID select X.CategoryID;
+
+            Categories = new List<Category>();
+            CategoryNames = new List<string>();
+
+            CategoryIDs = Query_1.ToList();
+
+            foreach (var item in CategoryIDs)
+            {
+                foreach(var cat in _context.Categories)
+                {
+                    if(item == cat.CategoryID)
+                    {
+                        Categories.Add(cat);
+                    }
+                }
+            }
+
+            foreach(var cat in Categories)
+            {
+                CategoryNames.Add(cat.CategoryName);
+            }
+
+            CategoryNames.ToList();
 
             if (Recipe == null)
             {

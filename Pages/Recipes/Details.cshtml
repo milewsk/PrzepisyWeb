@@ -19,6 +19,12 @@
     <p><b>Składniki</b> : @Html.DisplayFor(model => model.Recipe.Ingredients)</p>
     <p><b>Sposób przygotowania</b> : @Html.DisplayFor(model => model.Recipe.Description)</p>
     <p><b>Data dodania</b> : @Html.DisplayFor(model => model.Recipe.Date)</p>
+    <p><b>Kategorie</b></p>
+    @foreach(var cat in Model.CategoryNames)
+    {
+        <p class="btn btn-light m-1">@cat</p>
+       
+    }
 
     <form method="post">
         <a asp-page="./Edit" asp-route-id="@Model.Recipe.RecipeID" class=" btn btn-outline-info" style="margin: 0 0 10px 0">Edytuj</a>
