@@ -10,10 +10,12 @@
     <a asp-page="/Recipes/Create" id="go" type="submit" class="nav-link btn btn-outline-warning">Dodaj nowy przepis</a>
 </p>
 
+<h3>Zmień metodę na <a asp-page="./CategorySearch" class=" btn btn-info">Szukaj kategorii</a> </h3>
+
 <form method="post">
     <div class="form-group justify-content-center">
         <label id="search_1" style="margin: 10px 0 5px 0; font-size: 18px" asp-for="SearchString"><b>Wyszukiwarka</b></label>
-        <input type="text" class="form-control" id="search_1" asp-for="SearchString" placeholder="Nazwa przepisu, autor, kategoria..." />
+        <input type="text" class="form-control" id="search_1" asp-for="SearchString" placeholder="Nazwa przepisu, autor, opis, składniki" />
         <small id="search_1" class="form-text text-muted">Maksymalnie 50 znaków</small>
         <span asp-validation-for="SearchString" class="text-danger"></span>
     </div>

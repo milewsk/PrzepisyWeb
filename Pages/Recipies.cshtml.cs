@@ -103,10 +103,9 @@ namespace PrzepisyWeb.Pages
 
                     var SearchQuery = from X in _context.Recipes
                                       where (X.Name.Contains(SearchString) ||
-                                      X.Owner.UserName.Contains(SearchString) ||
+                                      X.OwnerUserName.Contains(SearchString)||
                                       X.Ingredients.Contains(SearchString) ||
                                       X.Description.Contains(SearchString))
-                                      //  X.RecipeCategories.Contains((from Q in _context.RecipeCategories where  Q.Category == (from E in Categories where E.CategoryName.Contains(SearchString)  select E) select Q).Single())
                                       orderby X.Date descending
                                       select X;
                     // || (from Z in _context.Categories where Z.CategoryName.Contains(SearchString.ToLower()) && (Z.CategoryID = (from Y in _context.RecipeCategories where Y.RecipeID == Recipe.RecipeID select Y.CategoryID)))
