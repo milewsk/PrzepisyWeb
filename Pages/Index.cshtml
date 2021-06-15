@@ -32,6 +32,7 @@
                 <div class="card-body">
                     <p style="text-align:center" class="card-text">@item.Description</p>
                     <div class="col-md-12 text-center">
+                        Autor: <a asp-page="/Recipes/UserPage" asp-route-UserName="@item.OwnerUserName">@Html.DisplayFor(modelItem => item.OwnerUserName)</a><br />
                         <a href="/Recipes/Details?id=@item.RecipeID">Zobacz szczegóły przepisu.</a>
                     </div>
                 </div>

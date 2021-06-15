@@ -43,7 +43,7 @@ namespace PrzepisyWeb.Pages.Recipes
             return Page();
         }
 
-        public ActionResult OnPostAsync(int Like, string UserName)
+        public ActionResult OnPostAsync(int Like, string UserName, int Dislike)
         {
 
             if (ModelState.IsValid)
@@ -119,7 +119,7 @@ namespace PrzepisyWeb.Pages.Recipes
                     }
                     if (Request.Form.Keys.Contains("Dislike"))
                     {
-                        Recipe = _context.Recipes.FirstOrDefault(m => m.RecipeID == Like);
+                        Recipe = _context.Recipes.FirstOrDefault(m => m.RecipeID == Dislike);
 
                         var IsCreated = from IS in _context.LikeDislikeList where (IS.RecipeID == Recipe.RecipeID) && (IS.UserID == _userManager.GetUserId(User)) select IS;
 
