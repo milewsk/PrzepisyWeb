@@ -58,7 +58,7 @@ namespace PrzepisyWeb.Pages.Recipes
             }
 
             
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Recipies");
         }
 
        
