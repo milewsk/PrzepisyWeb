@@ -249,7 +249,7 @@ namespace PrzepisyWeb.Migrations
                     b.ToTable("FavouriteRecipes");
                 });
 
-            modelBuilder.Entity("PrzepisyWeb.Models.Image", b =>
+            modelBuilder.Entity("PrzepisyWeb.Models.ImageGallery", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -266,7 +266,7 @@ namespace PrzepisyWeb.Migrations
 
                     b.HasIndex("RecipeID");
 
-                    b.ToTable("Image");
+                    b.ToTable("ImagesGallery");
                 });
 
             modelBuilder.Entity("PrzepisyWeb.Models.LikeDislikeModel", b =>
@@ -412,10 +412,10 @@ namespace PrzepisyWeb.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PrzepisyWeb.Models.Image", b =>
+            modelBuilder.Entity("PrzepisyWeb.Models.ImageGallery", b =>
                 {
                     b.HasOne("PrzepisyWeb.Models.Recipe", "Recipe")
-                        .WithMany("Images")
+                        .WithMany("ImagesGallery")
                         .HasForeignKey("RecipeID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

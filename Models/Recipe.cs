@@ -44,7 +44,7 @@ namespace PrzepisyWeb.Models
 
         //Image base
 
-        public ICollection<Image> Images { get; set; }
+        public ICollection<ImageGallery> ImagesGallery { get; set; }
 
         //public string Category { get; set; }
 

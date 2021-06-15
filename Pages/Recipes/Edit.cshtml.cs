@@ -41,7 +41,7 @@ namespace PrzepisyWeb.Pages.Recipes
         [BindProperty]
         public string Img_3 { get; set; }
         [BindProperty]
-        public IList<Image> Images { get; set; }
+        public IList<ImageGallery> ImageGalleries { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -81,26 +81,34 @@ namespace PrzepisyWeb.Pages.Recipes
             {
                 _context.LikeDislikeList.Remove(DeleteLikes);
             }
-            Image Image1 = new Image();
-            Image Image2 = new Image();
-            Image Image3 = new Image();
+           
+            ImageGallery Image2 = new ImageGallery();
+            ImageGallery Image3 = new ImageGallery();
 
-            Image1.Url = Img_1;
-            Image1.Recipe = Recipe;
 
+         //   var Query_1 = from X in _context.Images
+
+            if((Img_1 !="" || Img_1 != null))
+            {
+                ImageGallery Image1 = new ImageGallery();
+                Image1.Url = Img_1;
+                Image1.Recipe = Recipe;
+                ImageGalleries.Add(Image1);
+            }
+          
             Image2.Url = Img_2;
             Image2.Recipe = Recipe;
 
             Image3.Url = Img_3;
             Image3.Recipe = Recipe;
 
-            Images.Add(Image1);
-            Images.Add(Image2);
-            Images.Add(Image3);
+           
+            ImageGalleries.Add(Image2);
+            ImageGalleries.Add(Image3);
 
-            Images.ToList();
+            ImageGalleries.ToList();
 
-            Recipe.Images = Images;
+            Recipe.ImagesGallery = ImageGalleries;
 
             _context.Attach(Recipe).State = EntityState.Modified;
 

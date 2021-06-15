@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PrzepisyWeb.Models
 {
-    public class Image
+    public class ImageGallery
     {
         [Key]
         public int Id { get; set; }
@@ -16,7 +16,7 @@ namespace PrzepisyWeb.Models
 
         public Recipe Recipe { get; set; }
 
-        public Image() { }
+        public ImageGallery() { }
     }
 
 }

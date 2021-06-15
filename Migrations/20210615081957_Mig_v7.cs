@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PrzepisyWeb.Migrations
 {
-    public partial class MigTest : Migration
+    public partial class Mig_v7 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -52,7 +52,7 @@ namespace PrzepisyWeb.Migrations
                 {
                     CategoryID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CategoryName = table.Column<string>(maxLength: 20, nullable: false)
+                    CategoryName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -171,13 +171,13 @@ namespace PrzepisyWeb.Migrations
                 {
                     RecipeID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(maxLength: 40, nullable: false),
+                    Name = table.Column<string>(nullable: true),
                     Image = table.Column<string>(nullable: true),
-                    Ingredients = table.Column<string>(maxLength: 350, nullable: false),
-                    Description = table.Column<string>(maxLength: 500, nullable: false),
+                    Ingredients = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false),
                     OwnerId = table.Column<string>(nullable: true),
-                    OwnerUserName = table.Column<string>(nullable: false),
+                    OwnerUserName = table.Column<string>(nullable: true),
                     LikeCounter = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -216,19 +216,19 @@ namespace PrzepisyWeb.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Image",
+                name: "ImagesGallery",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Url = table.Column<string>(nullable: false),
+                    Url = table.Column<string>(nullable: true),
                     RecipeID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Image", x => x.Id);
+                    table.PrimaryKey("PK_ImagesGallery", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Image_Recipes_RecipeID",
+                        name: "FK_ImagesGallery_Recipes_RecipeID",
                         column: x => x.RecipeID,
                         principalTable: "Recipes",
                         principalColumn: "RecipeID",
@@ -331,8 +331,8 @@ namespace PrzepisyWeb.Migrations
                 column: "UserID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Image_RecipeID",
-                table: "Image",
+                name: "IX_ImagesGallery_RecipeID",
+                table: "ImagesGallery",
                 column: "RecipeID");
 
             migrationBuilder.CreateIndex(
@@ -372,7 +372,7 @@ namespace PrzepisyWeb.Migrations
                 name: "FavouriteRecipes");
 
             migrationBuilder.DropTable(
-                name: "Image");
+                name: "ImagesGallery");
 
             migrationBuilder.DropTable(
                 name: "LikeDislikeList");

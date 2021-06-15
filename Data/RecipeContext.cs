@@ -24,6 +24,8 @@ namespace PrzepisyWeb.Data
 
         public DbSet<LikeDislikeModel> LikeDislikeList { get; set; }
 
+        public DbSet<ImageGallery> ImagesGallery { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -80,7 +82,7 @@ namespace PrzepisyWeb.Data
 
             //galeria 
 
-            modelBuilder.Entity<Recipe>().HasMany(i => i.Images).WithOne(r => r.Recipe).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Recipe>().HasMany(i => i.ImagesGallery).WithOne(r => r.Recipe).OnDelete(DeleteBehavior.Cascade);
         }
 
         //zrobić coś takiego tylko połączyć userów z polubieniami
