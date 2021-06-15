@@ -29,6 +29,11 @@ namespace PrzepisyWeb.Pages.Recipes
 
         public List<string> CategoryNames { get; set; }
 
+
+        //
+
+        public List<string> StringsUrl { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -64,6 +69,14 @@ namespace PrzepisyWeb.Pages.Recipes
             }
 
             CategoryNames.ToList();
+
+
+            //obrazki
+
+            var Query_ob = from X in _context.ImagesGallery where Recipe.RecipeID == X.Recipe.RecipeID select X.Url;
+
+            StringsUrl = Query_ob.ToList();
+
 
             if (Recipe == null)
             {

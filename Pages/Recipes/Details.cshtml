@@ -26,6 +26,11 @@
        
     }
 
+    @foreach(var imgg in Model.StringsUrl)
+    {
+        <img src="@imgg" style="max-height: 80%; max-height:60%;" />
+    }
+
     <form method="post">
         <a asp-page="./Edit" asp-route-id="@Model.Recipe.RecipeID" class=" btn btn-outline-info" style="margin: 0 0 10px 0">Edytuj</a>
         <div>

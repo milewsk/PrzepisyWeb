@@ -26,32 +26,32 @@
 
 @foreach(var item in Model.SearchList)
 {
-    <div class="card">
-        <h3 style="text-align:center" class="card-title">@item.Name</h3>
-        <img class="card-img-top" src="@item.Image">
-        <div class="card-body">
-            <p style="text-align:center" class="card-text">@item.Description</p>
-            <form method="post">
+<div class="card">
+    <h3 style="text-align:center" class="card-title">@item.Name</h3>
+    <img class="card-img-top" src="@item.Image">
+    <div class="card-body">
+        <p style="text-align:center" class="card-text">@item.Description</p>
+        <form method="post">
 
-                <input type="hidden" name="Like" asp-for="@item.RecipeID" />
-                <input type="submit" name="Like" value="Like" class="btn btn-success" />
-            </form>
-            @Html.DisplayFor(modelItem => item.LikeCounter)
-            <form method="post">
+            <input type="hidden" name="Like" asp-for="@item.RecipeID" />
+            <input type="submit" name="Like" value="Like" class="btn btn-success" />
+        </form>
+        @Html.DisplayFor(modelItem => item.LikeCounter)
+        <form method="post">
 
-                <input type="hidden" name="Dislike" asp-for="@item.RecipeID" />
-                <input type="submit" name="Dislike" value="Dislike" class="btn btn-danger" />
-            </form>
+            <input type="hidden" name="Dislike" asp-for="@item.RecipeID" />
+            <input type="submit" name="Dislike" value="Dislike" class="btn btn-danger" />
+        </form>
 
-            <a asp-page="/Recipes/AddFavourite" asp-route-id="@item.RecipeID">Do ulubionych</a> 
-            <br />
-            Autor: <a asp-page="/Recipes/UserPage" asp-route-UserName="@item.OwnerUserName">@Html.DisplayFor(modelItem => item.OwnerUserName)</a>
+        <a asp-page="/Recipes/AddFavourite" asp-route-id="@item.RecipeID">Do ulubionych</a>
+        <br />
+        Autor: <a asp-page="/Recipes/UserPage" asp-route-UserName="@item.OwnerUserName">@Html.DisplayFor(modelItem => item.OwnerUserName)</a>
 
-            <div class="col-md-12 text-center">
-                <a href="/Recipes/Details?id=@item.RecipeID">Zobacz szczegóły przepisu.</a>
-            </div>
+        <div class="col-md-12 text-center">
+            <a href="/Recipes/Details?id=@item.RecipeID">Zobacz szczegóły przepisu.</a>
         </div>
     </div>
+</div>
 }
 
 
