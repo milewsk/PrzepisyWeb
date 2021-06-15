@@ -77,8 +77,10 @@ namespace PrzepisyWeb.Pages.Recipes
 
             var DeleteLikes = (from X in _context.LikeDislikeList where X.RecipeID == Recipe.RecipeID select X).FirstOrDefault();
 
-            _context.LikeDislikeList.Remove(DeleteLikes);
-
+            if (DeleteLikes != null)
+            {
+                _context.LikeDislikeList.Remove(DeleteLikes);
+            }
             Image Image1 = new Image();
             Image Image2 = new Image();
             Image Image3 = new Image();
